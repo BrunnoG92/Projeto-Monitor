@@ -163,13 +163,17 @@ namespace Monitoramento
 
         private void Btn4_Iniciar_Click(object sender, EventArgs e)
         {
-            var PegaIP = TxtB_IP.Text;
+            MessageBox.Show("PING sendo execultado. Irei avisar quando terminar", "Comando enviado com sucesso",
+                           MessageBoxButtons.OK, MessageBoxIcon.Information);
+            //salvado as text box em variaveis locais //
+            var PegaIP = TxtB_IP.Text; 
             int PegaTamPacote =  Convert.ToInt32(TxtB_TPacote.Text);
             int PegaQtdPacote = Convert.ToInt32(TxtB_QPacote.Text);
             bool PegaFragmentado = false;
             string Dados = string.Concat(Enumerable.Repeat("a", PegaTamPacote));
             byte[] Buffer = Encoding.ASCII.GetBytes(Dados);
-            bool ? Sucesso = null;
+            bool ? Sucesso = null; // variavel booleana para controle da caixa de erro
+            //condicional para controle do valor do botão radio
             if (Rdo_Sim.Checked == true)
             {
                 PegaFragmentado = false;
@@ -186,47 +190,57 @@ namespace Monitoramento
             {
                 PegaFragmentado = false;
             }
-
-
-
+            // Fazendo o ping
             Ping EnviaPing = new Ping();
             PingOptions Opcoes = new PingOptions();
             Opcoes.DontFragment = PegaFragmentado;
             string filename = @"C:\Users\Bruno\TESTEINTERFACE.txt";
             using (var writer = new StreamWriter(filename, false))
             {
-                writer.WriteLine("Status,Host, Tam.Pacote, Tempo");
+                writer.WriteLine("Nº, Status,Host, Tam.Pacote, Tempo");
                 for (int i = 0; i < PegaQtdPacote; i++)
                 {
                     try
                     {
+                        Pnl_Grade.Enabled = false;
+                        Btn4_Iniciar.Enabled = false;
                         System.Threading.Thread.Sleep(1000);
                         PingReply reply = EnviaPing.Send(PegaIP, 1000, Buffer);
-                        writer.WriteLine("{0},{1},{2},{3}", reply.Status, PegaIP, PegaTamPacote, reply.RoundtripTime);
-                        Sucesso = true;
+                        writer.WriteLine("{0},{1},{2},{3},{4}", (i+1),reply.Status, PegaIP, PegaTamPacote, reply.RoundtripTime);
+                        if (i == PegaQtdPacote -1)
+                        {
+                           
+                            MessageBox.Show("Terminado com sucesso. Verifique sua pasta", "Completo com sucesso",
+                            MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            Pnl_Grade.Enabled = true;
+                            Btn4_Iniciar.Enabled = true;
+
+                        }
+                      
                         
-                       
+
+
                     }
                     catch
                     {
                         MessageBox.Show("Ocorreu um erro ao execultar o ping. Verifique sua conexão com a internet " +
                             "e se o host é valido", "Erro de Ping",
                         MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        writer.WriteLine("ERRO NA EXECUÇÃO DO PING. NÃO FOI POSSIVEL COMPLETAR");
+                        Pnl_Grade.Enabled = true;
+                        Btn4_Iniciar.Enabled = true;
                         return;
                     }
                 }
             }
-            if (Sucesso == true)
-            {
-                MessageBox.Show("PING sendo execultado. Verifique sua pasta", "Comando enviado com sucesso",
-                            MessageBoxButtons.OK, MessageBoxIcon.Information);
-            }
-            
+           
+           
+        }
 
-
-
-
-
+        private void Btn5_Parar_Click(object sender, EventArgs e)
+        {
+            Pnl_Grade.Enabled = true;
+            Btn4_Iniciar.Enabled = true;
         }
     }
 }

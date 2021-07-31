@@ -42,9 +42,7 @@ namespace Monitoramento
             this.dragControl1 = new Monitoramento.DragControl();
             this.TxtB_ID = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
             this.Lbl_ID = new MetroSet_UI.Controls.MetroSetLabel();
-            this.panel3 = new System.Windows.Forms.Panel();
-            this.Btn5_Parar = new ComponentFactory.Krypton.Toolkit.KryptonButton();
-            this.Btn4_Iniciar = new ComponentFactory.Krypton.Toolkit.KryptonButton();
+            this.Pnl_Grade = new System.Windows.Forms.Panel();
             this.Lbl_FPacote = new MetroSet_UI.Controls.MetroSetLabel();
             this.Rdo_Nao = new ComponentFactory.Krypton.Toolkit.KryptonRadioButton();
             this.Rdo_Sim = new ComponentFactory.Krypton.Toolkit.KryptonRadioButton();
@@ -56,10 +54,14 @@ namespace Monitoramento
             this.Lbl_TPacote = new MetroSet_UI.Controls.MetroSetLabel();
             this.TxtB_Nome = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
             this.Lbl_Nome = new MetroSet_UI.Controls.MetroSetLabel();
+            this.Btn4_Iniciar = new ComponentFactory.Krypton.Toolkit.KryptonButton();
+            this.Btn5_Parar = new ComponentFactory.Krypton.Toolkit.KryptonButton();
+            this.Pnl2_Grade = new System.Windows.Forms.Panel();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
-            this.panel3.SuspendLayout();
+            this.Pnl_Grade.SuspendLayout();
+            this.Pnl2_Grade.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel1
@@ -241,57 +243,28 @@ namespace Monitoramento
             this.Lbl_ID.ThemeAuthor = "Narwin";
             this.Lbl_ID.ThemeName = "MetroLite";
             // 
-            // panel3
+            // Pnl_Grade
             // 
-            this.panel3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(42)))), ((int)(((byte)(64)))));
-            this.panel3.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("panel3.BackgroundImage")));
-            this.panel3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.panel3.Controls.Add(this.Btn5_Parar);
-            this.panel3.Controls.Add(this.Btn4_Iniciar);
-            this.panel3.Controls.Add(this.Lbl_FPacote);
-            this.panel3.Controls.Add(this.Rdo_Nao);
-            this.panel3.Controls.Add(this.Rdo_Sim);
-            this.panel3.Controls.Add(this.TxtB_QPacote);
-            this.panel3.Controls.Add(this.Lbl_QPacote);
-            this.panel3.Controls.Add(this.TxtB_IP);
-            this.panel3.Controls.Add(this.Lbl_IP);
-            this.panel3.Controls.Add(this.TxtB_TPacote);
-            this.panel3.Controls.Add(this.Lbl_TPacote);
-            this.panel3.Controls.Add(this.TxtB_Nome);
-            this.panel3.Controls.Add(this.Lbl_Nome);
-            this.panel3.Controls.Add(this.TxtB_ID);
-            this.panel3.Controls.Add(this.Lbl_ID);
-            this.panel3.Location = new System.Drawing.Point(197, 32);
-            this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(755, 505);
-            this.panel3.TabIndex = 4;
-            // 
-            // Btn5_Parar
-            // 
-            this.Btn5_Parar.Location = new System.Drawing.Point(418, 446);
-            this.Btn5_Parar.Name = "Btn5_Parar";
-            this.Btn5_Parar.Size = new System.Drawing.Size(97, 31);
-            this.Btn5_Parar.StateCommon.Border.DrawBorders = ((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders)((((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Top | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Bottom) 
-            | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Left) 
-            | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Right)));
-            this.Btn5_Parar.StateCommon.Border.Rounding = 10;
-            this.Btn5_Parar.StateCommon.Content.ShortText.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.Btn5_Parar.TabIndex = 10;
-            this.Btn5_Parar.Values.Text = "PARAR";
-            // 
-            // Btn4_Iniciar
-            // 
-            this.Btn4_Iniciar.Location = new System.Drawing.Point(189, 446);
-            this.Btn4_Iniciar.Name = "Btn4_Iniciar";
-            this.Btn4_Iniciar.Size = new System.Drawing.Size(97, 31);
-            this.Btn4_Iniciar.StateCommon.Border.DrawBorders = ((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders)((((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Top | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Bottom) 
-            | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Left) 
-            | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Right)));
-            this.Btn4_Iniciar.StateCommon.Border.Rounding = 10;
-            this.Btn4_Iniciar.StateCommon.Content.ShortText.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.Btn4_Iniciar.TabIndex = 9;
-            this.Btn4_Iniciar.Values.Text = "INICIAR";
-            this.Btn4_Iniciar.Click += new System.EventHandler(this.Btn4_Iniciar_Click);
+            this.Pnl_Grade.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(42)))), ((int)(((byte)(64)))));
+            this.Pnl_Grade.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("Pnl_Grade.BackgroundImage")));
+            this.Pnl_Grade.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.Pnl_Grade.Controls.Add(this.Lbl_FPacote);
+            this.Pnl_Grade.Controls.Add(this.Rdo_Nao);
+            this.Pnl_Grade.Controls.Add(this.Rdo_Sim);
+            this.Pnl_Grade.Controls.Add(this.TxtB_QPacote);
+            this.Pnl_Grade.Controls.Add(this.Lbl_QPacote);
+            this.Pnl_Grade.Controls.Add(this.TxtB_IP);
+            this.Pnl_Grade.Controls.Add(this.Lbl_IP);
+            this.Pnl_Grade.Controls.Add(this.TxtB_TPacote);
+            this.Pnl_Grade.Controls.Add(this.Lbl_TPacote);
+            this.Pnl_Grade.Controls.Add(this.TxtB_Nome);
+            this.Pnl_Grade.Controls.Add(this.Lbl_Nome);
+            this.Pnl_Grade.Controls.Add(this.TxtB_ID);
+            this.Pnl_Grade.Controls.Add(this.Lbl_ID);
+            this.Pnl_Grade.Location = new System.Drawing.Point(197, 32);
+            this.Pnl_Grade.Name = "Pnl_Grade";
+            this.Pnl_Grade.Size = new System.Drawing.Size(781, 430);
+            this.Pnl_Grade.TabIndex = 4;
             // 
             // Lbl_FPacote
             // 
@@ -460,15 +433,54 @@ namespace Monitoramento
             this.Lbl_Nome.ThemeAuthor = "Narwin";
             this.Lbl_Nome.ThemeName = "MetroLite";
             // 
+            // Btn4_Iniciar
+            // 
+            this.Btn4_Iniciar.Location = new System.Drawing.Point(170, 24);
+            this.Btn4_Iniciar.Name = "Btn4_Iniciar";
+            this.Btn4_Iniciar.Size = new System.Drawing.Size(97, 31);
+            this.Btn4_Iniciar.StateCommon.Border.DrawBorders = ((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders)((((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Top | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Bottom) 
+            | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Left) 
+            | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Right)));
+            this.Btn4_Iniciar.StateCommon.Border.Rounding = 10;
+            this.Btn4_Iniciar.StateCommon.Content.ShortText.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.Btn4_Iniciar.TabIndex = 9;
+            this.Btn4_Iniciar.Values.Text = "INICIAR";
+            this.Btn4_Iniciar.Click += new System.EventHandler(this.Btn4_Iniciar_Click);
+            // 
+            // Btn5_Parar
+            // 
+            this.Btn5_Parar.Location = new System.Drawing.Point(441, 24);
+            this.Btn5_Parar.Name = "Btn5_Parar";
+            this.Btn5_Parar.Size = new System.Drawing.Size(97, 31);
+            this.Btn5_Parar.StateCommon.Border.DrawBorders = ((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders)((((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Top | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Bottom) 
+            | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Left) 
+            | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Right)));
+            this.Btn5_Parar.StateCommon.Border.Rounding = 10;
+            this.Btn5_Parar.StateCommon.Content.ShortText.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.Btn5_Parar.TabIndex = 10;
+            this.Btn5_Parar.Values.Text = "PARAR";
+            this.Btn5_Parar.Click += new System.EventHandler(this.Btn5_Parar_Click);
+            // 
+            // Pnl2_Grade
+            // 
+            this.Pnl2_Grade.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(42)))), ((int)(((byte)(64)))));
+            this.Pnl2_Grade.Controls.Add(this.Btn4_Iniciar);
+            this.Pnl2_Grade.Controls.Add(this.Btn5_Parar);
+            this.Pnl2_Grade.Location = new System.Drawing.Point(197, 462);
+            this.Pnl2_Grade.Name = "Pnl2_Grade";
+            this.Pnl2_Grade.Size = new System.Drawing.Size(781, 74);
+            this.Pnl2_Grade.TabIndex = 11;
+            // 
             // Form_Dashboard
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(51)))), ((int)(((byte)(73)))));
             this.ClientSize = new System.Drawing.Size(1006, 574);
+            this.Controls.Add(this.Pnl2_Grade);
             this.Controls.Add(this.metroSetControlBox1);
             this.Controls.Add(this.panel1);
-            this.Controls.Add(this.panel3);
+            this.Controls.Add(this.Pnl_Grade);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(2);
@@ -478,8 +490,9 @@ namespace Monitoramento
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
-            this.panel3.ResumeLayout(false);
-            this.panel3.PerformLayout();
+            this.Pnl_Grade.ResumeLayout(false);
+            this.Pnl_Grade.PerformLayout();
+            this.Pnl2_Grade.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -498,7 +511,7 @@ namespace Monitoramento
         private System.Windows.Forms.Button Btn1_Dashboard;
         private ComponentFactory.Krypton.Toolkit.KryptonTextBox TxtB_ID;
         private MetroSet_UI.Controls.MetroSetLabel Lbl_ID;
-        private System.Windows.Forms.Panel panel3;
+        private System.Windows.Forms.Panel Pnl_Grade;
         private ComponentFactory.Krypton.Toolkit.KryptonTextBox TxtB_TPacote;
         private MetroSet_UI.Controls.MetroSetLabel Lbl_TPacote;
         private ComponentFactory.Krypton.Toolkit.KryptonTextBox TxtB_Nome;
@@ -512,6 +525,7 @@ namespace Monitoramento
         private ComponentFactory.Krypton.Toolkit.KryptonButton Btn4_Iniciar;
         public ComponentFactory.Krypton.Toolkit.KryptonRadioButton Rdo_Nao;
         public ComponentFactory.Krypton.Toolkit.KryptonRadioButton Rdo_Sim;
+        private System.Windows.Forms.Panel Pnl2_Grade;
     }
 }
 
