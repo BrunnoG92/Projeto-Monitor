@@ -9,6 +9,8 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Runtime.InteropServices;
 using MetroSet_UI.Forms;
+using System.Net.NetworkInformation;
+using System.IO;
 
 namespace Monitoramento
 {
@@ -162,8 +164,66 @@ namespace Monitoramento
         private void Btn4_Iniciar_Click(object sender, EventArgs e)
         {
             var PegaIP = TxtB_IP.Text;
-            int PegaTamPacote =  Convert.ToInt32(TxtB_TPacote);
-            int PegaQtdPacote = Convert.ToInt32(TxtB_QPacote);
+            int PegaTamPacote =  Convert.ToInt32(TxtB_TPacote.Text);
+            int PegaQtdPacote = Convert.ToInt32(TxtB_QPacote.Text);
+            bool PegaFragmentado = false;
+            string Dados = string.Concat(Enumerable.Repeat("a", PegaTamPacote));
+            byte[] Buffer = Encoding.ASCII.GetBytes(Dados);
+            bool ? Sucesso = null;
+            if (Rdo_Sim.Checked == true)
+            {
+                PegaFragmentado = false;
+            }
+            else
+            {
+                PegaFragmentado = true;
+            }
+            if(Rdo_Nao.Checked == true)
+            {
+                PegaFragmentado = true;
+            }
+            else
+            {
+                PegaFragmentado = false;
+            }
+
+
+
+            Ping EnviaPing = new Ping();
+            PingOptions Opcoes = new PingOptions();
+            Opcoes.DontFragment = PegaFragmentado;
+            string filename = @"C:\Users\Bruno\TESTEINTERFACE.txt";
+            using (var writer = new StreamWriter(filename, false))
+            {
+                writer.WriteLine("Status,Host, Tam.Pacote, Tempo");
+                for (int i = 0; i < PegaQtdPacote; i++)
+                {
+                    try
+                    {
+                        System.Threading.Thread.Sleep(1000);
+                        PingReply reply = EnviaPing.Send(PegaIP, 1000, Buffer);
+                        writer.WriteLine("{0},{1},{2},{3}", reply.Status, PegaIP, PegaTamPacote, reply.RoundtripTime);
+                        Sucesso = true;
+                        
+                       
+                    }
+                    catch
+                    {
+                        MessageBox.Show("Ocorreu um erro ao execultar o ping. Verifique sua conexão com a internet " +
+                            "e se o host é valido", "Erro de Ping",
+                        MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return;
+                    }
+                }
+            }
+            if (Sucesso == true)
+            {
+                MessageBox.Show("PING sendo execultado. Verifique sua pasta", "Comando enviado com sucesso",
+                            MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            
+
+
 
 
 

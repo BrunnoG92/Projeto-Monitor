@@ -508,10 +508,10 @@ namespace Monitoramento
         private ComponentFactory.Krypton.Toolkit.KryptonTextBox TxtB_QPacote;
         private MetroSet_UI.Controls.MetroSetLabel Lbl_QPacote;
         private MetroSet_UI.Controls.MetroSetLabel Lbl_FPacote;
-        private ComponentFactory.Krypton.Toolkit.KryptonRadioButton Rdo_Nao;
-        private ComponentFactory.Krypton.Toolkit.KryptonRadioButton Rdo_Sim;
         private ComponentFactory.Krypton.Toolkit.KryptonButton Btn5_Parar;
         private ComponentFactory.Krypton.Toolkit.KryptonButton Btn4_Iniciar;
+        public ComponentFactory.Krypton.Toolkit.KryptonRadioButton Rdo_Nao;
+        public ComponentFactory.Krypton.Toolkit.KryptonRadioButton Rdo_Sim;
     }
 }
 
