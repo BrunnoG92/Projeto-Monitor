@@ -262,6 +262,8 @@ namespace Monitoramento
 
         private void backgroundWorker1_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
+           
+            Pnl_Grade.Enabled = true;
             Btn4_Iniciar.Enabled = true;
             Btn5_Parar.Enabled = false;
             if (e.Cancelled == true)
@@ -284,6 +286,8 @@ namespace Monitoramento
 
         private void Btn4_Iniciar_Click(object sender, EventArgs e)
         {
+             
+            Pnl_Grade.Enabled = false;
             backgroundWorker1.RunWorkerAsync();
             backgroundWorker2.RunWorkerAsync();
             Btn4_Iniciar.Enabled = false;
