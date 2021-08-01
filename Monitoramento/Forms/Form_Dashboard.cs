@@ -21,7 +21,7 @@ namespace Monitoramento
         float Percent;
         static Boolean ClickParar;
         public static int ContadorProgressBar;
-        BackgroundWorker Trabalho;
+        
         [DllImport("Gdi32.dll", EntryPoint = "CreateRoundRectRgn")]
 
         private static extern IntPtr CreateRoundRectRgn
@@ -170,10 +170,43 @@ namespace Monitoramento
             TxtB_QPacote.StateCommon.Border.Color2 = Color.FromArgb(24, 30, 54);
             TxtB_QPacote .StateCommon.Border.Width = -1;
         }
-        public void TestePing()
+        public void TestePing(object sender, DoWorkEventArgs e)
         {
 
-          
+           
+
+        }
+        private void Btn4_Iniciar_Click(object sender, EventArgs e)
+        {
+
+            MessageBox.Show("PING sendo execultado. Irei avisar quando terminar", "Comando enviado com sucesso",
+                            MessageBoxButtons.OK, MessageBoxIcon.Information);
+            if (!backgroundWorker1.IsBusy)
+            {
+                backgroundWorker1.RunWorkerAsync();
+            }
+
+
+            
+
+        }
+
+        private void Btn5_Parar_Click(object sender, EventArgs e)
+        {
+            backgroundWorker1.CancelAsync();
+            
+            MessageBox.Show("Cancelado pelo usuario");
+            progressBar1.Value = 0;
+            Lbl_Porcentagem.Text = "0%";
+            
+
+
+        }
+
+        private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
+        {
+
+            BackgroundWorker worker = sender as BackgroundWorker;
             //salvado as text box em variaveis locais //
             var PegaIP = TxtB_IP.Text;
             int PegaTamPacote = Convert.ToInt32(TxtB_TPacote.Text);
@@ -209,77 +242,57 @@ namespace Monitoramento
                 writer.WriteLine("Nº, Status,Host, Tam.Pacote, Tempo");
                 for (float i = 0.0f; i < PegaQtdPacote; i++)
                 {
-                    try
+                    if (worker.CancellationPending == true)
                     {
-                        Percent = ((i+1) / PegaQtdPacote) * 100;
-
-                        backgroundWorker1.ReportProgress(0);
-;                      
-                        System.Threading.Thread.Sleep(1000);
-                        PingReply reply = EnviaPing.Send(PegaIP, 1000, Buffer);
-                        writer.WriteLine("{0},{1},{2},{3},{4}", (i + 1), reply.Status, PegaIP, PegaTamPacote, reply.RoundtripTime);
-                       
-                        if (i == PegaQtdPacote - 1)
+                        e.Cancel = true;
+                        break;
+                    }
+                    else
+                    {
+                        try
                         {
+                            Percent = ((i + 1) / PegaQtdPacote) * 100;
 
-                            MessageBox.Show("Terminado com sucesso. Verifique sua pasta", "Completo com sucesso",
-                            MessageBoxButtons.OK, MessageBoxIcon.Information);
-                            Pnl_Grade.Enabled = true;
-                            Btn4_Iniciar.Enabled = true;
+                            backgroundWorker1.ReportProgress(0);
+                            ;
+                            System.Threading.Thread.Sleep(1000);
+                            PingReply reply = EnviaPing.Send(PegaIP, 1000, Buffer);
+                            writer.WriteLine("{0},{1},{2},{3},{4}", (i + 1), reply.Status, PegaIP, PegaTamPacote, reply.RoundtripTime);
+
+                            if (i == PegaQtdPacote - 1)
+                            {
+
+                                MessageBox.Show("Terminado com sucesso. Verifique sua pasta", "Completo com sucesso",
+                                MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                Pnl_Grade.Enabled = true;
+                                Btn4_Iniciar.Enabled = true;
+
+                            }
+                            if (ClickParar == true)
+                            {
+                                MessageBox.Show("Abortado pelo usuário", "Pìng Cancelado",
+                                MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                i = PegaQtdPacote;
+                            }
+
+
 
                         }
-                        if (ClickParar == true)
+                        catch
                         {
-                            MessageBox.Show("Abortado pelo usuário", "Pìng Cancelado",
-                            MessageBoxButtons.OK, MessageBoxIcon.Information);
-                            i = PegaQtdPacote;
+                            MessageBox.Show("Ocorreu um erro ao execultar o ping. Verifique sua conexão com a internet " +
+                                "e se o host é valido", "Erro de Ping",
+                            MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            writer.WriteLine("ERRO NA EXECUÇÃO DO PING. NÃO FOI POSSIVEL COMPLETAR");
+
+                            return;
                         }
-
-
-
                     }
-                    catch
-                    {
-                        MessageBox.Show("Ocorreu um erro ao execultar o ping. Verifique sua conexão com a internet " +
-                            "e se o host é valido", "Erro de Ping",
-                        MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        writer.WriteLine("ERRO NA EXECUÇÃO DO PING. NÃO FOI POSSIVEL COMPLETAR");
-                       
-                        return;
-                    }
+
                 }
             }
 
-        }
-        private void Btn4_Iniciar_Click(object sender, EventArgs e)
-        {
-
-            MessageBox.Show("PING sendo execultado. Irei avisar quando terminar", "Comando enviado com sucesso",
-                            MessageBoxButtons.OK, MessageBoxIcon.Information);
-            if (!backgroundWorker1.IsBusy)
-            {
-                backgroundWorker1.RunWorkerAsync();
-            }
-            
-
-            
-
-        }
-
-        private void Btn5_Parar_Click(object sender, EventArgs e)
-        {
-            backgroundWorker1.CancelAsync();
-            MessageBox.Show("Cancelado pelo usuario");
-           
-
-
-        }
-
-        private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
-        {
-            TestePing();
-            
-            backgroundWorker1.ReportProgress(Porcentagem);
+            backgroundWorker1.ReportProgress(Porcentagem);          
         }
 
         private void backgroundWorker1_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
