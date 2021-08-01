@@ -14,14 +14,16 @@ using System.IO;
 
 namespace Monitoramento
 {
-    
+
     public partial class Form_Dashboard : Form
-    { 
-        static int Porcentagem;
-        float Percent;
-        static Boolean ClickParar;
+    {
+
+        static float Percent;
         public static int ContadorProgressBar;
-        
+        String TempoEmSegundos;
+        TimeSpan Tempo_Atual_Formatado;
+
+
         [DllImport("Gdi32.dll", EntryPoint = "CreateRoundRectRgn")]
 
         private static extern IntPtr CreateRoundRectRgn
@@ -39,10 +41,15 @@ namespace Monitoramento
         public Form_Dashboard()
         {
             InitializeComponent();
+
+
+
+            backgroundWorker1.WorkerReportsProgress = true;
             backgroundWorker1.WorkerSupportsCancellation = true;
 
 
 
+            Btn5_Parar.Enabled = false;
             Lbl_ID.ForeColor = Color.White;
             Lbl_Nome.ForeColor = Color.White;
             Lbl_TPacote.ForeColor = Color.White;
@@ -55,13 +62,15 @@ namespace Monitoramento
             Pnl_Navegacao.Top = Btn1_Dashboard.Top;
             Pnl_Navegacao.Left = Btn1_Dashboard.Left;
             Btn1_Dashboard.BackColor = Color.FromArgb(46, 51, 73);
+            Lbl_TempoDecorrido.ForeColor = Color.White;
+            Lbl_TempoEstimado2.ForeColor = Color.White;
 
         }
         // INICIO DESTAQUE MENU LATERAL //
 
         private void Btn1_Dashboard_Click(object sender, EventArgs e)
         {
-          
+
             Pnl_Navegacao.Height = Btn1_Dashboard.Height;
             Pnl_Navegacao.Top = Btn1_Dashboard.Top;
             Pnl_Navegacao.Left = Btn1_Dashboard.Left;
@@ -89,7 +98,7 @@ namespace Monitoramento
         {
             Btn1_Dashboard.BackColor = Color.FromArgb(24, 30, 54);
         }
-       
+
 
         private void Btn3_Historico_Leave(object sender, EventArgs e)
         {
@@ -102,14 +111,14 @@ namespace Monitoramento
         }
 
 
-         // DESTAQUE NA TEXT BOX //
+        // DESTAQUE NA TEXT BOX //
         private void TxtB_ID_TextChanged(object sender, EventArgs e)
         {
             TxtB_ID.StateCommon.Border.Color1 = Color.FromArgb(72, 0, 224);
             TxtB_ID.StateCommon.Border.Color2 = Color.FromArgb(72, 0, 224);
             TxtB_ID.StateCommon.Border.Width = 2;
         }
-       
+
         private void TxtB_Nome_TextChanged(object sender, EventArgs e)
         {
             TxtB_Nome.StateCommon.Border.Color1 = Color.FromArgb(72, 0, 224);
@@ -168,45 +177,14 @@ namespace Monitoramento
         {
             TxtB_QPacote.StateCommon.Border.Color1 = Color.FromArgb(24, 30, 54);
             TxtB_QPacote.StateCommon.Border.Color2 = Color.FromArgb(24, 30, 54);
-            TxtB_QPacote .StateCommon.Border.Width = -1;
-        }
-        public void TestePing(object sender, DoWorkEventArgs e)
-        {
-
-           
-
-        }
-        private void Btn4_Iniciar_Click(object sender, EventArgs e)
-        {
-
-            MessageBox.Show("PING sendo execultado. Irei avisar quando terminar", "Comando enviado com sucesso",
-                            MessageBoxButtons.OK, MessageBoxIcon.Information);
-            if (!backgroundWorker1.IsBusy)
-            {
-                backgroundWorker1.RunWorkerAsync();
-            }
-
-
-            
-
-        }
-
-        private void Btn5_Parar_Click(object sender, EventArgs e)
-        {
-            backgroundWorker1.CancelAsync();
-            
-            MessageBox.Show("Cancelado pelo usuario");
-            progressBar1.Value = 0;
-            Lbl_Porcentagem.Text = "0%";
-            
-
-
+            TxtB_QPacote.StateCommon.Border.Width = -1;
         }
 
         private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
         {
-
+            //inicia o traballho de fazer o ping em segundo plano, outra thread
             BackgroundWorker worker = sender as BackgroundWorker;
+
             //salvado as text box em variaveis locais //
             var PegaIP = TxtB_IP.Text;
             int PegaTamPacote = Convert.ToInt32(TxtB_TPacote.Text);
@@ -242,40 +220,28 @@ namespace Monitoramento
                 writer.WriteLine("Nº, Status,Host, Tam.Pacote, Tempo");
                 for (float i = 0.0f; i < PegaQtdPacote; i++)
                 {
-                    if (worker.CancellationPending == true)
+                    if (worker.CancellationPending == true) // verifica a cada etapa, se há um pedido de cancelamento do trabalho. Se sim , aborta o trabalho, se não continua
                     {
                         e.Cancel = true;
                         break;
                     }
                     else
                     {
+
                         try
                         {
-                            Percent = ((i + 1) / PegaQtdPacote) * 100;
 
-                            backgroundWorker1.ReportProgress(0);
-                            ;
+                           
+                           
+
+                            Percent = ((i + 1) / PegaQtdPacote) * 100;
+                            int Porcento_Inteiro = (int)Percent;
+
+                            //  MessageBox.Show("Procento inteiro: " + Porcento_Inteiro);
                             System.Threading.Thread.Sleep(1000);
                             PingReply reply = EnviaPing.Send(PegaIP, 1000, Buffer);
                             writer.WriteLine("{0},{1},{2},{3},{4}", (i + 1), reply.Status, PegaIP, PegaTamPacote, reply.RoundtripTime);
-
-                            if (i == PegaQtdPacote - 1)
-                            {
-
-                                MessageBox.Show("Terminado com sucesso. Verifique sua pasta", "Completo com sucesso",
-                                MessageBoxButtons.OK, MessageBoxIcon.Information);
-                                Pnl_Grade.Enabled = true;
-                                Btn4_Iniciar.Enabled = true;
-
-                            }
-                            if (ClickParar == true)
-                            {
-                                MessageBox.Show("Abortado pelo usuário", "Pìng Cancelado",
-                                MessageBoxButtons.OK, MessageBoxIcon.Information);
-                                i = PegaQtdPacote;
-                            }
-
-
+                            worker.ReportProgress(Porcento_Inteiro);
 
                         }
                         catch
@@ -287,18 +253,47 @@ namespace Monitoramento
 
                             return;
                         }
+                       
                     }
 
                 }
             }
-
-            backgroundWorker1.ReportProgress(Porcentagem);          
         }
 
         private void backgroundWorker1_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
-            MessageBox.Show("Monitoramento finalizado com sucesso");
-           
+            Btn4_Iniciar.Enabled = true;
+            Btn5_Parar.Enabled = false;
+            if (e.Cancelled == true)
+            {
+                MessageBox.Show("Abortado pelo usuário", "Pìng Cancelado",
+                               MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            else if (e.Error != null)
+            {
+                MessageBox.Show("Ocorreu um erro ao execultar o ping. Verifique sua conexão com a internet " +
+                                "e se o host é valido", "Erro de Ping",
+                            MessageBoxButtons.OK, MessageBoxIcon.Error); 
+            }
+            else
+            {
+                MessageBox.Show("Monitoramento concluido com suceso!", "Finalizado com sucesso",
+                             MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+        }
+
+        private void Btn4_Iniciar_Click(object sender, EventArgs e)
+        {
+            backgroundWorker1.RunWorkerAsync();
+            backgroundWorker2.RunWorkerAsync();
+            Btn4_Iniciar.Enabled = false;
+            Btn5_Parar.Enabled = true;
+        }
+
+        private void Btn5_Parar_Click(object sender, EventArgs e)
+        {
+            backgroundWorker1.CancelAsync();
+            backgroundWorker2.CancelAsync();
         }
 
         private void backgroundWorker1_ProgressChanged(object sender, ProgressChangedEventArgs e)
@@ -306,6 +301,45 @@ namespace Monitoramento
             int Porcentagem_Int = (int)Percent;
             Lbl_Porcentagem.Text = Porcentagem_Int.ToString() + "%";
             progressBar1.Value = Porcentagem_Int;
+            Lbl_TempoEstimado2.Text = TempoEmSegundos;
+
+
         }
+
+        private void backgroundWorker2_DoWork(object sender, DoWorkEventArgs e)
+        {
+            //inicia o traballho de fazer o calculo de tempo em segundo plano, outra thread
+            BackgroundWorker worker2 = sender as BackgroundWorker;
+           
+           
+                int TempoBruto = int.Parse(TxtB_QPacote.Text) -1;
+                for (int j = TempoBruto; j >= 0; j--)
+                {
+                    if (worker2.CancellationPending == true) // verifica a cada etapa, se há um pedido de cancelamento do trabalho. Se sim , aborta o trabalho, se não continua
+                    {
+                        e.Cancel = true;
+                        break;
+                    }
+                    else
+                    {
+                        System.Threading.Thread.Sleep(1000);
+                        TimeSpan time = TimeSpan.FromSeconds(TempoBruto);
+                        TempoEmSegundos = time.ToString(@"hh\:mm\:ss");
+                        TempoBruto--;
+                        
+                }
+                    
+                }
+
+            
+           
+        }
+
+        private void backgroundWorker2_ProgressChanged(object sender, ProgressChangedEventArgs e)
+        {
+            Lbl_TempoEstimado2.Text = TempoEmSegundos;
+        }
+
+       
     }
 }
