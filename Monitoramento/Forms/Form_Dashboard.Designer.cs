@@ -57,6 +57,10 @@ namespace Monitoramento
             this.Btn4_Iniciar = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             this.Btn5_Parar = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             this.Pnl2_Grade = new System.Windows.Forms.Panel();
+            this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
+            this.metroSetLabel1 = new MetroSet_UI.Controls.MetroSetLabel();
+            this.progressBar1 = new System.Windows.Forms.ProgressBar();
+            this.Lbl_Porcentagem = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -76,7 +80,7 @@ namespace Monitoramento
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Margin = new System.Windows.Forms.Padding(2);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(170, 574);
+            this.panel1.Size = new System.Drawing.Size(170, 602);
             this.panel1.TabIndex = 0;
             // 
             // Pnl_Navegacao
@@ -115,7 +119,7 @@ namespace Monitoramento
             this.Btn4_Configuracoes.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.Btn4_Configuracoes.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(126)))), ((int)(((byte)(249)))));
             this.Btn4_Configuracoes.Image = global::Monitoramento.Properties.Resources.settings;
-            this.Btn4_Configuracoes.Location = new System.Drawing.Point(0, 542);
+            this.Btn4_Configuracoes.Location = new System.Drawing.Point(0, 570);
             this.Btn4_Configuracoes.Margin = new System.Windows.Forms.Padding(2);
             this.Btn4_Configuracoes.Name = "Btn4_Configuracoes";
             this.Btn4_Configuracoes.Size = new System.Drawing.Size(170, 32);
@@ -225,6 +229,7 @@ namespace Monitoramento
             this.TxtB_ID.StateCommon.Border.Rounding = 10;
             this.TxtB_ID.StateCommon.Content.Color1 = System.Drawing.SystemColors.ScrollBar;
             this.TxtB_ID.TabIndex = 2;
+            this.TxtB_ID.Text = "1";
             this.TxtB_ID.TextChanged += new System.EventHandler(this.TxtB_ID_TextChanged);
             this.TxtB_ID.Leave += new System.EventHandler(this.TxtB_ID_Leave);
             // 
@@ -261,9 +266,9 @@ namespace Monitoramento
             this.Pnl_Grade.Controls.Add(this.Lbl_Nome);
             this.Pnl_Grade.Controls.Add(this.TxtB_ID);
             this.Pnl_Grade.Controls.Add(this.Lbl_ID);
-            this.Pnl_Grade.Location = new System.Drawing.Point(197, 32);
+            this.Pnl_Grade.Location = new System.Drawing.Point(197, 30);
             this.Pnl_Grade.Name = "Pnl_Grade";
-            this.Pnl_Grade.Size = new System.Drawing.Size(781, 430);
+            this.Pnl_Grade.Size = new System.Drawing.Size(781, 432);
             this.Pnl_Grade.TabIndex = 4;
             // 
             // Lbl_FPacote
@@ -315,6 +320,7 @@ namespace Monitoramento
             this.TxtB_QPacote.StateCommon.Border.Rounding = 10;
             this.TxtB_QPacote.StateCommon.Content.Color1 = System.Drawing.SystemColors.ScrollBar;
             this.TxtB_QPacote.TabIndex = 6;
+            this.TxtB_QPacote.Text = "10";
             this.TxtB_QPacote.TextChanged += new System.EventHandler(this.TxtB_QPacote_TextChanged);
             this.TxtB_QPacote.Leave += new System.EventHandler(this.TxtB_QPacote_Leave);
             // 
@@ -348,6 +354,7 @@ namespace Monitoramento
             this.TxtB_IP.StateCommon.Border.Rounding = 10;
             this.TxtB_IP.StateCommon.Content.Color1 = System.Drawing.SystemColors.ScrollBar;
             this.TxtB_IP.TabIndex = 4;
+            this.TxtB_IP.Text = "8.8.8.8";
             this.TxtB_IP.TextChanged += new System.EventHandler(this.TxtB_IP_TextChanged);
             this.TxtB_IP.Leave += new System.EventHandler(this.TxtB_IP_Leave);
             // 
@@ -415,6 +422,7 @@ namespace Monitoramento
             this.TxtB_Nome.StateCommon.Border.Rounding = 10;
             this.TxtB_Nome.StateCommon.Content.Color1 = System.Drawing.SystemColors.ScrollBar;
             this.TxtB_Nome.TabIndex = 3;
+            this.TxtB_Nome.Text = "1";
             this.TxtB_Nome.TextChanged += new System.EventHandler(this.TxtB_Nome_TextChanged);
             this.TxtB_Nome.Leave += new System.EventHandler(this.TxtB_Nome_Leave);
             // 
@@ -466,21 +474,65 @@ namespace Monitoramento
             this.Pnl2_Grade.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(42)))), ((int)(((byte)(64)))));
             this.Pnl2_Grade.Controls.Add(this.Btn4_Iniciar);
             this.Pnl2_Grade.Controls.Add(this.Btn5_Parar);
-            this.Pnl2_Grade.Location = new System.Drawing.Point(197, 462);
+            this.Pnl2_Grade.Location = new System.Drawing.Point(200, 468);
             this.Pnl2_Grade.Name = "Pnl2_Grade";
-            this.Pnl2_Grade.Size = new System.Drawing.Size(781, 74);
+            this.Pnl2_Grade.Size = new System.Drawing.Size(781, 68);
             this.Pnl2_Grade.TabIndex = 11;
+            // 
+            // backgroundWorker1
+            // 
+            this.backgroundWorker1.WorkerReportsProgress = true;
+            this.backgroundWorker1.WorkerSupportsCancellation = true;
+            this.backgroundWorker1.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundWorker1_DoWork);
+            this.backgroundWorker1.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.backgroundWorker1_ProgressChanged);
+            // 
+            // metroSetLabel1
+            // 
+            this.metroSetLabel1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.metroSetLabel1.IsDerivedStyle = true;
+            this.metroSetLabel1.Location = new System.Drawing.Point(215, 542);
+            this.metroSetLabel1.Name = "metroSetLabel1";
+            this.metroSetLabel1.Size = new System.Drawing.Size(103, 34);
+            this.metroSetLabel1.Style = MetroSet_UI.Enums.Style.Light;
+            this.metroSetLabel1.StyleManager = null;
+            this.metroSetLabel1.TabIndex = 15;
+            this.metroSetLabel1.Text = "Progresso:";
+            this.metroSetLabel1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.metroSetLabel1.ThemeAuthor = "Narwin";
+            this.metroSetLabel1.ThemeName = "MetroLite";
+            // 
+            // progressBar1
+            // 
+            this.progressBar1.Location = new System.Drawing.Point(336, 548);
+            this.progressBar1.Name = "progressBar1";
+            this.progressBar1.Size = new System.Drawing.Size(424, 28);
+            this.progressBar1.TabIndex = 16;
+            // 
+            // Lbl_Porcentagem
+            // 
+            this.Lbl_Porcentagem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(51)))), ((int)(((byte)(73)))));
+            this.Lbl_Porcentagem.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.Lbl_Porcentagem.ForeColor = System.Drawing.Color.White;
+            this.Lbl_Porcentagem.Location = new System.Drawing.Point(761, 548);
+            this.Lbl_Porcentagem.Name = "Lbl_Porcentagem";
+            this.Lbl_Porcentagem.Size = new System.Drawing.Size(56, 28);
+            this.Lbl_Porcentagem.TabIndex = 17;
+            this.Lbl_Porcentagem.Text = "0%";
+            this.Lbl_Porcentagem.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // Form_Dashboard
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(51)))), ((int)(((byte)(73)))));
-            this.ClientSize = new System.Drawing.Size(1006, 574);
+            this.ClientSize = new System.Drawing.Size(1006, 602);
+            this.Controls.Add(this.progressBar1);
+            this.Controls.Add(this.metroSetLabel1);
             this.Controls.Add(this.Pnl2_Grade);
             this.Controls.Add(this.metroSetControlBox1);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.Pnl_Grade);
+            this.Controls.Add(this.Lbl_Porcentagem);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(2);
@@ -526,6 +578,10 @@ namespace Monitoramento
         public ComponentFactory.Krypton.Toolkit.KryptonRadioButton Rdo_Nao;
         public ComponentFactory.Krypton.Toolkit.KryptonRadioButton Rdo_Sim;
         private System.Windows.Forms.Panel Pnl2_Grade;
+        private System.Windows.Forms.ProgressBar progressBar1;
+        private MetroSet_UI.Controls.MetroSetLabel metroSetLabel1;
+        private System.Windows.Forms.Label Lbl_Porcentagem;
+        public System.ComponentModel.BackgroundWorker backgroundWorker1;
     }
 }
 
