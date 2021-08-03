@@ -23,7 +23,21 @@ namespace Monitoramento
         string RecebeTamanhoPacote;
         string RecebeQtdPacote;
         Boolean RecebeFragmentaPacote;
-       
+        // Labels do Form2 Analise //
+        static public int Envia_Maior;
+        static public int Envia_Media;
+        static public int Envia_Menor;
+        static public int Envia_Sucesso;
+        static public int Envia_Restante;
+        static public int Envia_Perdidos;
+        static public int Envia_Percent;
+        static public int Envia_Atual;
+        static public float Envia_PerdaPorcento;
+        static public Boolean CalculoFinalizado;
+        static public Boolean EnviaClicado;
+
+
+
         static public String IDTEMP ="00001";
         static public String NOMETEMP = "Fulano Ciclano";
         static public String IPTEMP = "8.8.8.8";
@@ -81,13 +95,18 @@ namespace Monitoramento
             Pnl_Navegacao.Left = Btn1_Dashboard.Left;
             Btn1_Dashboard.BackColor = Color.FromArgb(46, 51, 73);
             AbrirFormsFilhos(new Form2_Dashboard());
-            backgroundWorker3.RunWorkerAsync(); // Thread 3 busca atualização no campo de texto
+            if (backgroundWorker3.IsBusy == false)
+            {
+                backgroundWorker3.RunWorkerAsync(); // Thread 3 busca atualização no campo de texto
+            }
+           
 
 
         }
 
         private void Btn2_Analise_Click(object sender, EventArgs e)
-        {
+        {   
+
             Pnl_Navegacao.Height = Btn2_Analise.Height;
             Pnl_Navegacao.Top = Btn2_Analise.Top;
             Pnl_Navegacao.Left = Btn2_Analise.Left;
@@ -147,10 +166,13 @@ namespace Monitoramento
         }
         private void Btn4_Iniciar_Click(object sender, EventArgs e)
         {
+            EnviaClicado = true;
+            Envia_PerdaPorcento = 0;
             Lbl_TempoEstimado2.ForeColor = Color.White;
             Pnl2_Grade.Enabled = false;
             backgroundWorker1.RunWorkerAsync(); // Thread 1 faz ping
             backgroundWorker2.RunWorkerAsync(); // Thread 2 atualiza a barra de progresso
+            ListaTempoPing.Clear();
            
             Btn4_Iniciar.Enabled = false;
             Btn5_Parar.Enabled = true;
@@ -160,6 +182,7 @@ namespace Monitoramento
         }
         private void Btn5_Parar_Click(object sender, EventArgs e)
         {
+            EnviaClicado = false;
             backgroundWorker1.CancelAsync();
             backgroundWorker2.CancelAsync();
             Btn4_Iniciar.Enabled = true;
@@ -181,7 +204,7 @@ namespace Monitoramento
 
         private void Form1_Principal_Load(object sender, EventArgs e)
         {
-            Btn1_Dashboard_Click(null, e);
+            Btn1_Dashboard_Click(null, e); // Inicio o programa principal com o botão Dashboard clicado
            
             
 
@@ -191,6 +214,7 @@ namespace Monitoramento
         private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
         {
             //inicia o traballho de fazer o ping em segundo plano, outra thread
+            CalculoFinalizado = false;
             BackgroundWorker worker = sender as BackgroundWorker;
             string Dados = string.Concat(Enumerable.Repeat("a", int.Parse(RecebeTamanhoPacote)));
             byte[] Buffer = Encoding.ASCII.GetBytes(Dados);
@@ -215,7 +239,7 @@ namespace Monitoramento
                     {
                         try
                         {
-
+                           
                             Percent = ((i + 1) / int.Parse(RecebeQtdPacote)) * 100;
                             int Porcento_Inteiro = (int)Percent;
                            
@@ -223,9 +247,21 @@ namespace Monitoramento
                             System.Threading.Thread.Sleep(1000);
                             PingReply reply = EnviaPing.Send(RecebeIP, 1000, Buffer);
                             writer.WriteLine("{0},{1},{2},{3},{4}", (i + 1), reply.Status, RecebeIP, RecebeTamanhoPacote, reply.RoundtripTime);
+                            // Trabalho para calculos do Form2 Analise
                            
                             ListaTempoPing.Insert((int)i, reply.RoundtripTime); //Adiciona posição do contador de ping, o tempo do ping
-                            
+                           
+                            Envia_Maior = (int)ListaTempoPing.Max(); // acha o maior tempo 
+                            Envia_Menor = (int)ListaTempoPing.Where(x => x != 0).DefaultIfEmpty().Min(); //Encontra o menor valor exceto zero;
+                            Envia_Media = (int)ListaTempoPing.Average(); //Acha o tempo médio
+                            Envia_Sucesso = (int)ListaTempoPing.Count(x => x != 0); // Acha quantidade ping com sucesso
+                            Envia_Restante = int.Parse(RecebeQtdPacote) - (int)ListaTempoPing.Count();
+                            Envia_Perdidos = ListaTempoPing.Count(x => x == 0); // Acha quantidade ping com sucesso
+                            Envia_Atual = (int)ListaTempoPing[(int)i];
+                            float Perdidos = (float)Envia_Perdidos;
+                            float Npacotes = float.Parse (RecebeQtdPacote);
+                            float PorcentoPerda = (Perdidos /Npacotes) * 100;
+                            Envia_PerdaPorcento = PorcentoPerda;
                             worker.ReportProgress(Porcento_Inteiro);
                            
                         }
@@ -246,10 +282,11 @@ namespace Monitoramento
 
         private void backgroundWorker1_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
+            EnviaClicado = false;
             Pnl2_Grade.Enabled = true;
             Btn4_Iniciar.Enabled = true;
             Btn5_Parar.Enabled = false;
-           
+            CalculoFinalizado = true;
             if (e.Cancelled == true)
             {
                 MessageBox.Show("Abortado pelo usuário", "Pìng Cancelado",
@@ -281,6 +318,8 @@ namespace Monitoramento
             Lbl_Porcentagem.Text = Porcentagem_Int.ToString() + "%";
             progressBar1.Value = Porcentagem_Int;
             Lbl_TempoEstimado2.Text = TempoEmSegundos;
+
+            
         }
 
         private void backgroundWorker2_DoWork(object sender, DoWorkEventArgs e)

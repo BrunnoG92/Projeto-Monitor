@@ -95,7 +95,7 @@ namespace Monitoramento
             // TxtB_IP
             // 
             this.TxtB_IP.Location = new System.Drawing.Point(89, 138);
-            this.TxtB_IP.MaxLength = 15;
+            this.TxtB_IP.MaxLength = 30;
             this.TxtB_IP.Name = "TxtB_IP";
             this.TxtB_IP.Size = new System.Drawing.Size(169, 29);
             this.TxtB_IP.StateCommon.Back.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(74)))), ((int)(((byte)(79)))), ((int)(((byte)(99)))));
