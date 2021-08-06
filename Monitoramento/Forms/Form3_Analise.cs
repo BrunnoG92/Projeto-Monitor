@@ -40,7 +40,8 @@ namespace Monitoramento
             Lbl_Media.ForeColor = Color.White;
             Lbl_PingAtual.ForeColor = Color.White;
             Lbl_PerdaPorcento.ForeColor = Color.White;
-           
+            TxtB_PingRestante.Font = new Font(TxtB_PingRestante.Font, FontStyle.Bold); //teste, alteração pra negrito //
+          
 
 
         }
@@ -61,8 +62,7 @@ namespace Monitoramento
                 Recebe_PerdaPorcento = Form1_Principal.Envia_PerdaPorcento;
                 Recebe_Clicado = Form1_Principal.EnviaClicado;
                 // Controle da cor da label perdeu pacote //
-
-
+               
                 worker1.ReportProgress(Form1_Principal.Envia_Percent);
             } while (Form1_Principal.CalculoFinalizado != true);
             
@@ -72,7 +72,8 @@ namespace Monitoramento
         private void backgroundWorker1_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
             // Atualiza os resultados //
-          //  MessageBox.Show("A lista tem " + Form1_Principal.ListaTempoPing.Count());
+            //  MessageBox.Show("A lista tem " + Form1_Principal.ListaTempoPing.Count());
+            Lbl_PerdaPorcento.Refresh();
             TxtB_Maior.Text = Recebe_Maior.ToString();
             TxtB_Media.Text = Recebe_Media.ToString();
             TxtB_Menor.Text = Recebe_Menor.ToString();   
@@ -83,20 +84,25 @@ namespace Monitoramento
             int PorcentoInteiro = (int) Recebe_PerdaPorcento;
             TxtB_PerdaPorcento.Text = PorcentoInteiro.ToString()+ "%";
 
-            if((int)Recebe_PerdaPorcento > 0  && Recebe_Clicado == true)
+            
+            if (Recebe_Perdidos == 0 && Recebe_Clicado == true )
             {
+                Lbl_PerdaPorcento.Text = "Perda";
+                Lbl_PerdaPorcento.ForeColor = Color.Chartreuse;
+               
+
+
+            }
+            if (Recebe_Perdidos > 0 && Recebe_Clicado == true)
+            {
+                Lbl_PerdaPorcento.Text = "Perda";
                 Lbl_PerdaPorcento.ForeColor = Color.Red;
             }
-            else if ((int)Recebe_PerdaPorcento == 0 && Recebe_Clicado == true)
-            {
-                Lbl_PerdaPorcento.ForeColor = Color.Chartreuse;
-                
-            }
 
 
 
-           
-            
+
+
 
         }
 

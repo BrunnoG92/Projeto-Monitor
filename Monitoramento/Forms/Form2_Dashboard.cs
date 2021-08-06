@@ -53,7 +53,9 @@ namespace Monitoramento
             Lbl_TPacote.ForeColor = Color.White;
             Lbl_QPacote.ForeColor = Color.White;
             Lbl_FPacote.ForeColor = Color.White;
-            
+          
+
+
 
         }
 

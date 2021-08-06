@@ -401,7 +401,6 @@ namespace Monitoramento
         private System.Windows.Forms.Button Btn3_Historico;
         private System.Windows.Forms.Button Btn2_Analise;
         private System.Windows.Forms.Button Btn1_Dashboard;
-        private System.Windows.Forms.Panel Pnl2_Grade;
         private MetroSet_UI.Controls.MetroSetLabel Lbl_TempoDecorrido;
         private System.Windows.Forms.ProgressBar progressBar1;
         private MetroSet_UI.Controls.MetroSetLabel Lbl_Progresso;
@@ -413,6 +412,7 @@ namespace Monitoramento
         private System.ComponentModel.BackgroundWorker backgroundWorker1;
         private System.ComponentModel.BackgroundWorker backgroundWorker2;
         private System.ComponentModel.BackgroundWorker backgroundWorker3;
+        public System.Windows.Forms.Panel Pnl2_Grade;
     }
 }
 

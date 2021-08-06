@@ -9,6 +9,7 @@ using System.Linq;
 using System.Net.NetworkInformation;
 using System.Runtime.InteropServices;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -32,7 +33,7 @@ namespace Monitoramento
         static public int Envia_Menor;
         static public int Envia_Sucesso;
         static public int Envia_Restante;
-        static public int Envia_Perdidos;
+        static public int Envia_Perdidos ;
         static public int Envia_Percent;
         static public int Envia_Atual;
         static public float Envia_PerdaPorcento;
@@ -69,6 +70,7 @@ namespace Monitoramento
              int nWidthEllipse,
              int nHeightEllipse
          );
+
         //
         // Fim da personalização //
         //
@@ -100,6 +102,8 @@ namespace Monitoramento
             // Ela é usada para controlar o Worker 3 que faz a atualização dos dados do Form Analise, sendo este ativado apenas quando entro naquele Form.
             //
             SAIDODASHBOARD = false;
+            Pnl2_Grade.Enabled = true;
+            
             Pnl_Navegacao.Height = Btn1_Dashboard.Height;
             Pnl_Navegacao.Top = Btn1_Dashboard.Top;
             Pnl_Navegacao.Left = Btn1_Dashboard.Left;
@@ -113,6 +117,8 @@ namespace Monitoramento
         private void Btn1_Dashboard_Leave(object sender, EventArgs e)
         {
             Btn1_Dashboard.BackColor = Color.FromArgb(24, 30, 54);
+            Pnl2_Grade.Enabled = true;
+            SAIDODASHBOARD = true;
         }
 
         private void Btn2_Analise_Click(object sender, EventArgs e)
@@ -170,9 +176,18 @@ namespace Monitoramento
             EnviaClicado = true;
             Envia_PerdaPorcento = 0;
             Lbl_TempoEstimado2.ForeColor = Color.White;
-            Pnl2_Grade.Enabled = false;
-            backgroundWorker1.RunWorkerAsync(); // Thread 1 faz ping
-            backgroundWorker2.RunWorkerAsync(); // Thread 2 atualiza a barra de progresso
+            // Verifico antes da execução das thread, se já não há um trabalho em segundo plano. Caso sim, encerra-se este 
+            if (!backgroundWorker1.IsBusy)
+                backgroundWorker1.RunWorkerAsync();
+            else
+                backgroundWorker1.CancelAsync();
+          
+            if (!backgroundWorker2.IsBusy)
+                backgroundWorker2.RunWorkerAsync();
+            else
+                backgroundWorker2.CancelAsync();
+
+         
             ListaTempoPing.Clear();
            
             Btn4_Iniciar.Enabled = false;
@@ -225,6 +240,7 @@ namespace Monitoramento
             // Com os valores de tempo, é utilizado manipulação de lista para encontrar o menor, maior , média e se houve perda de pacote (Tempo de ping = 0) //
             //
             Ping EnviaPing = new Ping();
+            
             PingOptions Opcoes = new PingOptions();
             Opcoes.DontFragment = RecebeFragmentaPacote;
             {
@@ -254,16 +270,22 @@ namespace Monitoramento
                             float Perdidos = (float)Envia_Perdidos;
                             float Npacotes = float.Parse (RecebeQtdPacote);
                             float PorcentoPerda = (Perdidos /i) * 100;
-                            Envia_PerdaPorcento = PorcentoPerda;
+                            if (PorcentoPerda > 100)
+                            {
+                                Envia_PerdaPorcento = 100;
+                            }
+                            else
+                                Envia_PerdaPorcento = PorcentoPerda;
                             worker.ReportProgress(Porcento_Inteiro);
                            
                         }
                         catch
                         {
                             MessageBox.Show("Ocorreu um erro ao execultar o ping. Verifique sua conexão com a internet " +
-                                "e se o host é valido", "Erro de Ping",
-                            MessageBoxButtons.OK, MessageBoxIcon.Error);
-                            return;
+                               "e se o host é valido", "Erro de Ping",
+                           MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            break;
+                            
                         }
 
                     }
@@ -279,6 +301,7 @@ namespace Monitoramento
             Lbl_Porcentagem.Text = Porcentagem_Int.ToString() + "%";
             progressBar1.Value = Porcentagem_Int;
             Lbl_TempoEstimado2.Text = TempoEmSegundos;
+            
         }
         private void backgroundWorker1_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {   //
@@ -289,35 +312,23 @@ namespace Monitoramento
             Btn4_Iniciar.Enabled = true;
             Btn5_Parar.Enabled = false;
             CalculoFinalizado = true;
-            if (e.Cancelled == true)
+            if (e.Cancelled)
             {
-                MessageBox.Show("Abortado pelo usuário", "Pìng Cancelado",
-                               MessageBoxButtons.OK, MessageBoxIcon.Information);
-                Lbl_TempoEstimado2.Text = "Cancelado pelo usuário";
-                Lbl_TempoEstimado2.ForeColor = Color.Red;
-            }
-            else if (e.Error != null)
-            {
-                MessageBox.Show("Ocorreu um erro ao execultar o ping. Verifique sua conexão com a internet " +
-                                "e se o host é valido", "Erro de Ping",
-                            MessageBoxButtons.OK, MessageBoxIcon.Error);
-                Lbl_TempoEstimado2.Text = "Erro na execução";
-                Lbl_TempoEstimado2.ForeColor = Color.Red;
-            }
-            else
-            {
-                MessageBox.Show("Monitoramento concluido com suceso!", "Finalizado com sucesso",
+                MessageBox.Show("Ping cancelado com sucesso", "Cancelado pelo usuário",
                              MessageBoxButtons.OK, MessageBoxIcon.Information);
-                Lbl_TempoEstimado2.Text = "Concluido com sucesso";
-                Lbl_TempoEstimado2.ForeColor = Color.Chartreuse;
-
             }
+            if (e.Error == null)
+            {
+                MessageBox.Show("Monitoramento finalizado");
+            }    
+           
         }
-        //
-        // Fim implementação Woker 1// 
-        //
-        // Inicio Implementação Worker 2 - Contagem do tempo restante// 
-        private void backgroundWorker2_DoWork(object sender, DoWorkEventArgs e)
+           
+            //
+            // Fim implementação Woker 1// 
+            //
+            // Inicio Implementação Worker 2 - Contagem do tempo restante// 
+            private void backgroundWorker2_DoWork(object sender, DoWorkEventArgs e)
         {   
             //
             // Cada solicitação de Ping irá aguardar 1 segundo até a proxima. A lógica do valor da barra de progresso é a quantidade de Pings transformada em segundos //
@@ -388,9 +399,13 @@ namespace Monitoramento
                 FRAGMENTATEMP = RecebeFragmentaPacote;
                 QTDPACOTETEMP = RecebeQtdPacote;
 
+               
+
             } while (SAIDODASHBOARD == false);
 
         }
+        //
+        
     }
     //
     //  Outras Implantações - // Implantações que mudam a interface mas que não dependem da função Ping //
@@ -407,5 +422,6 @@ namespace Monitoramento
             SendMessage(pBar.Handle, 1040, (IntPtr)state, IntPtr.Zero);
         }
     }
+
        
 }
