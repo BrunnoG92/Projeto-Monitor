@@ -40,7 +40,8 @@ namespace Monitoramento
             Lbl_Media.ForeColor = Color.White;
             Lbl_PingAtual.ForeColor = Color.White;
             Lbl_PerdaPorcento.ForeColor = Color.White;
-            TxtB_PingRestante.Font = new Font(TxtB_PingRestante.Font, FontStyle.Bold); //teste, alteração pra negrito //
+            
+          
           
 
 
@@ -72,7 +73,6 @@ namespace Monitoramento
         private void backgroundWorker1_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
             // Atualiza os resultados //
-            //  MessageBox.Show("A lista tem " + Form1_Principal.ListaTempoPing.Count());
             Lbl_PerdaPorcento.Refresh();
             TxtB_Maior.Text = Recebe_Maior.ToString();
             TxtB_Media.Text = Recebe_Media.ToString();
@@ -87,9 +87,9 @@ namespace Monitoramento
             
             if (Recebe_Perdidos == 0 && Recebe_Clicado == true )
             {
-                Lbl_PerdaPorcento.Text = "Perda";
-                Lbl_PerdaPorcento.ForeColor = Color.Chartreuse;
-               
+                    Lbl_PerdaPorcento.Text = "Perda";
+                    Lbl_PerdaPorcento.ForeColor = Color.Chartreuse;
+
 
 
             }
@@ -98,12 +98,6 @@ namespace Monitoramento
                 Lbl_PerdaPorcento.Text = "Perda";
                 Lbl_PerdaPorcento.ForeColor = Color.Red;
             }
-
-
-
-
-
-
         }
 
         

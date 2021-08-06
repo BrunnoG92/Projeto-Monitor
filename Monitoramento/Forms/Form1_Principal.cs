@@ -104,6 +104,7 @@ namespace Monitoramento
             SAIDODASHBOARD = false;
             Pnl2_Grade.Enabled = true;
             
+            
             Pnl_Navegacao.Height = Btn1_Dashboard.Height;
             Pnl_Navegacao.Top = Btn1_Dashboard.Top;
             Pnl_Navegacao.Left = Btn1_Dashboard.Left;
@@ -130,7 +131,7 @@ namespace Monitoramento
             Pnl_Navegacao.Left = Btn2_Analise.Left;
             Btn2_Analise.BackColor = Color.FromArgb(46, 51, 73);
             AbrirFormsFilhos(new Form3_Analise());
-            SAIDODASHBOARD = true;
+           
         }
         private void Btn2_Analise_Leave(object sender, EventArgs e)
         {
@@ -172,7 +173,7 @@ namespace Monitoramento
             //
             // Ao clicar em iniciar. Inicia-se o Back Worker 1 , que é o responsável pela função Ping
             //
-           
+            MessageBox.Show(RecebeQtdPacote.ToString());
             EnviaClicado = true;
             Envia_PerdaPorcento = 0;
             Lbl_TempoEstimado2.ForeColor = Color.White;
@@ -229,6 +230,7 @@ namespace Monitoramento
         {   //
             //inicia o traballho de fazer o ping em segundo plano, outra thread
             //
+            
             CalculoFinalizado = false;
             BackgroundWorker worker = sender as BackgroundWorker;
             string Dados = string.Concat(Enumerable.Repeat("a", int.Parse(RecebeTamanhoPacote)));
@@ -302,6 +304,7 @@ namespace Monitoramento
             progressBar1.Value = Porcentagem_Int;
             Lbl_TempoEstimado2.Text = TempoEmSegundos;
             
+
         }
         private void backgroundWorker1_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {   //
@@ -380,7 +383,7 @@ namespace Monitoramento
             //
             do
             {   //
-                // Até que seja detectado que sai do dashboard, eu envio os dados para o formulário dashboard //
+                // Até que seja detectado que sai que cliquei em INICIAR, eu envio os dados para o formulário dashboard //
                 //
                 RecebeID = Form2_Dashboard.EnviaID;
                 RecebeNome = Form2_Dashboard.EnviaNome;
@@ -401,11 +404,13 @@ namespace Monitoramento
 
                
 
-            } while (SAIDODASHBOARD == false);
+            } while (EnviaClicado == false);
 
         }
+
+       
         //
-        
+
     }
     //
     //  Outras Implantações - // Implantações que mudam a interface mas que não dependem da função Ping //

@@ -235,6 +235,7 @@ namespace Monitoramento
             this.Pnl2_Grade.Name = "Pnl2_Grade";
             this.Pnl2_Grade.Size = new System.Drawing.Size(837, 432);
             this.Pnl2_Grade.TabIndex = 2;
+           
             // 
             // panel1
             // 

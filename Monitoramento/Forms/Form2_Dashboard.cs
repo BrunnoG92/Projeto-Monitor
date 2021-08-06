@@ -53,7 +53,7 @@ namespace Monitoramento
             Lbl_TPacote.ForeColor = Color.White;
             Lbl_QPacote.ForeColor = Color.White;
             Lbl_FPacote.ForeColor = Color.White;
-          
+            TxtB_ID.BackColor = Color.Red;
 
 
 
@@ -66,6 +66,7 @@ namespace Monitoramento
             TextoTrocado = true;
             EnviaID = TxtB_ID.Text;
             
+
         }
 
         private void TxtB_Nome_TextChanged(object sender, EventArgs e)
@@ -104,7 +105,106 @@ namespace Monitoramento
             EnviaFragmentaPacote = Rdo_Nao.Checked;
         }
 
+        // Valida o texto digitado pelo usuário nos campo Tamanho de Pacote e Quantidade de pacote, permetindo apenas números. Caso insira 
+        // uma letra ou simbolo, retorna uma mensagem de erro. Também destaca as textbox quando ativas. Vermlha quando há letra e roxo quando há números.
+        //
+
+        // Destaque da TextBox Tamanho Pacote
+        private void TxtB_TPacote_KeyPress(object sender, KeyPressEventArgs e)
+        {   
+            // Se o digitado for letra. Destaca com a cor vermelha e mostra uma mensagem de erro. Caso seja numero, permite a digitação e destaca em roxo
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            {
+                e.Handled = true;
+                MessageBox.Show("Somente números são permitidos no campo tamanho de pacote", "Caractere inválido",
+                           MessageBoxButtons.OK, MessageBoxIcon.Error);
+                TxtB_TPacote.StateCommon.Border.Color1 = Color.Red;
+                
+                TxtB_TPacote.StateCommon.Border.Width = 2;
+            }
+            if (!char.IsControl(e.KeyChar) && !char.IsLetter(e.KeyChar))
+            {
+                e.Handled = false;
+
+                TxtB_TPacote.StateCommon.Border.Color1 = Color.FromArgb(72, 0, 224);
+
+                TxtB_TPacote.StateCommon.Border.Width = 2;
+            }
+           
+        }
+
        
+        private void TxtB_TPacote_Leave(object sender, EventArgs e)
+        {
+            TxtB_TPacote.StateCommon.Border.Color1 = Color.Black;
+            TxtB_TPacote.StateCommon.Border.Width = -1;
+        }
+
+        // // Destaque TextBox Quantidade de Pacote Ativo
+        private void TxtB_QPacote_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            // Se o digitado for letra. Destaca com a cor vermelha e mostra uma mensagem de erro. Caso seja numero, permite a digitação e destaca em roxo
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            {
+                e.Handled = true;
+                MessageBox.Show("Somente números são permitidos no campo tamanho de pacote", "Caractere inválido",
+                           MessageBoxButtons.OK, MessageBoxIcon.Error);
+                TxtB_QPacote.StateCommon.Border.Color1 = Color.Red;
+
+                TxtB_QPacote.StateCommon.Border.Width = 2;
+            }
+            if (!char.IsControl(e.KeyChar) && !char.IsLetter(e.KeyChar))
+            {
+                e.Handled = false;
+
+                TxtB_QPacote.StateCommon.Border.Color1 = Color.FromArgb(72, 0, 224);
+
+                TxtB_QPacote.StateCommon.Border.Width = 2;
+            }
+        }
+
+        // Destaque TextBox Quantidade de pacote Inativo
+        private void TxtB_QPacote_Leave(object sender, EventArgs e)
+        {
+            TxtB_QPacote.StateCommon.Border.Color1 = Color.Black;
+            TxtB_QPacote.StateCommon.Border.Width = -1;
+        }
+        // Destaque TextBox ID Ativo
+        private void TxtB_ID_KeyPress(object sender, KeyPressEventArgs e)
+        {
+                TxtB_ID.StateCommon.Border.Color1 = Color.FromArgb(72, 0, 224);
+                TxtB_ID.StateCommon.Border.Width = 2;
+        }
+        // Destaque TextBox ID Inativo
+        private void TxtB_ID_Leave(object sender, EventArgs e)
+        {
+            TxtB_ID.StateCommon.Border.Color1 = Color.Black;
+            TxtB_ID.StateCommon.Border.Width = -1;
+        }
+        // Destaque TextBox Nome Ativo
+        private void TxtB_Nome_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            TxtB_Nome.StateCommon.Border.Color1 = Color.FromArgb(72, 0, 224);
+            TxtB_Nome.StateCommon.Border.Width = 2;
+        }
+        // Destaque TextBox Nome Inativo
+        private void TxtB_Nome_Leave(object sender, EventArgs e)
+        {
+            TxtB_Nome.StateCommon.Border.Color1 = Color.Black;
+            TxtB_Nome.StateCommon.Border.Width = -1;
+        }
+        // Destaque TextBox IP Ativo
+        private void TxtB_IP_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            TxtB_IP.StateCommon.Border.Color1 = Color.FromArgb(72, 0, 224);
+            TxtB_IP.StateCommon.Border.Width = 2;
+        }
+        // Destaque TextBox IP Inativo
+        private void TxtB_IP_Leave(object sender, EventArgs e)
+        {
+            TxtB_IP.StateCommon.Border.Color1 = Color.Black;
+            TxtB_IP.StateCommon.Border.Width = -1;
+        }
     }
     
 }

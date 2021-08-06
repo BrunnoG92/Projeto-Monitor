@@ -76,6 +76,8 @@ namespace Monitoramento
             this.TxtB_ID.TabIndex = 29;
             this.TxtB_ID.Text = "1";
             this.TxtB_ID.TextChanged += new System.EventHandler(this.TxtB_ID_TextChanged);
+            this.TxtB_ID.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TxtB_ID_KeyPress);
+            this.TxtB_ID.Leave += new System.EventHandler(this.TxtB_ID_Leave);
             // 
             // Lbl_IP
             // 
@@ -109,6 +111,8 @@ namespace Monitoramento
             this.TxtB_IP.TabIndex = 32;
             this.TxtB_IP.Text = "8.8.8.8";
             this.TxtB_IP.TextChanged += new System.EventHandler(this.TxtB_IP_TextChanged);
+            this.TxtB_IP.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TxtB_IP_KeyPress);
+            this.TxtB_IP.Leave += new System.EventHandler(this.TxtB_IP_Leave);
             // 
             // TxtB_Nome
             // 
@@ -127,6 +131,8 @@ namespace Monitoramento
             this.TxtB_Nome.TabIndex = 30;
             this.TxtB_Nome.Text = "1";
             this.TxtB_Nome.TextChanged += new System.EventHandler(this.TxtB_Nome_TextChanged);
+            this.TxtB_Nome.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TxtB_Nome_KeyPress);
+            this.TxtB_Nome.Leave += new System.EventHandler(this.TxtB_Nome_Leave);
             // 
             // Lbl_Nome
             // 
@@ -175,6 +181,8 @@ namespace Monitoramento
             this.TxtB_QPacote.TabIndex = 35;
             this.TxtB_QPacote.Text = "10";
             this.TxtB_QPacote.TextChanged += new System.EventHandler(this.TxtB_QPacote_TextChanged);
+            this.TxtB_QPacote.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TxtB_QPacote_KeyPress);
+            this.TxtB_QPacote.Leave += new System.EventHandler(this.TxtB_QPacote_Leave);
             // 
             // Lbl_QPacote
             // 
@@ -208,6 +216,8 @@ namespace Monitoramento
             this.TxtB_TPacote.TabIndex = 33;
             this.TxtB_TPacote.Text = "32";
             this.TxtB_TPacote.TextChanged += new System.EventHandler(this.TxtB_TPacote_TextChanged);
+            this.TxtB_TPacote.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TxtB_TPacote_KeyPress);
+            this.TxtB_TPacote.Leave += new System.EventHandler(this.TxtB_TPacote_Leave);
             // 
             // Lbl_FPacote
             // 
