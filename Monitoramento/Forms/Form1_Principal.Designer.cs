@@ -29,6 +29,7 @@ namespace Monitoramento
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1_Principal));
             this.Pnl1_Menu = new System.Windows.Forms.Panel();
             this.Pnl_Navegacao = new System.Windows.Forms.Panel();
             this.Btn3_Historico = new System.Windows.Forms.Button();
@@ -355,7 +356,6 @@ namespace Monitoramento
             this.backgroundWorker3.WorkerReportsProgress = true;
             this.backgroundWorker3.WorkerSupportsCancellation = true;
             this.backgroundWorker3.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundWorker3_DoWork);
-            this.backgroundWorker3.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.backgroundWorker3_RunWorkerCompleted);
             // 
             // Form1_Principal
             // 
@@ -373,6 +373,7 @@ namespace Monitoramento
             this.Controls.Add(this.metroSetControlBox1);
             this.Controls.Add(this.Pnl1_Menu);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "Form1_Principal";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;

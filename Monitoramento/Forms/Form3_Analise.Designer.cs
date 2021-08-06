@@ -414,7 +414,6 @@ namespace Monitoramento
         private ComponentFactory.Krypton.Toolkit.KryptonTextBox TxtB_TotalPing;
         private MetroSet_UI.Controls.MetroSetLabel Lbl_TPing;
         private System.ComponentModel.BackgroundWorker backgroundWorker1;
-        private System.Windows.Forms.Button button1;
         private ComponentFactory.Krypton.Toolkit.KryptonTextBox TxtB_Atual;
         private MetroSet_UI.Controls.MetroSetLabel Lbl_PingAtual;
         private ComponentFactory.Krypton.Toolkit.KryptonTextBox TxtB_PerdaPorcento;
