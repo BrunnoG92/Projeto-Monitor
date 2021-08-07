@@ -1,4 +1,5 @@
 ﻿using MetroSet_UI.Forms;
+using Monitoramento.Classes;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -138,6 +139,15 @@ namespace Monitoramento
             Btn2_Analise.BackColor = Color.FromArgb(24, 30, 54);
 
         }
+        private void Btn_Grafico_Click(object sender, EventArgs e)
+        {
+            Pnl_Navegacao.Top = Btn_Grafico.Top;
+            Btn_Grafico.BackColor = Color.FromArgb(46, 51, 73);
+        }
+        private void Btn_Grafico_Leave(object sender, EventArgs e)
+        {
+            Btn_Grafico.BackColor = Color.FromArgb(24, 30, 54);
+        }
         private void Btn3_Historico_Click(object sender, EventArgs e)
         {
             Pnl_Navegacao.Height = Btn3_Historico.Height;
@@ -173,7 +183,7 @@ namespace Monitoramento
             //
             // Ao clicar em iniciar. Inicia-se o Back Worker 1 , que é o responsável pela função Ping
             //
-            MessageBox.Show(RecebeQtdPacote.ToString());
+           
             EnviaClicado = true;
             Envia_PerdaPorcento = 0;
             Lbl_TempoEstimado2.ForeColor = Color.White;
@@ -302,6 +312,7 @@ namespace Monitoramento
             int Porcentagem_Int = (int)Percent;
             Lbl_Porcentagem.Text = Porcentagem_Int.ToString() + "%";
             progressBar1.Value = Porcentagem_Int;
+            TaskbarProgress.SetValue(this.Handle, Porcentagem_Int, 100);
             Lbl_TempoEstimado2.Text = TempoEmSegundos;
             
 
@@ -315,15 +326,19 @@ namespace Monitoramento
             Btn4_Iniciar.Enabled = true;
             Btn5_Parar.Enabled = false;
             CalculoFinalizado = true;
+            FlashWindow.Flash(this);
             if (e.Cancelled)
             {
                 MessageBox.Show("Ping cancelado com sucesso", "Cancelado pelo usuário",
                              MessageBoxButtons.OK, MessageBoxIcon.Information);
+                TaskbarProgress.SetState(this.Handle, TaskbarProgress.TaskbarStates.Error);
+
             }
             if (e.Error == null)
             {
                 MessageBox.Show("Monitoramento finalizado");
             }    
+           
            
         }
            
@@ -409,6 +424,10 @@ namespace Monitoramento
         }
 
        
+
+
+
+
         //
 
     }

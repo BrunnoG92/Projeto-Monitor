@@ -113,7 +113,8 @@ namespace Monitoramento
         private void TxtB_TPacote_KeyPress(object sender, KeyPressEventArgs e)
         {   
             // Se o digitado for letra. Destaca com a cor vermelha e mostra uma mensagem de erro. Caso seja numero, permite a digitação e destaca em roxo
-            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+           
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) )
             {
                 e.Handled = true;
                 MessageBox.Show("Somente números são permitidos no campo tamanho de pacote", "Caractere inválido",
@@ -121,19 +122,22 @@ namespace Monitoramento
                 TxtB_TPacote.StateCommon.Border.Color1 = Color.Red;
                 
                 TxtB_TPacote.StateCommon.Border.Width = 2;
+               
             }
-            if (!char.IsControl(e.KeyChar) && !char.IsLetter(e.KeyChar))
-            {
-                e.Handled = false;
 
-                TxtB_TPacote.StateCommon.Border.Color1 = Color.FromArgb(72, 0, 224);
 
-                TxtB_TPacote.StateCommon.Border.Width = 2;
+             else if (!char.IsControl(e.KeyChar) && !char.IsLetter(e.KeyChar))
+           {
+               e.Handled = false;
+
+                            TxtB_TPacote.StateCommon.Border.Color1 = Color.FromArgb(72, 0, 224);
+
+            TxtB_TPacote.StateCommon.Border.Width = 2;
             }
-           
+
         }
 
-       
+
         private void TxtB_TPacote_Leave(object sender, EventArgs e)
         {
             TxtB_TPacote.StateCommon.Border.Color1 = Color.Black;
@@ -153,7 +157,7 @@ namespace Monitoramento
 
                 TxtB_QPacote.StateCommon.Border.Width = 2;
             }
-            if (!char.IsControl(e.KeyChar) && !char.IsLetter(e.KeyChar))
+           else if (!char.IsControl(e.KeyChar) && !char.IsLetter(e.KeyChar))
             {
                 e.Handled = false;
 

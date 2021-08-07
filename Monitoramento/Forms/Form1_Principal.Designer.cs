@@ -31,6 +31,7 @@ namespace Monitoramento
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1_Principal));
             this.Pnl1_Menu = new System.Windows.Forms.Panel();
+            this.Btn_Grafico = new System.Windows.Forms.Button();
             this.Pnl_Navegacao = new System.Windows.Forms.Panel();
             this.Btn3_Historico = new System.Windows.Forms.Button();
             this.Btn4_Configuracoes = new System.Windows.Forms.Button();
@@ -62,6 +63,7 @@ namespace Monitoramento
             // Pnl1_Menu
             // 
             this.Pnl1_Menu.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(24)))), ((int)(((byte)(30)))), ((int)(((byte)(54)))));
+            this.Pnl1_Menu.Controls.Add(this.Btn_Grafico);
             this.Pnl1_Menu.Controls.Add(this.Pnl_Navegacao);
             this.Pnl1_Menu.Controls.Add(this.Btn3_Historico);
             this.Pnl1_Menu.Controls.Add(this.Btn4_Configuracoes);
@@ -74,6 +76,24 @@ namespace Monitoramento
             this.Pnl1_Menu.Name = "Pnl1_Menu";
             this.Pnl1_Menu.Size = new System.Drawing.Size(170, 602);
             this.Pnl1_Menu.TabIndex = 0;
+            // 
+            // Btn_Grafico
+            // 
+            this.Btn_Grafico.FlatAppearance.BorderSize = 0;
+            this.Btn_Grafico.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.Btn_Grafico.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.Btn_Grafico.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(126)))), ((int)(((byte)(249)))));
+            this.Btn_Grafico.Image = global::Monitoramento.Properties.Resources.calendar;
+            this.Btn_Grafico.Location = new System.Drawing.Point(2, 270);
+            this.Btn_Grafico.Margin = new System.Windows.Forms.Padding(2);
+            this.Btn_Grafico.Name = "Btn_Grafico";
+            this.Btn_Grafico.Size = new System.Drawing.Size(168, 52);
+            this.Btn_Grafico.TabIndex = 5;
+            this.Btn_Grafico.Text = "Gráfico";
+            this.Btn_Grafico.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.Btn_Grafico.UseVisualStyleBackColor = true;
+            this.Btn_Grafico.Click += new System.EventHandler(this.Btn_Grafico_Click);
+            this.Btn_Grafico.Leave += new System.EventHandler(this.Btn_Grafico_Leave);
             // 
             // Pnl_Navegacao
             // 
@@ -235,7 +255,6 @@ namespace Monitoramento
             this.Pnl2_Grade.Name = "Pnl2_Grade";
             this.Pnl2_Grade.Size = new System.Drawing.Size(837, 432);
             this.Pnl2_Grade.TabIndex = 2;
-           
             // 
             // panel1
             // 
@@ -414,6 +433,7 @@ namespace Monitoramento
         private System.ComponentModel.BackgroundWorker backgroundWorker2;
         private System.ComponentModel.BackgroundWorker backgroundWorker3;
         public System.Windows.Forms.Panel Pnl2_Grade;
+        private System.Windows.Forms.Button Btn_Grafico;
     }
 }
 
