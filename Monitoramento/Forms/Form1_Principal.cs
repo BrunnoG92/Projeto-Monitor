@@ -154,6 +154,8 @@ namespace Monitoramento
             Pnl_Navegacao.Top = Btn3_Historico.Top;
             Pnl_Navegacao.Left = Btn3_Historico.Left;
             Btn3_Historico.BackColor = Color.FromArgb(46, 51, 73);
+            MessageBox.Show("Essa função ainda não foi implantada. Confira nas proximas versões :D","Em breve!",
+                             MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
         private void Btn3_Historico_Leave(object sender, EventArgs e)
         {
@@ -165,7 +167,9 @@ namespace Monitoramento
             Pnl_Navegacao.Top = Btn4_Configuracoes.Top;
             Pnl_Navegacao.Left = Btn4_Configuracoes.Left;
             Btn4_Configuracoes.BackColor = Color.FromArgb(46, 51, 73);
-            
+            MessageBox.Show("Essa função ainda não foi implantada. Confira nas proximas versões :D", "Em breve!",
+                            MessageBoxButtons.OK, MessageBoxIcon.Information);
+
         }
         private void Btn4_Configuracoes_Leave(object sender, EventArgs e)
         {
@@ -215,6 +219,7 @@ namespace Monitoramento
             Btn4_Iniciar.Enabled = true;
             Btn5_Parar.Enabled = false;
             progressBar1.SetState(2);
+            TaskbarProgress.SetState(this.Handle, TaskbarProgress.TaskbarStates.Error);
         }
         private void AbrirFormsFilhos(Form FormsFilhos)
         {
@@ -296,6 +301,7 @@ namespace Monitoramento
                             MessageBox.Show("Ocorreu um erro ao execultar o ping. Verifique sua conexão com a internet " +
                                "e se o host é valido", "Erro de Ping",
                            MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            
                             break;
                             
                         }
@@ -336,8 +342,13 @@ namespace Monitoramento
             }
             if (e.Error == null)
             {
+                FlashWindow.Flash(this);
                 MessageBox.Show("Monitoramento finalizado");
             }    
+            if (e.Error != null)
+            {
+                FlashWindow.Flash(this);
+            }
            
            
         }

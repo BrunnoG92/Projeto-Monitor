@@ -2,8 +2,11 @@
 
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
-    <TargetFramework>net5.0-windows</TargetFramework>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
     <UseWindowsForms>true</UseWindowsForms>
+    <ApplicationIcon>1419121_browser_internet_network_world_icon (1).ico</ApplicationIcon>
+    <Win32Resource />
+    <SignAssembly>false</SignAssembly>
   </PropertyGroup>
 
   <ItemGroup>
