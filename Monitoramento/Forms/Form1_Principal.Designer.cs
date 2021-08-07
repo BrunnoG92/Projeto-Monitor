@@ -40,7 +40,6 @@ namespace Monitoramento
             this.label1 = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.metroSetControlBox1 = new MetroSet_UI.Controls.MetroSetControlBox();
-            this.dragControl1 = new Monitoramento.DragControl();
             this.Pnl2_Grade = new System.Windows.Forms.Panel();
             this.panel1 = new System.Windows.Forms.Panel();
             this.Btn5_Parar = new ComponentFactory.Krypton.Toolkit.KryptonButton();
@@ -222,10 +221,6 @@ namespace Monitoramento
             this.metroSetControlBox1.ThemeAuthor = "Narwin";
             this.metroSetControlBox1.ThemeName = "MetroLite";
             // 
-            // dragControl1
-            // 
-            this.dragControl1.SelectControl = this;
-            // 
             // Pnl2_Grade
             // 
             this.Pnl2_Grade.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(42)))), ((int)(((byte)(64)))));
@@ -235,7 +230,6 @@ namespace Monitoramento
             this.Pnl2_Grade.Name = "Pnl2_Grade";
             this.Pnl2_Grade.Size = new System.Drawing.Size(837, 432);
             this.Pnl2_Grade.TabIndex = 2;
-           
             // 
             // panel1
             // 
@@ -302,7 +296,7 @@ namespace Monitoramento
             this.Lbl_Progresso.IsDerivedStyle = true;
             this.Lbl_Progresso.Location = new System.Drawing.Point(184, 538);
             this.Lbl_Progresso.Name = "Lbl_Progresso";
-            this.Lbl_Progresso.Size = new System.Drawing.Size(103, 34);
+            this.Lbl_Progresso.Size = new System.Drawing.Size(103, 47);
             this.Lbl_Progresso.Style = MetroSet_UI.Enums.Style.Light;
             this.Lbl_Progresso.StyleManager = null;
             this.Lbl_Progresso.TabIndex = 21;
