@@ -1,13 +1,9 @@
-﻿using MetroSet_UI.Forms;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Runtime.InteropServices;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Monitoramento
@@ -21,15 +17,9 @@ namespace Monitoramento
         public static string EnviaQtdPacote;
         public static Boolean EnviaFragmentaPacote;
         public static Boolean TextoTrocado;
-
-
-
-
-
         public Form2_Dashboard()
-        {   
+        {
             InitializeComponent();
-           
             // Envia para o Form1 os valores das textbox para atualização em tempo real //
             EnviaID = TxtB_ID.Text;
             EnviaNome = TxtB_Nome.Text;
@@ -45,27 +35,12 @@ namespace Monitoramento
             TxtB_TPacote.Text = Form1_Principal.TAMANHOTEMP;
             TxtB_QPacote.Text = Form1_Principal.QTDPACOTETEMP;
             Rdo_Sim.Checked = Form1_Principal.FRAGMENTATEMP;
-
-            // Cores das label do dashboard //
-            Lbl_ID.ForeColor = Color.White;
-            Lbl_Nome.ForeColor = Color.White;
-            Lbl_IP.ForeColor = Color.White;
-            Lbl_TPacote.ForeColor = Color.White;
-            Lbl_QPacote.ForeColor = Color.White;
-            Lbl_FPacote.ForeColor = Color.White;
-            TxtB_ID.BackColor = Color.Red;
-
-
-
         }
-
-        
-
         private void TxtB_ID_TextChanged(object sender, EventArgs e)
         {
             TextoTrocado = true;
             EnviaID = TxtB_ID.Text;
-            
+
 
         }
 
@@ -79,6 +54,7 @@ namespace Monitoramento
         {
             TextoTrocado = true;
             EnviaIP = TxtB_IP.Text;
+            
         }
 
         private void TxtB_TPacote_TextChanged(object sender, EventArgs e)
@@ -111,32 +87,30 @@ namespace Monitoramento
 
         // Destaque da TextBox Tamanho Pacote
         private void TxtB_TPacote_KeyPress(object sender, KeyPressEventArgs e)
-        {   
+        {
             // Se o digitado for letra. Destaca com a cor vermelha e mostra uma mensagem de erro. Caso seja numero, permite a digitação e destaca em roxo
-           
-            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) )
+
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
             {
                 e.Handled = true;
                 MessageBox.Show("Somente números são permitidos no campo tamanho de pacote", "Caractere inválido",
                            MessageBoxButtons.OK, MessageBoxIcon.Error);
                 TxtB_TPacote.StateCommon.Border.Color1 = Color.Red;
-                
+
                 TxtB_TPacote.StateCommon.Border.Width = 2;
-               
+
             }
 
 
-             else if (!char.IsControl(e.KeyChar) && !char.IsLetter(e.KeyChar))
-           {
-               e.Handled = false;
+            else if (!char.IsControl(e.KeyChar) && !char.IsLetter(e.KeyChar))
+            {
+                e.Handled = false;
 
-                            TxtB_TPacote.StateCommon.Border.Color1 = Color.FromArgb(72, 0, 224);
+                TxtB_TPacote.StateCommon.Border.Color1 = Color.FromArgb(72, 0, 224);
 
-            TxtB_TPacote.StateCommon.Border.Width = 2;
+                TxtB_TPacote.StateCommon.Border.Width = 2;
             }
-
         }
-
 
         private void TxtB_TPacote_Leave(object sender, EventArgs e)
         {
@@ -144,7 +118,6 @@ namespace Monitoramento
             TxtB_TPacote.StateCommon.Border.Width = -1;
         }
 
-        // // Destaque TextBox Quantidade de Pacote Ativo
         private void TxtB_QPacote_KeyPress(object sender, KeyPressEventArgs e)
         {
             // Se o digitado for letra. Destaca com a cor vermelha e mostra uma mensagem de erro. Caso seja numero, permite a digitação e destaca em roxo
@@ -157,7 +130,7 @@ namespace Monitoramento
 
                 TxtB_QPacote.StateCommon.Border.Width = 2;
             }
-           else if (!char.IsControl(e.KeyChar) && !char.IsLetter(e.KeyChar))
+            else if (!char.IsControl(e.KeyChar) && !char.IsLetter(e.KeyChar))
             {
                 e.Handled = false;
 
@@ -167,48 +140,47 @@ namespace Monitoramento
             }
         }
 
-        // Destaque TextBox Quantidade de pacote Inativo
         private void TxtB_QPacote_Leave(object sender, EventArgs e)
         {
             TxtB_QPacote.StateCommon.Border.Color1 = Color.Black;
             TxtB_QPacote.StateCommon.Border.Width = -1;
         }
-        // Destaque TextBox ID Ativo
+
         private void TxtB_ID_KeyPress(object sender, KeyPressEventArgs e)
         {
-                TxtB_ID.StateCommon.Border.Color1 = Color.FromArgb(72, 0, 224);
-                TxtB_ID.StateCommon.Border.Width = 2;
+            TxtB_ID.StateCommon.Border.Color1 = Color.FromArgb(72, 0, 224);
+            TxtB_ID.StateCommon.Border.Width = 2;
         }
-        // Destaque TextBox ID Inativo
+
         private void TxtB_ID_Leave(object sender, EventArgs e)
         {
             TxtB_ID.StateCommon.Border.Color1 = Color.Black;
             TxtB_ID.StateCommon.Border.Width = -1;
         }
-        // Destaque TextBox Nome Ativo
+
         private void TxtB_Nome_KeyPress(object sender, KeyPressEventArgs e)
         {
             TxtB_Nome.StateCommon.Border.Color1 = Color.FromArgb(72, 0, 224);
             TxtB_Nome.StateCommon.Border.Width = 2;
         }
-        // Destaque TextBox Nome Inativo
+
         private void TxtB_Nome_Leave(object sender, EventArgs e)
         {
             TxtB_Nome.StateCommon.Border.Color1 = Color.Black;
             TxtB_Nome.StateCommon.Border.Width = -1;
         }
-        // Destaque TextBox IP Ativo
+
         private void TxtB_IP_KeyPress(object sender, KeyPressEventArgs e)
         {
             TxtB_IP.StateCommon.Border.Color1 = Color.FromArgb(72, 0, 224);
             TxtB_IP.StateCommon.Border.Width = 2;
         }
-        // Destaque TextBox IP Inativo
+
         private void TxtB_IP_Leave(object sender, EventArgs e)
         {
             TxtB_IP.StateCommon.Border.Color1 = Color.Black;
             TxtB_IP.StateCommon.Border.Width = -1;
         }
     }
-    
-}
+
+} 

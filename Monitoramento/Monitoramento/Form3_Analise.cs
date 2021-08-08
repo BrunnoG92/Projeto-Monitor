@@ -40,9 +40,9 @@ namespace Monitoramento
             Lbl_Media.ForeColor = Color.White;
             Lbl_PingAtual.ForeColor = Color.White;
             Lbl_PerdaPorcento.ForeColor = Color.White;
-            
-          
-          
+
+
+
 
 
         }
@@ -52,7 +52,7 @@ namespace Monitoramento
             BackgroundWorker worker1 = sender as BackgroundWorker;
             do
             {   //Recebendo os resultados do ping em tempo real //
-                System.Threading.Thread.Sleep(100);           
+                System.Threading.Thread.Sleep(100);
                 Recebe_Maior = Form1_Principal.Envia_Maior;
                 Recebe_Media = Form1_Principal.Envia_Media;
                 Recebe_Menor = Form1_Principal.Envia_Menor;
@@ -63,10 +63,10 @@ namespace Monitoramento
                 Recebe_PerdaPorcento = Form1_Principal.Envia_PerdaPorcento;
                 Recebe_Clicado = Form1_Principal.EnviaClicado;
                 // Controle da cor da label perdeu pacote //
-               
+
                 worker1.ReportProgress(Form1_Principal.Envia_Percent);
             } while (Form1_Principal.CalculoFinalizado != true);
-            
+
 
         }
 
@@ -76,19 +76,19 @@ namespace Monitoramento
             Lbl_PerdaPorcento.Refresh();
             TxtB_Maior.Text = Recebe_Maior.ToString();
             TxtB_Media.Text = Recebe_Media.ToString();
-            TxtB_Menor.Text = Recebe_Menor.ToString();   
+            TxtB_Menor.Text = Recebe_Menor.ToString();
             TxtB_PingSucesso.Text = Recebe_Sucesso.ToString();
             TxtB_PingRestante.Text = Recebe_Restante.ToString();
             TxtB_PingPerdido.Text = Recebe_Perdidos.ToString();
             TxtB_Atual.Text = Recebe_atual.ToString();
-            int PorcentoInteiro = (int) Recebe_PerdaPorcento;
-            TxtB_PerdaPorcento.Text = PorcentoInteiro.ToString()+ "%";
+            int PorcentoInteiro = (int)Recebe_PerdaPorcento;
+            TxtB_PerdaPorcento.Text = PorcentoInteiro.ToString() + "%";
 
-            
-            if (Recebe_Perdidos == 0 && Recebe_Clicado == true )
+
+            if (Recebe_Perdidos == 0 && Recebe_Clicado == true)
             {
-                    Lbl_PerdaPorcento.Text = "Perda";
-                    Lbl_PerdaPorcento.ForeColor = Color.Chartreuse;
+                Lbl_PerdaPorcento.Text = "Perda";
+                Lbl_PerdaPorcento.ForeColor = Color.Chartreuse;
 
 
 
@@ -100,6 +100,6 @@ namespace Monitoramento
             }
         }
 
-        
+
     }
 }

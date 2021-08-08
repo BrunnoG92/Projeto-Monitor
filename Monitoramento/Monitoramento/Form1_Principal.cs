@@ -18,7 +18,7 @@ using System.Windows.Forms;
 namespace Monitoramento
 {
     public partial class Form1_Principal : Form
-    {   
+    {
         // Variávies que recebem os valores atualizados do formulário Dashboard //
         string RecebeID;
         string RecebeNome;
@@ -34,7 +34,7 @@ namespace Monitoramento
         static public int Envia_Menor;
         static public int Envia_Sucesso;
         static public int Envia_Restante;
-        static public int Envia_Perdidos ;
+        static public int Envia_Perdidos;
         static public int Envia_Percent;
         static public int Envia_Atual;
         static public float Envia_PerdaPorcento;
@@ -43,7 +43,7 @@ namespace Monitoramento
         //
         // Variávies temporárias. Onde fica salvo o conteudo do formulário Dashboard//
         //
-        static public String IDTEMP ="00001";
+        static public String IDTEMP = "00001";
         static public String NOMETEMP = "Fulano Ciclano";
         static public String IPTEMP = "8.8.8.8";
         static public String TAMANHOTEMP = "32";
@@ -53,7 +53,7 @@ namespace Monitoramento
         // 
         // Variavéis de controle //
         //
-        Boolean SAIDODASHBOARD; 
+        Boolean SAIDODASHBOARD;
         Boolean TextoMudou = Form2_Dashboard.TextoTrocado = true;
         String TempoEmSegundos;
         //
@@ -83,19 +83,38 @@ namespace Monitoramento
             Pnl_Navegacao.Height = Btn1_Dashboard.Height;
             Pnl_Navegacao.Top = Btn1_Dashboard.Top;
             Pnl_Navegacao.Left = Btn1_Dashboard.Left;
-            Btn1_Dashboard.BackColor = Color.FromArgb(46, 51, 73);
-            Lbl_Porcentagem.ForeColor = Color.White;
-            Lbl_TempoDecorrido.ForeColor = Color.White;
-            Lbl_TempoEstimado2.ForeColor = Color.White;
-            Lbl_Progresso.ForeColor = Color.White;
+            AbrirFormsFilhos(new Form2_Dashboard());
+            if (backgroundWorker3.IsBusy == false)
+            {
+                backgroundWorker3.RunWorkerAsync(); // Thread 3 busca atualização no campo de texto
+            }
+
+
         }
+        public const int WM_NCLBUTTONDOWN = 0xA1;
+        public const int HT_CAPTION = 0x2;
+
+        [System.Runtime.InteropServices.DllImport("user32.dll")]
+        public static extern int SendMessage(IntPtr hWnd, int Msg, int wParam, int lParam);
+        [System.Runtime.InteropServices.DllImport("user32.dll")]
+        public static extern bool ReleaseCapture();
+
+        private void Form1_MouseDown(object sender, System.Windows.Forms.MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Left)
+            {
+                ReleaseCapture();
+                SendMessage(Handle, WM_NCLBUTTONDOWN, HT_CAPTION, 0);
+            }
+        }
+
 
         //
         // Controle do menu lateral esquerdo (Click nos botões) //
         // A cada click há alterações de cores e mudança de posição do painel lateral esquerdo, que indica qual opção está selecionada //
         // 
         private void Btn1_Dashboard_Click(object sender, EventArgs e)
-        {   
+        {
             //
             // Ao iniciar o dashboard, altera-se as cores e muda o painel a esquerda, indicando que este foi selecinado //
             // No click também é aberto o formulário correspondente , como Form filho
@@ -104,8 +123,8 @@ namespace Monitoramento
             //
             SAIDODASHBOARD = false;
             Pnl2_Grade.Enabled = true;
-            
-            
+
+
             Pnl_Navegacao.Height = Btn1_Dashboard.Height;
             Pnl_Navegacao.Top = Btn1_Dashboard.Top;
             Pnl_Navegacao.Left = Btn1_Dashboard.Left;
@@ -124,15 +143,15 @@ namespace Monitoramento
         }
 
         private void Btn2_Analise_Click(object sender, EventArgs e)
-        {   
-               //
-               // Quando eu clico 
+        {
+            //
+            // Quando eu clico 
             Pnl_Navegacao.Height = Btn2_Analise.Height;
             Pnl_Navegacao.Top = Btn2_Analise.Top;
             Pnl_Navegacao.Left = Btn2_Analise.Left;
             Btn2_Analise.BackColor = Color.FromArgb(46, 51, 73);
             AbrirFormsFilhos(new Form3_Analise());
-           
+
         }
         private void Btn2_Analise_Leave(object sender, EventArgs e)
         {
@@ -141,13 +160,13 @@ namespace Monitoramento
         }
         private void Btn_Grafico_Click(object sender, EventArgs e)
         {
-            Pnl_Navegacao.Top = Btn_Grafico.Top;
-            Btn_Grafico.BackColor = Color.FromArgb(46, 51, 73);
-            AbrirFormsFilhos(new Forms.Form4_Grafico());
+            Pnl_Navegacao.Top = Btn4_Grafico.Top;
+            Btn4_Grafico.BackColor = Color.FromArgb(46, 51, 73);
+            
         }
         private void Btn_Grafico_Leave(object sender, EventArgs e)
         {
-            Btn_Grafico.BackColor = Color.FromArgb(24, 30, 54);
+            Btn4_Grafico.BackColor = Color.FromArgb(24, 30, 54);
         }
         private void Btn3_Historico_Click(object sender, EventArgs e)
         {
@@ -160,18 +179,29 @@ namespace Monitoramento
         {
             Btn3_Historico.BackColor = Color.FromArgb(24, 30, 54);
         }
-        private void Btn4_Configuracoes_Click(object sender, EventArgs e)
+        private void Btn4_Grafico_Click(object sender, EventArgs e)
         {
-            Pnl_Navegacao.Height = Btn4_Configuracoes.Height;
-            Pnl_Navegacao.Top = Btn4_Configuracoes.Top;
-            Pnl_Navegacao.Left = Btn4_Configuracoes.Left;
-            Btn4_Configuracoes.BackColor = Color.FromArgb(46, 51, 73);
-            
+            Pnl_Navegacao.Height = Btn4_Grafico.Height;
+            Pnl_Navegacao.Top = Btn4_Grafico.Top;
+            Pnl_Navegacao.Left = Btn4_Grafico.Left;
+            Btn4_Grafico.BackColor = Color.FromArgb(46, 51, 73);
+
         }
-        private void Btn4_Configuracoes_Leave(object sender, EventArgs e)
+        private void Btn4_Grafico_Leave(object sender, EventArgs e)
         {
-            Btn4_Configuracoes.BackColor = Color.FromArgb(24, 30, 54);
+            Btn4_Grafico.BackColor = Color.FromArgb(24, 30, 54);
         }
+        private void Btn5_Config_Click(object sender, EventArgs e)
+        {
+        
+            Pnl_Navegacao.Top = Btn5_Config.Top;
+            Btn5_Config.BackColor = Color.FromArgb(46, 51, 73);
+        }
+        private void Btn5_Config_Leave(object sender, EventArgs e)
+        {
+            Btn5_Config.BackColor = Color.FromArgb(24, 30, 54);
+        }
+
         private void Form1_Principal_Load(object sender, EventArgs e)
         {
             Btn1_Dashboard_Click(null, e); // Inicio o programa principal com o botão Dashboard clicado
@@ -184,26 +214,26 @@ namespace Monitoramento
             //
             // Ao clicar em iniciar. Inicia-se o Back Worker 1 , que é o responsável pela função Ping
             //
-           
+
             EnviaClicado = true;
             Envia_PerdaPorcento = 0;
-            Lbl_TempoEstimado2.ForeColor = Color.White;
+           
             // Verifico antes da execução das thread, se já não há um trabalho em segundo plano. Caso sim, encerra-se este 
             if (!backgroundWorker1.IsBusy)
                 backgroundWorker1.RunWorkerAsync();
             else
                 backgroundWorker1.CancelAsync();
-          
+
             if (!backgroundWorker2.IsBusy)
                 backgroundWorker2.RunWorkerAsync();
             else
                 backgroundWorker2.CancelAsync();
 
-         
+
             ListaTempoPing.Clear();
-           
-            Btn4_Iniciar.Enabled = false;
-            Btn5_Parar.Enabled = true;
+
+            Btn6_Iniciar.Enabled = false;
+            Btn7_Parar.Enabled = true;
             progressBar1.Value = 0;
             Lbl_Porcentagem.Text = "0%";
             progressBar1.SetState(1);
@@ -213,8 +243,8 @@ namespace Monitoramento
             EnviaClicado = false;
             backgroundWorker1.CancelAsync();
             backgroundWorker2.CancelAsync();
-            Btn4_Iniciar.Enabled = true;
-            Btn5_Parar.Enabled = false;
+            Btn6_Iniciar.Enabled = true;
+            Btn7_Parar.Enabled = false;
             progressBar1.SetState(2);
         }
         private void AbrirFormsFilhos(Form FormsFilhos)
@@ -241,7 +271,7 @@ namespace Monitoramento
         {   //
             //inicia o traballho de fazer o ping em segundo plano, outra thread
             //
-            
+
             CalculoFinalizado = false;
             BackgroundWorker worker = sender as BackgroundWorker;
             string Dados = string.Concat(Enumerable.Repeat("a", int.Parse(RecebeTamanhoPacote)));
@@ -253,7 +283,7 @@ namespace Monitoramento
             // Com os valores de tempo, é utilizado manipulação de lista para encontrar o menor, maior , média e se houve perda de pacote (Tempo de ping = 0) //
             //
             Ping EnviaPing = new Ping();
-            
+
             PingOptions Opcoes = new PingOptions();
             Opcoes.DontFragment = RecebeFragmentaPacote;
             {
@@ -269,7 +299,7 @@ namespace Monitoramento
                         try
                         {
                             Percent = ((i + 1) / int.Parse(RecebeQtdPacote)) * 100;
-                            int Porcento_Inteiro = (int)Percent;          
+                            int Porcento_Inteiro = (int)Percent;
                             System.Threading.Thread.Sleep(1000);
                             PingReply reply = EnviaPing.Send(RecebeIP, 1000, Buffer); // IP, Tempo de Espera, Buffer                                   
                             ListaTempoPing.Insert((int)i, reply.RoundtripTime); //Adiciona na lista posição do contador o tempo do ping                  
@@ -279,10 +309,10 @@ namespace Monitoramento
                             Envia_Sucesso = (int)ListaTempoPing.Count(x => x != 0); // Acha quantidade ping com sucesso
                             Envia_Restante = int.Parse(RecebeQtdPacote) - (int)ListaTempoPing.Count();
                             Envia_Perdidos = ListaTempoPing.Count(x => x == 0); // Acha quantidade ping com sucesso
-                            Envia_Atual = (int)ListaTempoPing[(int)i];
+                            Envia_Atual = (int)ListaTempoPing[(int)i];       
                             float Perdidos = (float)Envia_Perdidos;
-                            float Npacotes = float.Parse (RecebeQtdPacote);
-                            float PorcentoPerda = (Perdidos /i) * 100;
+                            float Npacotes = float.Parse(RecebeQtdPacote);
+                            float PorcentoPerda = (Perdidos / i) * 100;
                             if (PorcentoPerda > 100)
                             {
                                 Envia_PerdaPorcento = 100;
@@ -290,7 +320,7 @@ namespace Monitoramento
                             else
                                 Envia_PerdaPorcento = PorcentoPerda;
                             worker.ReportProgress(Porcento_Inteiro);
-                           
+
                         }
                         catch
                         {
@@ -298,7 +328,7 @@ namespace Monitoramento
                                "e se o host é valido", "Erro de Ping",
                            MessageBoxButtons.OK, MessageBoxIcon.Error);
                             break;
-                            
+
                         }
 
                     }
@@ -311,11 +341,12 @@ namespace Monitoramento
             // Controla as mudanças que devem ser feita pelo Worker. No caso a atualização das labels e o valor da barra de progresso//
             //
             int Porcentagem_Int = (int)Percent;
+          
             Lbl_Porcentagem.Text = Porcentagem_Int.ToString() + "%";
             progressBar1.Value = Porcentagem_Int;
             TaskbarProgress.SetValue(this.Handle, Porcentagem_Int, 100);
             Lbl_TempoEstimado2.Text = TempoEmSegundos;
-            
+
 
         }
         private void backgroundWorker1_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
@@ -324,8 +355,8 @@ namespace Monitoramento
             //
             EnviaClicado = false;
             Pnl2_Grade.Enabled = true;
-            Btn4_Iniciar.Enabled = true;
-            Btn5_Parar.Enabled = false;
+            Btn6_Iniciar.Enabled = true;
+            Btn7_Parar.Enabled = false;
             CalculoFinalizado = true;
             FlashWindow.Flash(this);
             if (e.Cancelled)
@@ -338,17 +369,17 @@ namespace Monitoramento
             if (e.Error == null)
             {
                 MessageBox.Show("Monitoramento finalizado");
-            }    
-           
-           
+            }
+
+
         }
-           
-            //
-            // Fim implementação Woker 1// 
-            //
-            // Inicio Implementação Worker 2 - Contagem do tempo restante// 
-            private void backgroundWorker2_DoWork(object sender, DoWorkEventArgs e)
-        {   
+
+        //
+        // Fim implementação Woker 1// 
+        //
+        // Inicio Implementação Worker 2 - Contagem do tempo restante// 
+        private void backgroundWorker2_DoWork(object sender, DoWorkEventArgs e)
+        {
             //
             // Cada solicitação de Ping irá aguardar 1 segundo até a proxima. A lógica do valor da barra de progresso é a quantidade de Pings transformada em segundos //
             // 10 Pings serão 10 Segundos por exemplo //
@@ -377,7 +408,7 @@ namespace Monitoramento
         }
 
         private void backgroundWorker2_ProgressChanged(object sender, ProgressChangedEventArgs e)
-        {   
+        {
             //
             // Atualiza a label a cada etapa concluida do Worker 2
             //
@@ -392,7 +423,7 @@ namespace Monitoramento
         // 
         private void backgroundWorker3_DoWork(object sender, DoWorkEventArgs e)
         {
-           
+
             BackgroundWorker worker = sender as BackgroundWorker;
             //
             // Monitoro as textbox por alterações e as envio através do Worker 3 para o formulário Dashboard //
@@ -418,13 +449,21 @@ namespace Monitoramento
                 FRAGMENTATEMP = RecebeFragmentaPacote;
                 QTDPACOTETEMP = RecebeQtdPacote;
 
-               
+
 
             } while (EnviaClicado == false);
 
         }
 
        
+
+
+
+
+
+
+
+
 
 
 
@@ -448,5 +487,5 @@ namespace Monitoramento
         }
     }
 
-       
+
 }

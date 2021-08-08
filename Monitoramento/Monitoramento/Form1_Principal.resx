@@ -57,4 +57,27 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="Btn4_Grafico.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAABkAAAAZCAYAAADE6YVjAAAABGdBTUEAALGPC/xhBQAAAPBJREFUSEtj
+        GH7Aa8Kj/1Am7QC6Jd4THm6FMuGAEjEwGBCf0AQMCkt8e56JANUUgmioEFbg1n1HzHPCo7NAtQehQgiA
+        bgly5IE0AuUvg9SAaBAfKoVb3cRHJ6HCCACSgDJRAJoFf6E0ikUggM8hcACShDLhwHPSc1Ggiy5BND6+
+        7jHhsR4y373/gSQ2dV5T70uADUAH6Jbg0kjIYpwWgACyJYS8jiaPMwgxAEghiMZnATmJAQWAFEPp09g0
+        YgOg5OzZ/7CAULKGAyRLjgPxGUIWkAVgltAUDIgl2CKPEjEwGL7BRRMAsoTaGGr0sAEMDABTPVXiDP27
+        GgAAAABJRU5ErkJggg==
+</value>
+  </data>
+  <metadata name="Pnl2_Grade.Locked" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="backgroundWorker1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>17, 17</value>
+  </metadata>
+  <metadata name="backgroundWorker2.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>181, 17</value>
+  </metadata>
+  <metadata name="backgroundWorker3.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>345, 17</value>
+  </metadata>
 </root>

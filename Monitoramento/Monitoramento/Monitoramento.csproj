@@ -2,12 +2,14 @@
 
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
-    <TargetFramework>net5.0-windows</TargetFramework>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
     <UseWindowsForms>true</UseWindowsForms>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="Krypton.Components.Suite" Version="4.5.9" />
+    <PackageReference Include="LiveCharts.NetCore" Version="0.9.7" />
+    <PackageReference Include="LiveCharts.WinForms.NetCore3" Version="0.9.7" />
     <PackageReference Include="MetroSet_UI" Version="2.0.0" />
   </ItemGroup>
 
