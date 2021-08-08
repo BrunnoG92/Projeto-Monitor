@@ -83,13 +83,14 @@ namespace Monitoramento
             this.Btn_Grafico.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.Btn_Grafico.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.Btn_Grafico.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(126)))), ((int)(((byte)(249)))));
-            this.Btn_Grafico.Image = global::Monitoramento.Properties.Resources.calendar;
+            this.Btn_Grafico.Image = ((System.Drawing.Image)(resources.GetObject("Btn_Grafico.Image")));
             this.Btn_Grafico.Location = new System.Drawing.Point(2, 270);
             this.Btn_Grafico.Margin = new System.Windows.Forms.Padding(2);
             this.Btn_Grafico.Name = "Btn_Grafico";
-            this.Btn_Grafico.Size = new System.Drawing.Size(168, 52);
+            this.Btn_Grafico.Size = new System.Drawing.Size(155, 52);
             this.Btn_Grafico.TabIndex = 5;
             this.Btn_Grafico.Text = "Gráfico";
+            this.Btn_Grafico.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.Btn_Grafico.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.Btn_Grafico.UseVisualStyleBackColor = true;
             this.Btn_Grafico.Click += new System.EventHandler(this.Btn_Grafico_Click);

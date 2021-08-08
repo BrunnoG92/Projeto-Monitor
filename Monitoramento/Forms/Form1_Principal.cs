@@ -143,6 +143,7 @@ namespace Monitoramento
         {
             Pnl_Navegacao.Top = Btn_Grafico.Top;
             Btn_Grafico.BackColor = Color.FromArgb(46, 51, 73);
+            AbrirFormsFilhos(new Forms.Form4_Grafico());
         }
         private void Btn_Grafico_Leave(object sender, EventArgs e)
         {
