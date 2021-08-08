@@ -174,6 +174,7 @@ namespace Monitoramento
             Pnl_Navegacao.Top = Btn3_Historico.Top;
             Pnl_Navegacao.Left = Btn3_Historico.Left;
             Btn3_Historico.BackColor = Color.FromArgb(46, 51, 73);
+            AbrirFormsFilhos(new Form4_Historico());
         }
         private void Btn3_Historico_Leave(object sender, EventArgs e)
         {
@@ -185,6 +186,7 @@ namespace Monitoramento
             Pnl_Navegacao.Top = Btn4_Grafico.Top;
             Pnl_Navegacao.Left = Btn4_Grafico.Left;
             Btn4_Grafico.BackColor = Color.FromArgb(46, 51, 73);
+            AbrirFormsFilhos(new Form5_Grafico());
 
         }
         private void Btn4_Grafico_Leave(object sender, EventArgs e)
@@ -196,6 +198,7 @@ namespace Monitoramento
         
             Pnl_Navegacao.Top = Btn5_Config.Top;
             Btn5_Config.BackColor = Color.FromArgb(46, 51, 73);
+            AbrirFormsFilhos(new Form6_Configuracoes());
         }
         private void Btn5_Config_Leave(object sender, EventArgs e)
         {
