@@ -158,18 +158,11 @@ namespace Monitoramento
             Btn2_Analise.BackColor = Color.FromArgb(24, 30, 54);
 
         }
-        private void Btn_Grafico_Click(object sender, EventArgs e)
-        {
-            Pnl_Navegacao.Top = Btn4_Grafico.Top;
-            Btn4_Grafico.BackColor = Color.FromArgb(46, 51, 73);
-            
-        }
-        private void Btn_Grafico_Leave(object sender, EventArgs e)
-        {
-            Btn4_Grafico.BackColor = Color.FromArgb(24, 30, 54);
-        }
+    
         private void Btn3_Historico_Click(object sender, EventArgs e)
         {
+            MessageBox.Show("Opa. Temos um(a) curioso(a) aqui :D. Esse software ainda está em estágio beta e essa função " +
+            "ainda não foi implementada" ,"Funcionalidade inativa", MessageBoxButtons.OK, MessageBoxIcon.Information);
             Pnl_Navegacao.Height = Btn3_Historico.Height;
             Pnl_Navegacao.Top = Btn3_Historico.Top;
             Pnl_Navegacao.Left = Btn3_Historico.Left;
@@ -180,29 +173,25 @@ namespace Monitoramento
         {
             Btn3_Historico.BackColor = Color.FromArgb(24, 30, 54);
         }
-        private void Btn4_Grafico_Click(object sender, EventArgs e)
-        {
-            Pnl_Navegacao.Height = Btn4_Grafico.Height;
-            Pnl_Navegacao.Top = Btn4_Grafico.Top;
-            Pnl_Navegacao.Left = Btn4_Grafico.Left;
-            Btn4_Grafico.BackColor = Color.FromArgb(46, 51, 73);
-            AbrirFormsFilhos(new Form5_Grafico());
-
-        }
-        private void Btn4_Grafico_Leave(object sender, EventArgs e)
-        {
-            Btn4_Grafico.BackColor = Color.FromArgb(24, 30, 54);
-        }
+       
+       
         private void Btn5_Config_Click(object sender, EventArgs e)
         {
-        
+            MessageBox.Show("Opa. Temos um(a) curioso(a) aqui :D. Esse software ainda está em estágio beta e essa função " +
+            "ainda não foi implementada", "Funcionalidade inativa", MessageBoxButtons.OK, MessageBoxIcon.Information);
             Pnl_Navegacao.Top = Btn5_Config.Top;
             Btn5_Config.BackColor = Color.FromArgb(46, 51, 73);
             AbrirFormsFilhos(new Form6_Configuracoes());
+           
         }
         private void Btn5_Config_Leave(object sender, EventArgs e)
         {
             Btn5_Config.BackColor = Color.FromArgb(24, 30, 54);
+        }
+        public void Alert(string msg, Form_Alert.enmType type)
+        {
+            Form_Alert frm = new Form_Alert();
+            frm.showAlert(msg, type);
         }
 
         private void Form1_Principal_Load(object sender, EventArgs e)
@@ -217,7 +206,10 @@ namespace Monitoramento
             //
             // Ao clicar em iniciar. Inicia-se o Back Worker 1 , que é o responsável pela função Ping
             //
-
+            this.Alert("Monitoramento iniciado", Form_Alert.enmType.Info);
+            this.Alert("Monitoramento iniciado", Form_Alert.enmType.Info);
+            this.Alert("Monitoramento iniciado", Form_Alert.enmType.Info);
+            this.Alert("Monitoramento iniciado", Form_Alert.enmType.Info);
             EnviaClicado = true;
             Envia_PerdaPorcento = 0;
            
@@ -231,6 +223,7 @@ namespace Monitoramento
                 backgroundWorker2.RunWorkerAsync();
             else
                 backgroundWorker2.CancelAsync();
+           
 
 
             ListaTempoPing.Clear();
@@ -330,6 +323,7 @@ namespace Monitoramento
                             MessageBox.Show("Ocorreu um erro ao execultar o ping. Verifique sua conexão com a internet " +
                                "e se o host é valido", "Erro de Ping",
                            MessageBoxButtons.OK, MessageBoxIcon.Error);
+                           
                             break;
 
                         }
@@ -356,6 +350,9 @@ namespace Monitoramento
         {   //
             // Recebe a resposta do Worker que ele terminou o trabalho. Trata os tipos de finalização : Sucesso, Erro e Cancelado pelo usuário //
             //
+            if (!backgroundWorker3.IsBusy)
+                backgroundWorker3.RunWorkerAsync();
+            
             EnviaClicado = false;
             Pnl2_Grade.Enabled = true;
             Btn6_Iniciar.Enabled = true;
@@ -364,14 +361,16 @@ namespace Monitoramento
             FlashWindow.Flash(this);
             if (e.Cancelled)
             {
-                MessageBox.Show("Ping cancelado com sucesso", "Cancelado pelo usuário",
-                             MessageBoxButtons.OK, MessageBoxIcon.Information);
-                TaskbarProgress.SetState(this.Handle, TaskbarProgress.TaskbarStates.Error);
+             
+                this.Alert("Monitoramento cancelado", Form_Alert.enmType.Error);
+               
 
             }
-            if (e.Error == null)
+           else if (e.Error == null)
             {
-                MessageBox.Show("Monitoramento finalizado");
+                
+                
+                this.Alert("Monitoramento finalizado", Form_Alert.enmType.Success);
             }
 
 
@@ -426,7 +425,7 @@ namespace Monitoramento
         // 
         private void backgroundWorker3_DoWork(object sender, DoWorkEventArgs e)
         {
-
+          
             BackgroundWorker worker = sender as BackgroundWorker;
             //
             // Monitoro as textbox por alterações e as envio através do Worker 3 para o formulário Dashboard //
@@ -457,19 +456,6 @@ namespace Monitoramento
             } while (EnviaClicado == false);
 
         }
-
-       
-
-
-
-
-
-
-
-
-
-
-
 
         //
 

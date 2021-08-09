@@ -29,6 +29,7 @@ namespace Monitoramento
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.TxtB_PerdaPorcento = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
             this.TxtB_Atual = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
             this.TxtB_Media = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
@@ -48,6 +49,7 @@ namespace Monitoramento
             this.Lbl_Media = new System.Windows.Forms.Label();
             this.Lbl_PerdaPorcento = new System.Windows.Forms.Label();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
+            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.SuspendLayout();
             // 
             // TxtB_PerdaPorcento
@@ -66,6 +68,8 @@ namespace Monitoramento
             this.TxtB_PerdaPorcento.StateCommon.Border.Rounding = 10;
             this.TxtB_PerdaPorcento.StateCommon.Content.Color1 = System.Drawing.SystemColors.ScrollBar;
             this.TxtB_PerdaPorcento.TabIndex = 60;
+            this.TxtB_PerdaPorcento.Text = "Mostra quantos porcento de perda de pacotes houve no total testado. O ideal é  0 " +
+    "perdas";
             this.TxtB_PerdaPorcento.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // TxtB_Atual
@@ -230,6 +234,7 @@ namespace Monitoramento
             this.Lbl_TPing.TabIndex = 61;
             this.Lbl_TPing.Text = "Toal de Pings:";
             this.Lbl_TPing.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.toolTip1.SetToolTip(this.Lbl_TPing, "Quantidade total de Pings que serão feitos");
             // 
             // Lbl_Sucesso
             // 
@@ -241,6 +246,7 @@ namespace Monitoramento
             this.Lbl_Sucesso.TabIndex = 62;
             this.Lbl_Sucesso.Text = "Pings com Sucesso:";
             this.Lbl_Sucesso.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.toolTip1.SetToolTip(this.Lbl_Sucesso, "Quantidade total de Pings feito com sucesso");
             // 
             // Lbl_Perdido
             // 
@@ -252,6 +258,7 @@ namespace Monitoramento
             this.Lbl_Perdido.TabIndex = 63;
             this.Lbl_Perdido.Text = "Pacotes Perdidos:";
             this.Lbl_Perdido.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.toolTip1.SetToolTip(this.Lbl_Perdido, "Quantidade de pacotes perdidos");
             // 
             // Lbl_Restante
             // 
@@ -263,6 +270,7 @@ namespace Monitoramento
             this.Lbl_Restante.TabIndex = 64;
             this.Lbl_Restante.Text = "Restantes:";
             this.Lbl_Restante.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.toolTip1.SetToolTip(this.Lbl_Restante, "Quantidade de Pings que ainda faltam");
             // 
             // Lbl_PingAtual
             // 
@@ -274,6 +282,7 @@ namespace Monitoramento
             this.Lbl_PingAtual.TabIndex = 65;
             this.Lbl_PingAtual.Text = "Ping Atual:";
             this.Lbl_PingAtual.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.toolTip1.SetToolTip(this.Lbl_PingAtual, "Valor atual em ms do Ping (Quanto menor esse número, melhor)");
             // 
             // Lbl_Menor
             // 
@@ -285,6 +294,8 @@ namespace Monitoramento
             this.Lbl_Menor.TabIndex = 66;
             this.Lbl_Menor.Text = "Menor Ping:";
             this.Lbl_Menor.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.toolTip1.SetToolTip(this.Lbl_Menor, "O menor valor que o Ping teve. Um Ping de 0 ms indica que houve perda de pacote (" +
+        "Quanto menor esse número , fora o zero, melhor)");
             // 
             // Lbl_Maior
             // 
@@ -296,6 +307,7 @@ namespace Monitoramento
             this.Lbl_Maior.TabIndex = 67;
             this.Lbl_Maior.Text = "Maior Ping:";
             this.Lbl_Maior.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.toolTip1.SetToolTip(this.Lbl_Maior, "O maior valor que o Ping teve (Quanto menor esse número, melhor)");
             // 
             // Lbl_Media
             // 
@@ -307,6 +319,7 @@ namespace Monitoramento
             this.Lbl_Media.TabIndex = 68;
             this.Lbl_Media.Text = "Média de Ping:";
             this.Lbl_Media.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.toolTip1.SetToolTip(this.Lbl_Media, "O valor médio  que o Ping teve");
             // 
             // Lbl_PerdaPorcento
             // 
@@ -382,5 +395,6 @@ namespace Monitoramento
         private System.Windows.Forms.Label Lbl_Media;
         private System.Windows.Forms.Label Lbl_PerdaPorcento;
         private System.ComponentModel.BackgroundWorker backgroundWorker1;
+        private System.Windows.Forms.ToolTip toolTip1;
     }
 }

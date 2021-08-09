@@ -34,7 +34,6 @@ namespace Monitoramento
             this.panel1 = new System.Windows.Forms.Panel();
             this.Btn5_Config = new System.Windows.Forms.Button();
             this.Pnl_Navegacao = new System.Windows.Forms.Panel();
-            this.Btn4_Grafico = new System.Windows.Forms.Button();
             this.Btn3_Historico = new System.Windows.Forms.Button();
             this.Btn2_Analise = new System.Windows.Forms.Button();
             this.Btn1_Dashboard = new System.Windows.Forms.Button();
@@ -90,7 +89,6 @@ namespace Monitoramento
             this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(24)))), ((int)(((byte)(30)))), ((int)(((byte)(54)))));
             this.panel1.Controls.Add(this.Btn5_Config);
             this.panel1.Controls.Add(this.Pnl_Navegacao);
-            this.panel1.Controls.Add(this.Btn4_Grafico);
             this.panel1.Controls.Add(this.Btn3_Historico);
             this.panel1.Controls.Add(this.Btn2_Analise);
             this.panel1.Controls.Add(this.Btn1_Dashboard);
@@ -128,26 +126,6 @@ namespace Monitoramento
             this.Pnl_Navegacao.Name = "Pnl_Navegacao";
             this.Pnl_Navegacao.Size = new System.Drawing.Size(2, 75);
             this.Pnl_Navegacao.TabIndex = 3;
-            // 
-            // Btn4_Grafico
-            // 
-            this.Btn4_Grafico.Dock = System.Windows.Forms.DockStyle.Top;
-            this.Btn4_Grafico.FlatAppearance.BorderSize = 0;
-            this.Btn4_Grafico.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.Btn4_Grafico.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.Btn4_Grafico.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(126)))), ((int)(((byte)(249)))));
-            this.Btn4_Grafico.Image = ((System.Drawing.Image)(resources.GetObject("Btn4_Grafico.Image")));
-            this.Btn4_Grafico.Location = new System.Drawing.Point(0, 270);
-            this.Btn4_Grafico.Margin = new System.Windows.Forms.Padding(2);
-            this.Btn4_Grafico.Name = "Btn4_Grafico";
-            this.Btn4_Grafico.Size = new System.Drawing.Size(170, 52);
-            this.Btn4_Grafico.TabIndex = 9;
-            this.Btn4_Grafico.Text = "Gráfico";
-            this.Btn4_Grafico.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.Btn4_Grafico.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.Btn4_Grafico.UseVisualStyleBackColor = true;
-            this.Btn4_Grafico.Click += new System.EventHandler(this.Btn4_Grafico_Click);
-            this.Btn4_Grafico.Leave += new System.EventHandler(this.Btn4_Grafico_Leave);
             // 
             // Btn3_Historico
             // 
@@ -373,6 +351,7 @@ namespace Monitoramento
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.metroSetControlBox1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Form1_Principal";
             this.Text = "Form1";
             this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Form1_MouseDown);
@@ -403,7 +382,6 @@ namespace Monitoramento
         private System.Windows.Forms.Label Lbl_TempoEstimado;
         private System.Windows.Forms.Label Lbl_TempoEstimado2;
         private System.Windows.Forms.Panel Pnl_Navegacao;
-        private System.Windows.Forms.Button Btn4_Grafico;
         private System.Windows.Forms.Button Btn3_Historico;
         private System.Windows.Forms.Button Btn2_Analise;
         private System.Windows.Forms.Button Btn1_Dashboard;

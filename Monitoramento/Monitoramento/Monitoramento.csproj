@@ -7,6 +7,15 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Form5_Grafico.cs" />
+    <Compile Remove="Form5_Grafico.Designer.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Remove="Form5_Grafico.resx" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Krypton.Components.Suite" Version="4.5.9" />
     <PackageReference Include="LiveCharts.NetCore" Version="0.9.7" />
     <PackageReference Include="LiveCharts.WinForms.NetCore3" Version="0.9.7" />

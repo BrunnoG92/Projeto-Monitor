@@ -29,6 +29,7 @@ namespace Monitoramento
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.TxtB_ID = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
             this.TxtB_IP = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
             this.TxtB_Nome = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
@@ -42,6 +43,7 @@ namespace Monitoramento
             this.Lbl_Nome = new System.Windows.Forms.Label();
             this.Lbl_QPacote = new System.Windows.Forms.Label();
             this.Lbl_FPacote = new System.Windows.Forms.Label();
+            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.SuspendLayout();
             // 
             // TxtB_ID
@@ -152,6 +154,7 @@ namespace Monitoramento
             this.Rdo_Sim.Size = new System.Drawing.Size(43, 20);
             this.Rdo_Sim.StateCommon.ShortText.Color1 = System.Drawing.Color.White;
             this.Rdo_Sim.TabIndex = 44;
+            this.toolTip1.SetToolTip(this.Rdo_Sim, "Permite ou não a fragmentação de pacotes. Altere somente se necessário");
             this.Rdo_Sim.Values.Text = "Sim";
             this.Rdo_Sim.Click += new System.EventHandler(this.Rdo_Sim_Click);
             // 
@@ -162,6 +165,7 @@ namespace Monitoramento
             this.Rdo_Nao.Size = new System.Drawing.Size(45, 20);
             this.Rdo_Nao.StateCommon.ShortText.Color1 = System.Drawing.Color.White;
             this.Rdo_Nao.TabIndex = 45;
+            this.toolTip1.SetToolTip(this.Rdo_Nao, "Permite ou não a fragmentação de pacotes. Altere somente se necessário");
             this.Rdo_Nao.Values.Text = "Não";
             this.Rdo_Nao.Click += new System.EventHandler(this.Rdo_Nao_Click);
             // 
@@ -175,6 +179,7 @@ namespace Monitoramento
             this.Lbl_ID.TabIndex = 46;
             this.Lbl_ID.Text = "ID:";
             this.Lbl_ID.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.toolTip1.SetToolTip(this.Lbl_ID, "Número do cliente");
             // 
             // Lbl_IP
             // 
@@ -185,7 +190,8 @@ namespace Monitoramento
             this.Lbl_IP.Size = new System.Drawing.Size(58, 61);
             this.Lbl_IP.TabIndex = 47;
             this.Lbl_IP.Text = "Host:";
-            this.Lbl_IP.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.Lbl_IP.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.toolTip1.SetToolTip(this.Lbl_IP, "IP ou site que deseja monitorar");
             // 
             // Lbl_TPacote
             // 
@@ -197,6 +203,7 @@ namespace Monitoramento
             this.Lbl_TPacote.TabIndex = 48;
             this.Lbl_TPacote.Text = "Tamanho do Pacote:";
             this.Lbl_TPacote.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.toolTip1.SetToolTip(this.Lbl_TPacote, "MTU do Ping. Altere somente se souber o que está fazendo");
             // 
             // Lbl_Nome
             // 
@@ -219,6 +226,7 @@ namespace Monitoramento
             this.Lbl_QPacote.TabIndex = 50;
             this.Lbl_QPacote.Text = "N° Pacotes";
             this.Lbl_QPacote.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.toolTip1.SetToolTip(this.Lbl_QPacote, "Quantidade de pings que deseja fazer");
             // 
             // Lbl_FPacote
             // 
@@ -276,5 +284,6 @@ namespace Monitoramento
         private System.Windows.Forms.Label Lbl_Nome;
         private System.Windows.Forms.Label Lbl_QPacote;
         private System.Windows.Forms.Label Lbl_FPacote;
+        private System.Windows.Forms.ToolTip toolTip1;
     }
 }
