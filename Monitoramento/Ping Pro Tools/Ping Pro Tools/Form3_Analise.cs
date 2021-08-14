@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MySql.Data.MySqlClient;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -21,6 +22,12 @@ namespace Ping_Pro_Tools
         int Recebe_atual;
         float Recebe_PerdaPorcento;
         Boolean Recebe_Clicado;
+
+        MySqlConnection conexao;
+        MySqlCommand comando;
+        MySqlDataAdapter da;
+        MySqlDataReader dr;
+        string strSQL;
         public Form3_Analise()
         {
             InitializeComponent();
@@ -82,7 +89,59 @@ namespace Ping_Pro_Tools
                 Lbl_PerdaPorcento.Text = "Perda";
                 Lbl_PerdaPorcento.ForeColor = Color.Red;
             }
+
+           
+
         }
+
+        private void Btn6_Iniciar_Click(object sender, EventArgs e)
+        {
+            try
+            {
+               
+              
+              conexao = new MySqlConnection("Server=bruno-dev.coswwudtnlbd.us-east-2.rds.amazonaws.com;Port=3306;Database=PingProTools;Uid=brunog;Pwd=98497389b;");
+              strSQL = "INSERT INTO Ping (ID_CLIENTE, OPERADOR,  CLIENTE, HOST, QUANTIDADE_PING, TAMANHO_PACOTE, MAIOR_PING, MENOR_PING, MEDIA_PING, QTD_PACOTES_PERDIDOS, PORCENTO_PCTS_PERDIDOS, DATA  ) VALUES (@ID_CLIENTE, @OPERADOR, @CLIENTE, @HOST, @QUANTIDADE_PING, @TAMANHO_PACOTE, @MAIOR_PING, @MENOR_PING, @MEDIA_PING, @QTD_PACOTES_PERDIDOS, @PORCENTO_PCTS_PERDIDOS, @DATA )";
+              
+              comando = new MySqlCommand(strSQL, conexao);
+              comando.Parameters.AddWithValue("@ID_CLIENTE", Form2_Dashboard.EnviaID);
+              comando.Parameters.AddWithValue("@OPERADOR", Form2_Dashboard.EnviaOperador);
+              comando.Parameters.AddWithValue("@CLIENTE", Form2_Dashboard.EnviaNome);
+              comando.Parameters.AddWithValue("@HOST", Form2_Dashboard.EnviaIP);
+              comando.Parameters.AddWithValue("@QUANTIDADE_PING", Form2_Dashboard.EnviaQtdPacote);
+              comando.Parameters.AddWithValue("@TAMANHO_PACOTE", Form2_Dashboard.EnviaTamanhoPacote);
+              comando.Parameters.AddWithValue("@MAIOR_PING", Recebe_Maior);
+              comando.Parameters.AddWithValue("@MENOR_PING", Recebe_Menor);
+              comando.Parameters.AddWithValue("@MEDIA_PING", Recebe_Media);
+              comando.Parameters.AddWithValue("@QTD_PACOTES_PERDIDOS", Recebe_Perdidos);
+              comando.Parameters.AddWithValue("@PORCENTO_PCTS_PERDIDOS", Recebe_PerdaPorcento);
+              comando.Parameters.AddWithValue("@DATA", DateTime.Now.ToString("dd/MM/yyy"));
+                
+
+
+                conexao.Open();
+                int salvo = comando.ExecuteNonQuery();
+                if (salvo < 1)
+                {
+                    MessageBox.Show("Não enviado");
+                }
+                else
+                {
+                    MessageBox.Show("Enviado");
+                }
+            }
+            catch
+            {
+
+            }
+            finally
+            {
+                conexao.Close();
+                conexao = null;
+                comando = null;
+            }
+                 
+            }
     }
 }
 

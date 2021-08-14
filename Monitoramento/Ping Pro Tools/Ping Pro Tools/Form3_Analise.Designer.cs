@@ -50,6 +50,7 @@ namespace Ping_Pro_Tools
             this.Lbl_PerdaPorcento = new System.Windows.Forms.Label();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.Btn6_Iniciar = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             this.SuspendLayout();
             // 
             // TxtB_PerdaPorcento
@@ -339,6 +340,21 @@ namespace Ping_Pro_Tools
             this.backgroundWorker1.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundWorker1_DoWork);
             this.backgroundWorker1.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.backgroundWorker1_ProgressChanged);
             // 
+            // Btn6_Iniciar
+            // 
+            this.Btn6_Iniciar.Location = new System.Drawing.Point(322, 394);
+            this.Btn6_Iniciar.Name = "Btn6_Iniciar";
+            this.Btn6_Iniciar.Size = new System.Drawing.Size(174, 31);
+            this.Btn6_Iniciar.StateCommon.Border.DrawBorders = ((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders)((((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Top | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Bottom) 
+            | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Left) 
+            | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Right)));
+            this.Btn6_Iniciar.StateCommon.Border.Rounding = 10;
+            this.Btn6_Iniciar.StateCommon.Content.ShortText.Color1 = System.Drawing.Color.Black;
+            this.Btn6_Iniciar.StateCommon.Content.ShortText.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold);
+            this.Btn6_Iniciar.TabIndex = 70;
+            this.Btn6_Iniciar.Values.Text = "SALVAR RESULTADOS";
+            this.Btn6_Iniciar.Click += new System.EventHandler(this.Btn6_Iniciar_Click);
+            // 
             // Form3_Analise
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -347,6 +363,7 @@ namespace Ping_Pro_Tools
             this.BackgroundImage = global::Ping_Pro_Tools.Properties.Resources.dark;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.ClientSize = new System.Drawing.Size(837, 432);
+            this.Controls.Add(this.Btn6_Iniciar);
             this.Controls.Add(this.Lbl_PerdaPorcento);
             this.Controls.Add(this.Lbl_Media);
             this.Controls.Add(this.Lbl_Maior);
@@ -396,5 +413,6 @@ namespace Ping_Pro_Tools
         private System.Windows.Forms.Label Lbl_PerdaPorcento;
         private System.ComponentModel.BackgroundWorker backgroundWorker1;
         private System.Windows.Forms.ToolTip toolTip1;
+        private ComponentFactory.Krypton.Toolkit.KryptonButton Btn6_Iniciar;
     }
 }

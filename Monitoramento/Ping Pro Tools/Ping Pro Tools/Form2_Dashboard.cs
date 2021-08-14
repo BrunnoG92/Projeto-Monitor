@@ -17,8 +17,10 @@ namespace Ping_Pro_Tools
         public static string EnviaIP;
         public static string EnviaTamanhoPacote;
         public static string EnviaQtdPacote;
+        public static string EnviaOperador;
         public static Boolean EnviaFragmentaPacote;
         public static Boolean TextoTrocado;
+
         public Form2_Dashboard()
         {
             InitializeComponent();
@@ -38,7 +40,11 @@ namespace Ping_Pro_Tools
             TxtB_QPacote.Text = Form1_Principal.QTDPACOTETEMP;
             Rdo_Sim.Checked = Form1_Principal.FRAGMENTATEMP;
         }
-
+        private void TxtB_Operador_TextChanged(object sender, EventArgs e)
+        {
+            TextoTrocado = true;
+            EnviaOperador = TxtB_Operador.Text;
+        }
         private void TxtB_ID_TextChanged(object sender, EventArgs e)
         {
             TextoTrocado = true;

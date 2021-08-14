@@ -21,6 +21,7 @@ namespace Ping_Pro_Tools
         string RecebeIP;
         string RecebeTamanhoPacote;
         string RecebeQtdPacote;
+        string Operador;
         Boolean RecebeFragmentaPacote;
         //
         // Labels do Form2 Analise //
@@ -138,8 +139,7 @@ namespace Ping_Pro_Tools
 
         private void Btn3_Historico_Click(object sender, EventArgs e)
         {
-          //  MessageBox.Show("Opa. Temos um(a) curioso(a) aqui :D. Esse software ainda está em estágio beta e essa função " +
-          // "ainda não foi implementada", "Funcionalidade inativa", MessageBoxButtons.OK, MessageBoxIcon.Information);
+         
            Pnl_Navegacao.Height = Btn3_Historico.Height;
            Pnl_Navegacao.Top = Btn3_Historico.Top;
           
@@ -270,6 +270,7 @@ namespace Ping_Pro_Tools
                             System.Threading.Thread.Sleep(1000);
                             PingReply reply = EnviaPing.Send(RecebeIP, 1000, Buffer); // IP, Tempo de Espera, Buffer                                   
                             ListaTempoPing.Insert((int)i, reply.RoundtripTime); //Adiciona na lista posição do contador o tempo do ping                  
+                            
                             Envia_Maior = (int)ListaTempoPing.Max(); // acha o maior tempo 
                             Envia_Menor = (int)ListaTempoPing.Where(x => x != 0).DefaultIfEmpty().Min(); //Encontra o menor valor exceto zero;
                             Envia_Media = (int)ListaTempoPing.Average(); //Acha o tempo médio
@@ -412,6 +413,7 @@ namespace Ping_Pro_Tools
                 RecebeQtdPacote = Form2_Dashboard.EnviaQtdPacote;
                 RecebeFragmentaPacote = Form2_Dashboard.EnviaFragmentaPacote;
                 TextoMudou = Form2_Dashboard.TextoTrocado;
+               
                 //
                 // Envio também cada alteração para variáveis temporárias, salvado assim os dados, para que não se perca entre as trocas de formulários pelo usuário//
                 //

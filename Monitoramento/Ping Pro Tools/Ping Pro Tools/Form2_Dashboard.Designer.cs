@@ -44,11 +44,13 @@ namespace Ping_Pro_Tools
             this.Lbl_QPacote = new System.Windows.Forms.Label();
             this.Lbl_FPacote = new System.Windows.Forms.Label();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.Lbl_Operador = new System.Windows.Forms.Label();
+            this.TxtB_Operador = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
             this.SuspendLayout();
             // 
             // TxtB_ID
             // 
-            this.TxtB_ID.Location = new System.Drawing.Point(117, 33);
+            this.TxtB_ID.Location = new System.Drawing.Point(208, 137);
             this.TxtB_ID.MaxLength = 5;
             this.TxtB_ID.Name = "TxtB_ID";
             this.TxtB_ID.Size = new System.Drawing.Size(65, 29);
@@ -68,7 +70,7 @@ namespace Ping_Pro_Tools
             // 
             // TxtB_IP
             // 
-            this.TxtB_IP.Location = new System.Drawing.Point(137, 121);
+            this.TxtB_IP.Location = new System.Drawing.Point(128, 192);
             this.TxtB_IP.MaxLength = 30;
             this.TxtB_IP.Name = "TxtB_IP";
             this.TxtB_IP.Size = new System.Drawing.Size(145, 29);
@@ -88,7 +90,7 @@ namespace Ping_Pro_Tools
             // 
             // TxtB_Nome
             // 
-            this.TxtB_Nome.Location = new System.Drawing.Point(581, 33);
+            this.TxtB_Nome.Location = new System.Drawing.Point(595, 42);
             this.TxtB_Nome.MaxLength = 30;
             this.TxtB_Nome.Name = "TxtB_Nome";
             this.TxtB_Nome.Size = new System.Drawing.Size(174, 29);
@@ -128,7 +130,7 @@ namespace Ping_Pro_Tools
             // 
             // TxtB_TPacote
             // 
-            this.TxtB_TPacote.Location = new System.Drawing.Point(205, 216);
+            this.TxtB_TPacote.Location = new System.Drawing.Point(230, 247);
             this.TxtB_TPacote.MaxLength = 4;
             this.TxtB_TPacote.Name = "TxtB_TPacote";
             this.TxtB_TPacote.Size = new System.Drawing.Size(52, 29);
@@ -173,7 +175,7 @@ namespace Ping_Pro_Tools
             // 
             this.Lbl_ID.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold);
             this.Lbl_ID.ForeColor = System.Drawing.Color.White;
-            this.Lbl_ID.Location = new System.Drawing.Point(35, 22);
+            this.Lbl_ID.Location = new System.Drawing.Point(12, 124);
             this.Lbl_ID.Name = "Lbl_ID";
             this.Lbl_ID.Size = new System.Drawing.Size(65, 53);
             this.Lbl_ID.TabIndex = 46;
@@ -185,7 +187,7 @@ namespace Ping_Pro_Tools
             // 
             this.Lbl_IP.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold);
             this.Lbl_IP.ForeColor = System.Drawing.Color.White;
-            this.Lbl_IP.Location = new System.Drawing.Point(33, 111);
+            this.Lbl_IP.Location = new System.Drawing.Point(12, 182);
             this.Lbl_IP.Name = "Lbl_IP";
             this.Lbl_IP.Size = new System.Drawing.Size(72, 53);
             this.Lbl_IP.TabIndex = 47;
@@ -197,7 +199,7 @@ namespace Ping_Pro_Tools
             // 
             this.Lbl_TPacote.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold);
             this.Lbl_TPacote.ForeColor = System.Drawing.Color.White;
-            this.Lbl_TPacote.Location = new System.Drawing.Point(12, 206);
+            this.Lbl_TPacote.Location = new System.Drawing.Point(22, 235);
             this.Lbl_TPacote.Name = "Lbl_TPacote";
             this.Lbl_TPacote.Size = new System.Drawing.Size(187, 53);
             this.Lbl_TPacote.TabIndex = 48;
@@ -209,11 +211,11 @@ namespace Ping_Pro_Tools
             // 
             this.Lbl_Nome.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold);
             this.Lbl_Nome.ForeColor = System.Drawing.Color.White;
-            this.Lbl_Nome.Location = new System.Drawing.Point(464, 22);
+            this.Lbl_Nome.Location = new System.Drawing.Point(416, 30);
             this.Lbl_Nome.Name = "Lbl_Nome";
-            this.Lbl_Nome.Size = new System.Drawing.Size(65, 53);
+            this.Lbl_Nome.Size = new System.Drawing.Size(144, 53);
             this.Lbl_Nome.TabIndex = 49;
-            this.Lbl_Nome.Text = "Nome:";
+            this.Lbl_Nome.Text = "Nome Cliente:";
             this.Lbl_Nome.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // Lbl_QPacote
@@ -239,6 +241,37 @@ namespace Ping_Pro_Tools
             this.Lbl_FPacote.Text = "Fragmentar Pacote:";
             this.Lbl_FPacote.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
+            // Lbl_Operador
+            // 
+            this.Lbl_Operador.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold);
+            this.Lbl_Operador.ForeColor = System.Drawing.Color.White;
+            this.Lbl_Operador.Location = new System.Drawing.Point(22, 30);
+            this.Lbl_Operador.Name = "Lbl_Operador";
+            this.Lbl_Operador.Size = new System.Drawing.Size(99, 53);
+            this.Lbl_Operador.TabIndex = 52;
+            this.Lbl_Operador.Text = "Operador:";
+            this.Lbl_Operador.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.toolTip1.SetToolTip(this.Lbl_Operador, "Nome de quem realizou o teste");
+            this.Lbl_Operador.UseCompatibleTextRendering = true;
+            // 
+            // TxtB_Operador
+            // 
+            this.TxtB_Operador.Location = new System.Drawing.Point(177, 42);
+            this.TxtB_Operador.MaxLength = 30;
+            this.TxtB_Operador.Name = "TxtB_Operador";
+            this.TxtB_Operador.Size = new System.Drawing.Size(174, 29);
+            this.TxtB_Operador.StateCommon.Back.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(74)))), ((int)(((byte)(79)))), ((int)(((byte)(99)))));
+            this.TxtB_Operador.StateCommon.Border.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(24)))), ((int)(((byte)(30)))), ((int)(((byte)(54)))));
+            this.TxtB_Operador.StateCommon.Border.Color2 = System.Drawing.Color.FromArgb(((int)(((byte)(24)))), ((int)(((byte)(30)))), ((int)(((byte)(54)))));
+            this.TxtB_Operador.StateCommon.Border.DrawBorders = ((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders)((((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Top | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Bottom) 
+            | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Left) 
+            | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Right)));
+            this.TxtB_Operador.StateCommon.Border.Rounding = 10;
+            this.TxtB_Operador.StateCommon.Content.Color1 = System.Drawing.SystemColors.ScrollBar;
+            this.TxtB_Operador.TabIndex = 53;
+            this.TxtB_Operador.Text = "1";
+            this.TxtB_Operador.TextChanged += new System.EventHandler(this.TxtB_Operador_TextChanged);
+            // 
             // Form2_Dashboard
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -247,6 +280,8 @@ namespace Ping_Pro_Tools
             this.BackgroundImage = global::Ping_Pro_Tools.Properties.Resources.dark;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.ClientSize = new System.Drawing.Size(837, 432);
+            this.Controls.Add(this.TxtB_Operador);
+            this.Controls.Add(this.Lbl_Operador);
             this.Controls.Add(this.Lbl_FPacote);
             this.Controls.Add(this.Lbl_QPacote);
             this.Controls.Add(this.Lbl_Nome);
@@ -285,5 +320,7 @@ namespace Ping_Pro_Tools
         private System.Windows.Forms.Label Lbl_QPacote;
         private System.Windows.Forms.Label Lbl_FPacote;
         private System.Windows.Forms.ToolTip toolTip1;
+        private System.Windows.Forms.Label Lbl_Operador;
+        private ComponentFactory.Krypton.Toolkit.KryptonTextBox TxtB_Operador;
     }
 }
