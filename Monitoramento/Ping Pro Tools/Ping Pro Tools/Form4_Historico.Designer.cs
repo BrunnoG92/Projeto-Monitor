@@ -31,19 +31,20 @@ namespace Ping_Pro_Tools
         {
             this.components = new System.ComponentModel.Container();
             this.kryptonDataGridView1 = new ComponentFactory.Krypton.Toolkit.KryptonDataGridView();
-            this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
-            this.Btn6_Carregar = new ComponentFactory.Krypton.Toolkit.KryptonButton();
-            this.Btn_Apagar = new ComponentFactory.Krypton.Toolkit.KryptonButton();
-            this.backgroundWorker2 = new System.ComponentModel.BackgroundWorker();
-            this.pingBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.pingProToolsDataSet = new Ping_Pro_Tools.PingProToolsDataSet();
-            this.pingTableAdapter = new Ping_Pro_Tools.PingProToolsDataSetTableAdapters.PingTableAdapter();
             this.idPing = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Data = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.operadorDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.clienteDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.quantidadePingDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.hostDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.pingBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.pingProToolsDataSet = new Ping_Pro_Tools.PingProToolsDataSet();
+            this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
+            this.Btn6_Carregar = new ComponentFactory.Krypton.Toolkit.KryptonButton();
+            this.Btn_Apagar = new ComponentFactory.Krypton.Toolkit.KryptonButton();
+            this.backgroundWorker2 = new System.ComponentModel.BackgroundWorker();
+            this.pingTableAdapter = new Ping_Pro_Tools.PingProToolsDataSetTableAdapters.PingTableAdapter();
+            this.Btn_EnviarAnalise = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonDataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pingBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pingProToolsDataSet)).BeginInit();
@@ -101,61 +102,6 @@ namespace Ping_Pro_Tools
             this.kryptonDataGridView1.StateSelected.DataCell.Back.Color2 = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(126)))), ((int)(((byte)(249)))));
             this.kryptonDataGridView1.TabIndex = 3;
             // 
-            // backgroundWorker1
-            // 
-            this.backgroundWorker1.WorkerReportsProgress = true;
-            this.backgroundWorker1.WorkerSupportsCancellation = true;
-            this.backgroundWorker1.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundWorker1_DoWork);
-            // 
-            // Btn6_Carregar
-            // 
-            this.Btn6_Carregar.Location = new System.Drawing.Point(207, 384);
-            this.Btn6_Carregar.Name = "Btn6_Carregar";
-            this.Btn6_Carregar.Size = new System.Drawing.Size(195, 31);
-            this.Btn6_Carregar.StateCommon.Border.DrawBorders = ((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders)((((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Top | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Bottom) 
-            | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Left) 
-            | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Right)));
-            this.Btn6_Carregar.StateCommon.Border.Rounding = 10;
-            this.Btn6_Carregar.StateCommon.Content.ShortText.Color1 = System.Drawing.Color.Black;
-            this.Btn6_Carregar.StateCommon.Content.ShortText.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold);
-            this.Btn6_Carregar.TabIndex = 5;
-            this.Btn6_Carregar.Values.Text = "CARREGAR HISTORICO";
-            this.Btn6_Carregar.Click += new System.EventHandler(this.Btn6_Carregar_Click_1);
-            // 
-            // Btn_Apagar
-            // 
-            this.Btn_Apagar.Location = new System.Drawing.Point(471, 384);
-            this.Btn_Apagar.Name = "Btn_Apagar";
-            this.Btn_Apagar.Size = new System.Drawing.Size(195, 31);
-            this.Btn_Apagar.StateCommon.Border.DrawBorders = ((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders)((((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Top | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Bottom) 
-            | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Left) 
-            | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Right)));
-            this.Btn_Apagar.StateCommon.Border.Rounding = 10;
-            this.Btn_Apagar.StateCommon.Content.ShortText.Color1 = System.Drawing.Color.Black;
-            this.Btn_Apagar.StateCommon.Content.ShortText.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold);
-            this.Btn_Apagar.TabIndex = 6;
-            this.Btn_Apagar.Values.Text = "APAGAR SELECIONADO";
-            this.Btn_Apagar.Click += new System.EventHandler(this.Btn_Apagar_Click);
-            // 
-            // backgroundWorker2
-            // 
-            this.backgroundWorker2.WorkerReportsProgress = true;
-            this.backgroundWorker2.WorkerSupportsCancellation = true;
-            // 
-            // pingBindingSource
-            // 
-            this.pingBindingSource.DataMember = "Ping";
-            this.pingBindingSource.DataSource = this.pingProToolsDataSet;
-            // 
-            // pingProToolsDataSet
-            // 
-            this.pingProToolsDataSet.DataSetName = "PingProToolsDataSet";
-            this.pingProToolsDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
-            // 
-            // pingTableAdapter
-            // 
-            this.pingTableAdapter.ClearBeforeFill = true;
-            // 
             // idPing
             // 
             this.idPing.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
@@ -204,6 +150,76 @@ namespace Ping_Pro_Tools
             this.hostDataGridViewTextBoxColumn1.Name = "hostDataGridViewTextBoxColumn1";
             this.hostDataGridViewTextBoxColumn1.ReadOnly = true;
             // 
+            // pingBindingSource
+            // 
+            this.pingBindingSource.DataMember = "Ping";
+            this.pingBindingSource.DataSource = this.pingProToolsDataSet;
+            // 
+            // pingProToolsDataSet
+            // 
+            this.pingProToolsDataSet.DataSetName = "PingProToolsDataSet";
+            this.pingProToolsDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
+            // 
+            // backgroundWorker1
+            // 
+            this.backgroundWorker1.WorkerReportsProgress = true;
+            this.backgroundWorker1.WorkerSupportsCancellation = true;
+            this.backgroundWorker1.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundWorker1_DoWork);
+            // 
+            // Btn6_Carregar
+            // 
+            this.Btn6_Carregar.Location = new System.Drawing.Point(132, 384);
+            this.Btn6_Carregar.Name = "Btn6_Carregar";
+            this.Btn6_Carregar.Size = new System.Drawing.Size(173, 31);
+            this.Btn6_Carregar.StateCommon.Border.DrawBorders = ((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders)((((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Top | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Bottom) 
+            | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Left) 
+            | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Right)));
+            this.Btn6_Carregar.StateCommon.Border.Rounding = 10;
+            this.Btn6_Carregar.StateCommon.Content.ShortText.Color1 = System.Drawing.Color.Black;
+            this.Btn6_Carregar.StateCommon.Content.ShortText.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold);
+            this.Btn6_Carregar.TabIndex = 5;
+            this.Btn6_Carregar.Values.Text = "CARREGAR HISTORICO";
+            this.Btn6_Carregar.Click += new System.EventHandler(this.Btn6_Carregar_Click_1);
+            // 
+            // Btn_Apagar
+            // 
+            this.Btn_Apagar.Location = new System.Drawing.Point(346, 384);
+            this.Btn_Apagar.Name = "Btn_Apagar";
+            this.Btn_Apagar.Size = new System.Drawing.Size(171, 31);
+            this.Btn_Apagar.StateCommon.Border.DrawBorders = ((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders)((((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Top | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Bottom) 
+            | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Left) 
+            | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Right)));
+            this.Btn_Apagar.StateCommon.Border.Rounding = 10;
+            this.Btn_Apagar.StateCommon.Content.ShortText.Color1 = System.Drawing.Color.Black;
+            this.Btn_Apagar.StateCommon.Content.ShortText.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold);
+            this.Btn_Apagar.TabIndex = 6;
+            this.Btn_Apagar.Values.Text = "APAGAR SELECIONADO";
+            this.Btn_Apagar.Click += new System.EventHandler(this.Btn_Apagar_Click);
+            // 
+            // backgroundWorker2
+            // 
+            this.backgroundWorker2.WorkerReportsProgress = true;
+            this.backgroundWorker2.WorkerSupportsCancellation = true;
+            // 
+            // pingTableAdapter
+            // 
+            this.pingTableAdapter.ClearBeforeFill = true;
+            // 
+            // Btn_EnviarAnalise
+            // 
+            this.Btn_EnviarAnalise.Location = new System.Drawing.Point(550, 384);
+            this.Btn_EnviarAnalise.Name = "Btn_EnviarAnalise";
+            this.Btn_EnviarAnalise.Size = new System.Drawing.Size(171, 31);
+            this.Btn_EnviarAnalise.StateCommon.Border.DrawBorders = ((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders)((((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Top | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Bottom) 
+            | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Left) 
+            | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Right)));
+            this.Btn_EnviarAnalise.StateCommon.Border.Rounding = 10;
+            this.Btn_EnviarAnalise.StateCommon.Content.ShortText.Color1 = System.Drawing.Color.Black;
+            this.Btn_EnviarAnalise.StateCommon.Content.ShortText.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold);
+            this.Btn_EnviarAnalise.TabIndex = 7;
+            this.Btn_EnviarAnalise.Values.Text = "ENVIAR PARA ANÁLISE";
+            this.Btn_EnviarAnalise.Click += new System.EventHandler(this.Btn_EnviarAnalise_Click);
+            // 
             // Form4_Historico
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -212,6 +228,7 @@ namespace Ping_Pro_Tools
             this.BackgroundImage = global::Ping_Pro_Tools.Properties.Resources.dark;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.ClientSize = new System.Drawing.Size(856, 444);
+            this.Controls.Add(this.Btn_EnviarAnalise);
             this.Controls.Add(this.Btn_Apagar);
             this.Controls.Add(this.Btn6_Carregar);
             this.Controls.Add(this.kryptonDataGridView1);
@@ -241,5 +258,6 @@ namespace Ping_Pro_Tools
         private System.Windows.Forms.DataGridViewTextBoxColumn clienteDataGridViewTextBoxColumn1;
         private System.Windows.Forms.DataGridViewTextBoxColumn quantidadePingDataGridViewTextBoxColumn1;
         private System.Windows.Forms.DataGridViewTextBoxColumn hostDataGridViewTextBoxColumn1;
+        private ComponentFactory.Krypton.Toolkit.KryptonButton Btn_EnviarAnalise;
     }
 }

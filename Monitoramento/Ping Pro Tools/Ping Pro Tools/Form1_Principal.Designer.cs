@@ -76,6 +76,7 @@ namespace Ping_Pro_Tools
             // 
             // Btn4_Config
             // 
+            this.Btn4_Config.Cursor = System.Windows.Forms.Cursors.Hand;
             this.Btn4_Config.FlatAppearance.BorderSize = 0;
             this.Btn4_Config.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.Btn4_Config.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold);
@@ -93,6 +94,7 @@ namespace Ping_Pro_Tools
             // 
             // Btn3_Historico
             // 
+            this.Btn3_Historico.Cursor = System.Windows.Forms.Cursors.Hand;
             this.Btn3_Historico.FlatAppearance.BorderSize = 0;
             this.Btn3_Historico.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.Btn3_Historico.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold);
@@ -110,6 +112,7 @@ namespace Ping_Pro_Tools
             // 
             // Btn2_Analise
             // 
+            this.Btn2_Analise.Cursor = System.Windows.Forms.Cursors.Hand;
             this.Btn2_Analise.FlatAppearance.BorderSize = 0;
             this.Btn2_Analise.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.Btn2_Analise.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold);
@@ -135,6 +138,7 @@ namespace Ping_Pro_Tools
             // 
             // Btn1_Dashboard
             // 
+            this.Btn1_Dashboard.Cursor = System.Windows.Forms.Cursors.Hand;
             this.Btn1_Dashboard.Dock = System.Windows.Forms.DockStyle.Top;
             this.Btn1_Dashboard.FlatAppearance.BorderSize = 0;
             this.Btn1_Dashboard.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -237,6 +241,8 @@ namespace Ping_Pro_Tools
             this.Btn7_Parar.StateCommon.Border.Rounding = 10;
             this.Btn7_Parar.StateCommon.Content.ShortText.Color1 = System.Drawing.Color.Black;
             this.Btn7_Parar.StateCommon.Content.ShortText.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold);
+            this.Btn7_Parar.StateDisabled.Back.Color1 = System.Drawing.Color.Silver;
+            this.Btn7_Parar.StateDisabled.Back.Color2 = System.Drawing.Color.Silver;
             this.Btn7_Parar.TabIndex = 1;
             this.Btn7_Parar.Values.Text = "PARAR";
             this.Btn7_Parar.Click += new System.EventHandler(this.Btn7_Parar_Click);
@@ -273,6 +279,7 @@ namespace Ping_Pro_Tools
             this.Lbl_Progresso.TabIndex = 5;
             this.Lbl_Progresso.Text = "Progresso:";
             this.Lbl_Progresso.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.Lbl_Progresso.Click += new System.EventHandler(this.Lbl_Progresso_Click);
             // 
             // Lbl_TempoEstimado2
             // 

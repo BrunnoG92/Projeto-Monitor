@@ -4,12 +4,16 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
+using System.Media;
 using System.Net.NetworkInformation;
 using System.Runtime.InteropServices;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using ToastNotifications;
 
 namespace Ping_Pro_Tools
 {
@@ -21,7 +25,7 @@ namespace Ping_Pro_Tools
         string RecebeIP;
         string RecebeTamanhoPacote;
         string RecebeQtdPacote;
-        string Operador;
+       // string Operador;
         Boolean RecebeFragmentaPacote;
         //
         // Labels do Form2 Analise //
@@ -50,6 +54,7 @@ namespace Ping_Pro_Tools
         // 
         // Variavéis de controle //
         //
+        public int erro =0;
         Boolean SAIDODASHBOARD;
         Boolean TextoMudou = Form2_Dashboard.TextoTrocado = true;
         String TempoEmSegundos;
@@ -75,10 +80,15 @@ namespace Ping_Pro_Tools
         public Form1_Principal()
         {
             InitializeComponent();
+
+            
+          
             Region = System.Drawing.Region.FromHrgn(CreateRoundRectRgn(0, 0, Width, Height, 25, 25));
             Pnl_Navegacao.Height = Btn1_Dashboard.Height;
             Pnl_Navegacao.Top = Btn1_Dashboard.Top;
             Pnl_Navegacao.Left = Btn1_Dashboard.Left;
+          
+          //  AbrirFormsFilhos(new Form5_Configuracoes());
             AbrirFormsFilhos(new Form2_Dashboard());
             if (backgroundWorker3.IsBusy == false)
             {
@@ -122,12 +132,7 @@ namespace Ping_Pro_Tools
         {
             //
             // Quando eu clico 
-           
-
-
-           // Pnl_Navegacao.Height = Btn2_Analise.Height; // tira a barra da posição anterior
             Pnl_Navegacao.Top = Btn2_Analise.Top;
-           // Pnl_Navegacao.Left = Btn2_Analise.Left;
             Btn2_Analise.BackColor = Color.FromArgb(46, 51, 73);
             AbrirFormsFilhos(new Form3_Analise());
         }
@@ -168,6 +173,7 @@ namespace Ping_Pro_Tools
 
         private void Btn7_Parar_Click(object sender, EventArgs e)
         {
+           
             EnviaClicado = false;
             backgroundWorker1.CancelAsync();
             backgroundWorker2.CancelAsync();
@@ -189,21 +195,20 @@ namespace Ping_Pro_Tools
 
         }
         
-        public void Alert(string msg, Form_Alert.enmType type) // Envio das notificações
-        {
-            Form_Alert frm = new Form_Alert();
-            frm.showAlert(msg, type);
-        }
+       
             private void Btn6_Iniciar_Click(object sender, EventArgs e)
-        {
+        {   
+            //chamo a notificação personalizada e altero a cor, icone e texto e toco o som de notificação
+            Notification.CorPainel = Color.FromArgb(0, 120, 215, 255);
+            Notification.Icone = Properties.Resources.Info;
+            Notification toastNotification = new Notification("Iniciado", "Monitoramento iniciado com sucesso", 3, FormAnimator.AnimationMethod.Slide, FormAnimator.AnimationDirection.Up);
+            toastNotification.Show();
+           
             //
             // Ao clicar em iniciar. Inicia-se o Back Worker 1 , que é o responsável pela função Ping
             //
-            this.Alert("Monitoramento iniciado", Form_Alert.enmType.Info);
-            this.Alert("Monitoramento iniciado", Form_Alert.enmType.Info);
-            this.Alert("Monitoramento iniciado", Form_Alert.enmType.Info);
-            this.Alert("Monitoramento iniciado", Form_Alert.enmType.Info);
-           
+
+
             EnviaClicado = true;
             Envia_PerdaPorcento = 0;
 
@@ -226,6 +231,14 @@ namespace Ping_Pro_Tools
             progressBar1.SetState(1);
         }
 
+        // Definino por padrão a notificação com o visual do erro, para chamada na catch da funçaõ ping
+        //chamo a notificação personalizada e altero a cor, icone e texto e toco o som de notificação
+        
+       
+        
+
+
+
         //
         // Configuração dos Background Workers //
         // Há 03 Workers no Painel Principal //
@@ -235,7 +248,9 @@ namespace Ping_Pro_Tools
         //
         // Inicio implementação Woker 1// 
         private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
-        {   //
+        {
+            erro = 0;
+            //
             //inicia o traballho de fazer o ping em segundo plano, outra thread
             //
            
@@ -287,16 +302,14 @@ namespace Ping_Pro_Tools
                             }
                             else
                                 Envia_PerdaPorcento = PorcentoPerda;
-                            worker.ReportProgress(Porcento_Inteiro);
+                                worker.ReportProgress(Porcento_Inteiro);
 
                         }
                         catch
                         {
-                            MessageBox.Show("Ocorreu um erro ao execultar o ping. Verifique sua conexão com a internet " +
-                               "e se o host é valido", "Erro de Ping",
-                           MessageBoxButtons.OK, MessageBoxIcon.Error);
-
+                            erro = 1;
                             break;
+                            
 
                         }
 
@@ -331,19 +344,40 @@ namespace Ping_Pro_Tools
             Btn7_Parar.Enabled = false;
             CalculoFinalizado = true;
             FlashWindow.Flash(this);
+            
+           
             if (e.Cancelled)
             {
 
-                this.Alert("Monitoramento cancelado", Form_Alert.enmType.Error);
+                //chamo a notificação personalizada e altero a cor, icone e texto e toco o som de notificação
+                Notification.CorPainel = Color.DarkOrange;
+                Notification.Icone = Properties.Resources.Info;
+                Notification toastNotificationC = new Notification("Parado", "O Monitoramento foi cancelado pelo usuário", 3, FormAnimator.AnimationMethod.Slide, FormAnimator.AnimationDirection.Up);           
+                toastNotificationC.Show();
 
 
             }
-            else if (e.Error == null)
+           
+           else if (erro > 0)
             {
+                Notification.CorPainel = Color.Red;
+                Notification.Icone = Properties.Resources.Error;
+                progressBar1.SetState(2);
+                Notification toastNotificationE = new Notification("Erro critico", "Ocorreu um erro no monitoramento. Verifique sua conexão com a internet", 3, FormAnimator.AnimationMethod.Slide, FormAnimator.AnimationDirection.Up);
+                toastNotificationE.Show();
+                playaudio(Ping_Pro_Tools.Properties.Resources.zapsplat_error);
 
-
-                this.Alert("Monitoramento finalizado", Form_Alert.enmType.Success);
             }
+            else if (erro == 0)
+            {
+                //chamo a notificação personalizada e altero a cor, icone e texto e toco o som de notificação
+                Notification.CorPainel = Color.Green;
+                Notification.Icone = Properties.Resources.Sucess;
+                Notification toastNotificationS = new Notification("Concluido", "O Monitoramento foi concluido com sucesso !", 3, FormAnimator.AnimationMethod.Slide, FormAnimator.AnimationDirection.Up);
+                playaudio(Ping_Pro_Tools.Properties.Resources.zapslat_sucess);
+                toastNotificationS.Show();
+            }
+            
 
 
         }
@@ -424,6 +458,8 @@ namespace Ping_Pro_Tools
                 FRAGMENTATEMP = RecebeFragmentaPacote;
                 QTDPACOTETEMP = RecebeQtdPacote;
 
+                // Recebo as alterações no campo login do banco de dados 
+
 
 
             } while (EnviaClicado == false);
@@ -474,14 +510,38 @@ namespace Ping_Pro_Tools
             }
         }
 
-       
-
-
-
-
         //
         // Fim arrastar com o mouse 
         //
+
+
+
+       
+        public static void playaudio(Stream arquivowav) 
+        {
+            SoundPlayer audio = new SoundPlayer(arquivowav); 
+            audio.Play();
+        }
+
+        private void Lbl_Progresso_Click(object sender, EventArgs e)
+        {
+            Notification.CorPainel = Color.FromArgb(0, 120, 215, 255);
+            Notification.Icone = Properties.Resources.Info;
+            Notification toastNotification = new Notification("Iniciado", "Monitoramento iniciado com sucesso", 3, FormAnimator.AnimationMethod.Slide, FormAnimator.AnimationDirection.Up);
+            
+            toastNotification.Show();
+            
+            playaudio(Ping_Pro_Tools.Properties.Resources.savanna);
+
+
+        }
+
+
+
+
+
+
+       
     }
 }
 //

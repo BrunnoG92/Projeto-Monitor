@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using ToastNotifications;
 
 namespace Ping_Pro_Tools
 {
@@ -22,6 +23,13 @@ namespace Ping_Pro_Tools
         int Recebe_atual;
         float Recebe_PerdaPorcento;
         Boolean Recebe_Clicado;
+        
+         private string Servidor;
+        private string Porta;
+        private string Usuario;
+        private string Senha;
+        private string BD;
+       
 
         MySqlConnection conexao;
         MySqlCommand comando;
@@ -32,13 +40,13 @@ namespace Ping_Pro_Tools
         {
             InitializeComponent();
             TxtB_TotalPing.Text = Form2_Dashboard.EnviaQtdPacote;
-            backgroundWorker1.RunWorkerAsync(); // Thread 1 do analise
+            if (!backgroundWorker1.IsBusy) //Thread 1 
+                backgroundWorker1.RunWorkerAsync();
+            else
+                backgroundWorker1.CancelAsync();
         }
 
-        private void TxtB_PingRestante_TextChanged(object sender, EventArgs e)
-        {
-
-        }
+       
 
         private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
         {
@@ -55,10 +63,14 @@ namespace Ping_Pro_Tools
                 Recebe_atual = Form1_Principal.Envia_Atual;
                 Recebe_PerdaPorcento = Form1_Principal.Envia_PerdaPorcento;
                 Recebe_Clicado = Form1_Principal.EnviaClicado;
-                // Controle da cor da label perdeu pacote //
-
-                worker1.ReportProgress(Form1_Principal.Envia_Percent);
-            } while (Form1_Principal.CalculoFinalizado != true);
+                // Recebendo as configurações do banco de dados
+                Servidor = Form5_Configuracoes.Servidor;
+                Porta = Form5_Configuracoes.Porta;
+                Usuario = Form5_Configuracoes.Usuario;
+                Senha = Form5_Configuracoes.Senha;
+                BD = Form5_Configuracoes.BD;
+              worker1.ReportProgress(Form1_Principal.Envia_Percent);
+            } while (Form1_Principal.CalculoFinalizado != true);   
         }
 
         private void backgroundWorker1_ProgressChanged(object sender, ProgressChangedEventArgs e)
@@ -74,14 +86,11 @@ namespace Ping_Pro_Tools
             TxtB_Atual.Text = Recebe_atual.ToString();
             int PorcentoInteiro = (int)Recebe_PerdaPorcento;
             TxtB_PerdaPorcento.Text = PorcentoInteiro.ToString() + "%";
-
-
+            MessageBox.Show(Recebe_atual.ToString());
             if (Recebe_Perdidos == 0 && Recebe_Clicado == true)
             {
                 Lbl_PerdaPorcento.Text = "Perda";
                 Lbl_PerdaPorcento.ForeColor = Color.Chartreuse;
-
-
 
             }
             if (Recebe_Perdidos > 0 && Recebe_Clicado == true)
@@ -94,15 +103,31 @@ namespace Ping_Pro_Tools
 
         }
 
-        private void Btn6_Iniciar_Click(object sender, EventArgs e)
+        private void Btn_Salvar_Click(object sender, EventArgs e)
         {
+            MySqlConnection connection;
+            string server;
+            string database;
+            string uid;
+            string password;
+            string porta;
+
+            server = Servidor;
+            database = BD;
+            uid = Usuario;
+            password = Senha;
+            porta = Porta;
+            string connectionString;
+            connectionString = "SERVER=" + server + ";" + "PORT=" + Porta + ";" + "DATABASE=" +
+            database + ";" + "UID=" + uid + ";" + "PASSWORD=" + password + ";";
+
+            connection = new MySqlConnection(connectionString);
             try
             {
                
               
-              conexao = new MySqlConnection("Server=bruno-dev.coswwudtnlbd.us-east-2.rds.amazonaws.com;Port=3306;Database=PingProTools;Uid=brunog;Pwd=98497389b;");
+              conexao = new MySqlConnection(connectionString);
               strSQL = "INSERT INTO Ping (ID_CLIENTE, OPERADOR,  CLIENTE, HOST, QUANTIDADE_PING, TAMANHO_PACOTE, MAIOR_PING, MENOR_PING, MEDIA_PING, QTD_PACOTES_PERDIDOS, PORCENTO_PCTS_PERDIDOS, DATA  ) VALUES (@ID_CLIENTE, @OPERADOR, @CLIENTE, @HOST, @QUANTIDADE_PING, @TAMANHO_PACOTE, @MAIOR_PING, @MENOR_PING, @MEDIA_PING, @QTD_PACOTES_PERDIDOS, @PORCENTO_PCTS_PERDIDOS, @DATA )";
-              
               comando = new MySqlCommand(strSQL, conexao);
               comando.Parameters.AddWithValue("@ID_CLIENTE", Form2_Dashboard.EnviaID);
               comando.Parameters.AddWithValue("@OPERADOR", Form2_Dashboard.EnviaOperador);
@@ -116,18 +141,24 @@ namespace Ping_Pro_Tools
               comando.Parameters.AddWithValue("@QTD_PACOTES_PERDIDOS", Recebe_Perdidos);
               comando.Parameters.AddWithValue("@PORCENTO_PCTS_PERDIDOS", Recebe_PerdaPorcento);
               comando.Parameters.AddWithValue("@DATA", DateTime.Now.ToString("dd/MM/yyy"));
-                
-
-
-                conexao.Open();
+              conexao.Open();
+               
                 int salvo = comando.ExecuteNonQuery();
                 if (salvo < 1)
                 {
-                    MessageBox.Show("Não enviado");
+                    Notification.CorPainel = Color.Red;
+                    Notification.Icone = Properties.Resources.Error;
+                    Notification toastNotificationS = new Notification("Erro", "Os dados não foram salvo. Verifique sua conexão com o banco de dados!", 3, FormAnimator.AnimationMethod.Slide, FormAnimator.AnimationDirection.Up);
+                    Form1_Principal.playaudio(Ping_Pro_Tools.Properties.Resources.zapsplat_error);
+                    toastNotificationS.Show();
                 }
                 else
                 {
-                    MessageBox.Show("Enviado");
+                    Notification.CorPainel = Color.Green;
+                    Notification.Icone = Properties.Resources.Sucess;
+                    Notification toastNotificationS = new Notification("Salvo", "Os dados foram salvo com sucesso!", 3, FormAnimator.AnimationMethod.Slide, FormAnimator.AnimationDirection.Up);
+                    Form1_Principal.playaudio(Ping_Pro_Tools.Properties.Resources.zapslat_sucess);
+                    toastNotificationS.Show();
                 }
             }
             catch
@@ -142,6 +173,13 @@ namespace Ping_Pro_Tools
             }
                  
             }
+
+        private void Lbl_PerdaPorcento_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        
     }
 }
 
