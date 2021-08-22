@@ -84,9 +84,9 @@ namespace Ping_Pro_Tools
             TxtB_PingRestante.Text = Recebe_Restante.ToString();
             TxtB_PingPerdido.Text = Recebe_Perdidos.ToString();
             TxtB_Atual.Text = Recebe_atual.ToString();
-            int PorcentoInteiro = (int)Recebe_PerdaPorcento;
-            TxtB_PerdaPorcento.Text = PorcentoInteiro.ToString() + "%";
-            
+           
+            TxtB_PerdaPorcento.Text = Recebe_PerdaPorcento.ToString("N2")+ "%";
+          //  MessageBox.Show(Recebe_PerdaPorcento.ToString("N2") + "%");
             if (Recebe_Perdidos == 0 && Recebe_Clicado == true)
             {
                 Lbl_PerdaPorcento.Text = "Perda";

@@ -59,7 +59,7 @@ namespace Ping_Pro_Tools
             this.TxtB_PerdaPorcento.Location = new System.Drawing.Point(403, 359);
             this.TxtB_PerdaPorcento.MaxLength = 5;
             this.TxtB_PerdaPorcento.Name = "TxtB_PerdaPorcento";
-            this.TxtB_PerdaPorcento.Size = new System.Drawing.Size(53, 29);
+            this.TxtB_PerdaPorcento.Size = new System.Drawing.Size(64, 29);
             this.TxtB_PerdaPorcento.StateCommon.Back.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(74)))), ((int)(((byte)(79)))), ((int)(((byte)(99)))));
             this.TxtB_PerdaPorcento.StateCommon.Border.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(24)))), ((int)(((byte)(30)))), ((int)(((byte)(54)))));
             this.TxtB_PerdaPorcento.StateCommon.Border.Color2 = System.Drawing.Color.FromArgb(((int)(((byte)(24)))), ((int)(((byte)(30)))), ((int)(((byte)(54)))));

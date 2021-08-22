@@ -279,7 +279,7 @@ namespace Ping_Pro_Tools
             this.Lbl_Progresso.TabIndex = 5;
             this.Lbl_Progresso.Text = "Progresso:";
             this.Lbl_Progresso.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.Lbl_Progresso.Click += new System.EventHandler(this.Lbl_Progresso_Click);
+           
             // 
             // Lbl_TempoEstimado2
             // 

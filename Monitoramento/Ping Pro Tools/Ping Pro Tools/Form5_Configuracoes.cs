@@ -40,6 +40,7 @@ namespace Ping_Pro_Tools
             string password;
             string porta;
             //recebe os valores atualizados
+            server = "abcv";
             server = TxtB_Servidor.Text;
             database = Txtb_BD.Text;
             uid = TxtB_Usuario.Text;
@@ -50,7 +51,7 @@ namespace Ping_Pro_Tools
             connectionString = "SERVER=" + server + ";" + "PORT=" + porta + ";" + "DATABASE=" +
             database + ";" + "UID=" + uid + ";" + "PASSWORD=" + password + ";";
 
-            connection = new MySqlConnection(connectionString);
+           // connection = new MySqlConnection(connectionString);
 
             try
             {
@@ -60,6 +61,11 @@ namespace Ping_Pro_Tools
                     if (sqlConn.State == ConnectionState.Open)
                     {
                         MessageBox.Show("Conectado com sucesso");
+                        TxtB_Servidor.Text = Servidor;
+                        Txtb_Porta.Text = Porta;
+                        Txtb_BD.Text = BD;
+                        TxtB_Senha.Text = Senha;
+                        TxtB_Usuario.Text = Usuario;
                     }
 
 
@@ -86,5 +92,7 @@ namespace Ping_Pro_Tools
             } while (true);
             
         }
+
+       
     }
 }

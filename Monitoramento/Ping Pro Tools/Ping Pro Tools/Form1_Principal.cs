@@ -13,6 +13,7 @@ using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Windows.Forms.DataVisualization.Charting;
 using ToastNotifications;
 
 namespace Ping_Pro_Tools
@@ -58,6 +59,8 @@ namespace Ping_Pro_Tools
         Boolean SAIDODASHBOARD;
         Boolean TextoMudou = Form2_Dashboard.TextoTrocado = true;
         String TempoEmSegundos;
+        int PerdaDetectada;
+        int PingAltoDetectado;
         //
         // Inicio da persoanlização da Form. Deixa a form com bordas arredondadas //
         //
@@ -80,20 +83,19 @@ namespace Ping_Pro_Tools
         public Form1_Principal()
         {
             InitializeComponent();
-
-            
-          
+            this.Icon = Properties.Resources.icone_globo;
             Region = System.Drawing.Region.FromHrgn(CreateRoundRectRgn(0, 0, Width, Height, 25, 25));
             Pnl_Navegacao.Height = Btn1_Dashboard.Height;
             Pnl_Navegacao.Top = Btn1_Dashboard.Top;
             Pnl_Navegacao.Left = Btn1_Dashboard.Left;
           
-          //  AbrirFormsFilhos(new Form5_Configuracoes());
-            AbrirFormsFilhos(new Form2_Dashboard());
+            AbrirFormsFilhos(new Form5_Configuracoes()); // Inicializo as configurações para ja rececber os valores referente ao banco dedados
+            AbrirFormsFilhos(new Form2_Dashboard()); // Inicializo em seguida o dashboard e exibe
             if (backgroundWorker3.IsBusy == false)
             {
                 backgroundWorker3.RunWorkerAsync(); // Thread 3 busca atualização no campo de texto
             }
+           
         }
 
         //
@@ -197,18 +199,19 @@ namespace Ping_Pro_Tools
         
        
             private void Btn6_Iniciar_Click(object sender, EventArgs e)
-        {   
+        {
+            PerdaDetectada = 0;
+            PingAltoDetectado = 0;
+            // Chamo a função de monitoramento de perca de pacote, para o envio de notificação
+          
             //chamo a notificação personalizada e altero a cor, icone e texto e toco o som de notificação
             Notification.CorPainel = Color.FromArgb(0, 120, 215, 255);
             Notification.Icone = Properties.Resources.Info;
             Notification toastNotification = new Notification("Iniciado", "Monitoramento iniciado com sucesso", 3, FormAnimator.AnimationMethod.Slide, FormAnimator.AnimationDirection.Up);
             toastNotification.Show();
-           
             //
             // Ao clicar em iniciar. Inicia-se o Back Worker 1 , que é o responsável pela função Ping
             //
-
-
             EnviaClicado = true;
             Envia_PerdaPorcento = 0;
 
@@ -282,6 +285,7 @@ namespace Ping_Pro_Tools
                         {
                             Percent = ((i + 1) / int.Parse(RecebeQtdPacote)) * 100;
                             int Porcento_Inteiro = (int)Percent;
+                          
                             System.Threading.Thread.Sleep(1000);
                             PingReply reply = EnviaPing.Send(RecebeIP, 1000, Buffer); // IP, Tempo de Espera, Buffer                                   
                             ListaTempoPing.Insert((int)i, reply.RoundtripTime); //Adiciona na lista posição do contador o tempo do ping                  
@@ -291,11 +295,22 @@ namespace Ping_Pro_Tools
                             Envia_Media = (int)ListaTempoPing.Average(); //Acha o tempo médio
                             Envia_Sucesso = (int)ListaTempoPing.Count(x => x != 0); // Acha quantidade ping com sucesso
                             Envia_Restante = int.Parse(RecebeQtdPacote) - (int)ListaTempoPing.Count();
-                            Envia_Perdidos = ListaTempoPing.Count(x => x == 0); // Acha quantidade ping com sucesso
+                            Envia_Perdidos = ListaTempoPing.Count(x => x == 0); // Acha quantidade ping perdidos
                             Envia_Atual = (int)ListaTempoPing[(int)i];
                             float Perdidos = (float)Envia_Perdidos;
                             float Npacotes = float.Parse(RecebeQtdPacote);
                             float PorcentoPerda = (Perdidos / i) * 100;
+                           
+                            if (PorcentoPerda > 0)
+                            {
+                                PerdaDetectada++;
+                            }
+                            if (Envia_Atual > 100)
+                            {
+                                PingAltoDetectado++;
+;                            }
+                           
+
                             if (PorcentoPerda > 100)
                             {
                                 Envia_PerdaPorcento = 100;
@@ -323,14 +338,32 @@ namespace Ping_Pro_Tools
             // Controla as mudanças que devem ser feita pelo Worker. No caso a atualização das labels e o valor da barra de progresso//
             //
             int Porcentagem_Int = (int)Percent;
-          
             Lbl_Porcentagem.Text = Porcentagem_Int.ToString() + "%";
             progressBar1.Value = Porcentagem_Int;
             TaskbarProgress.SetValue(this.Handle, Porcentagem_Int, 100);
             Lbl_TempoEstimado2.Text = TempoEmSegundos;
+            if (PerdaDetectada == 1)
+            {
+                Notification.CorPainel = Color.Red;
+                Notification.Icone = Properties.Resources.Error;
+                Notification toastNotificationE = new Notification("Perda de pacote detectada", "Foram detectadas perdas de pacotes no cliente " + Form2_Dashboard.EnviaNome, 172800, FormAnimator.AnimationMethod.Slide, FormAnimator.AnimationDirection.Up);
+                toastNotificationE.Show();
+                playaudio(Ping_Pro_Tools.Properties.Resources.zapsplat_error);
+            }
+            if (PingAltoDetectado == 1)
+            {
+                Notification.CorPainel = Color.Red;
+                Notification.Icone = Properties.Resources.Error;
+                Notification toastNotificationE = new Notification("Latência alta", "O Ping no cliente " + Form2_Dashboard.EnviaNome +" está muito alto", 172800, FormAnimator.AnimationMethod.Slide, FormAnimator.AnimationDirection.Up);
+                toastNotificationE.Show();
+                playaudio(Ping_Pro_Tools.Properties.Resources.zapsplat_error);
+            }
 
 
         }
+        
+
+       
         private void backgroundWorker1_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {   //
             // Recebe a resposta do Worker que ele terminou o trabalho. Trata os tipos de finalização : Sucesso, Erro e Cancelado pelo usuário //
@@ -345,7 +378,6 @@ namespace Ping_Pro_Tools
             CalculoFinalizado = true;
             FlashWindow.Flash(this);
             
-           
             if (e.Cancelled)
             {
 
@@ -354,7 +386,6 @@ namespace Ping_Pro_Tools
                 Notification.Icone = Properties.Resources.Info;
                 Notification toastNotificationC = new Notification("Parado", "O Monitoramento foi cancelado pelo usuário", 3, FormAnimator.AnimationMethod.Slide, FormAnimator.AnimationDirection.Up);           
                 toastNotificationC.Show();
-
 
             }
            
@@ -465,30 +496,6 @@ namespace Ping_Pro_Tools
             } while (EnviaClicado == false);
 
         }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
         //
         // Arrastar a janela com o mouse : Com o evento MouseDown
         //
@@ -516,30 +523,12 @@ namespace Ping_Pro_Tools
 
 
 
-       
+       //toca som de notificação desejado
         public static void playaudio(Stream arquivowav) 
         {
             SoundPlayer audio = new SoundPlayer(arquivowav); 
             audio.Play();
         }
-
-        private void Lbl_Progresso_Click(object sender, EventArgs e)
-        {
-            Notification.CorPainel = Color.FromArgb(0, 120, 215, 255);
-            Notification.Icone = Properties.Resources.Info;
-            Notification toastNotification = new Notification("Iniciado", "Monitoramento iniciado com sucesso", 3, FormAnimator.AnimationMethod.Slide, FormAnimator.AnimationDirection.Up);
-            
-            toastNotification.Show();
-            
-            playaudio(Ping_Pro_Tools.Properties.Resources.savanna);
-
-
-        }
-
-
-
-
-
 
        
     }
