@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using ToastNotifications;
 
 namespace Ping_Pro_Tools
 {
@@ -18,6 +19,7 @@ namespace Ping_Pro_Tools
         private string Usuario;
         private string Senha;
         private string BD;
+        private bool Sucesso;
         public Form4_Historico()
         {
             InitializeComponent();
@@ -25,7 +27,7 @@ namespace Ping_Pro_Tools
 
 
         private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
-        {   
+        {
             //recebo os dados de login da pagina de configurações 
             Servidor = Form5_Configuracoes.Servidor;
             Porta = Form5_Configuracoes.Porta;
@@ -49,42 +51,48 @@ namespace Ping_Pro_Tools
             password = Senha;
             porta = Porta;
             string connectionString;
-            connectionString = "SERVER=" + server + ";"  + "PORT="+ Porta + ";" +  "DATABASE=" +
+            connectionString = "SERVER=" + server + ";" + "PORT=" + Porta + ";" + "DATABASE=" +
             database + ";" + "UID=" + uid + ";" + "PASSWORD=" + password + ";";
 
             connection = new MySqlConnection(connectionString);
-         
 
+            // APAGA NO BANCO DE DADOS
             using (MySqlConnection sqlConn = new MySqlConnection(connectionString))
             {
-                sqlConn.Open();
-                using (MySqlCommand sqlCommand = new MySqlCommand("DELETE FROM Ping WHERE idPing = " + row["idPing"], sqlConn))
-                {   
-                    
-                    int sucesso = sqlCommand.ExecuteNonQuery();
-                    if (sucesso < 1)
+                try
+                {
+
+
+                    sqlConn.Open();
+                    using (MySqlCommand sqlCommand = new MySqlCommand("DELETE FROM Ping WHERE idPing = " + row["idPing"], sqlConn))
                     {
-                        MessageBox.Show("Não Apagado");
+
+                        int sucesso = sqlCommand.ExecuteNonQuery();
+                        if (sucesso < 1)
+                        {
+                            Sucesso = false;
+
+                        }
+                        else
+                        {
+                            Sucesso = true;
+
+                        }
                     }
-                    else
-                    {
-                        MessageBox.Show("Apagado");
-                    }
-                    
                 }
- 
+                catch
+                {
+
+
+                }
             }
-            foreach (DataGridViewRow linha in kryptonDataGridView1.SelectedRows)
-            {
-                if (!linha.IsNewRow)
-                    kryptonDataGridView1.Rows.Remove(linha);
-            }
+
         }
 
-        
 
 
-    private void Btn6_Carregar_Click_1(object sender, EventArgs e)
+
+        private void Btn6_Carregar_Click_1(object sender, EventArgs e)
         {
             try
             {
@@ -94,14 +102,18 @@ namespace Ping_Pro_Tools
             {
                 System.Windows.Forms.MessageBox.Show(ex.Message);
             }
-           
+
         }
 
         private void Btn_Apagar_Click(object sender, EventArgs e)
         {
 
             if (!backgroundWorker1.IsBusy)
+            {
                 backgroundWorker1.RunWorkerAsync();
+
+            }
+
             else
                 backgroundWorker1.CancelAsync();
         }
@@ -109,6 +121,31 @@ namespace Ping_Pro_Tools
         private void Btn_EnviarAnalise_Click(object sender, EventArgs e)
         {
             MessageBox.Show(Servidor.ToString());
+        }
+
+        private void backgroundWorker1_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            //Apago no Datagridview local
+            int row = kryptonDataGridView1.CurrentCell.RowIndex;
+            kryptonDataGridView1.Rows.RemoveAt(row);
+
+            // Exibo a notificação para sucesso ou falha ao deletar no banco
+            if (Sucesso == false)
+            {
+                Notification.CorPainel = Color.Red;
+                Notification.Icone = Properties.Resources.Error;
+                Notification toastNotificationS = new Notification("Erro de conexão", "Os dados selecionados foram apagados apenas localmente !", 30, FormAnimator.AnimationMethod.Slide, FormAnimator.AnimationDirection.Up);
+                Form1_Principal.playaudio(Ping_Pro_Tools.Properties.Resources.zapsplat_error);
+                toastNotificationS.Show();
+            }
+            else
+            {
+                Notification.CorPainel = Color.Green;
+                Notification.Icone = Properties.Resources.Sucess;
+                Notification toastNotificationS = new Notification("Sucesso", "Os dados selecionados foram apagados com sucesso!", 5, FormAnimator.AnimationMethod.Slide, FormAnimator.AnimationDirection.Up);
+                Form1_Principal.playaudio(Ping_Pro_Tools.Properties.Resources.zapslat_sucess);
+                toastNotificationS.Show();
+            }
         }
     }
 }
