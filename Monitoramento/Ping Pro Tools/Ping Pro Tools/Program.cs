@@ -16,7 +16,7 @@ namespace Ping_Pro_Tools
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Form1_Principal());
+            Application.Run(new Form0_Login());
         }
     }
 }

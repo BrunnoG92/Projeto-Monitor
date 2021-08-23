@@ -27,7 +27,7 @@ namespace Ping_Pro_Tools
         {
             InitializeComponent();
             //recebem os valores ao iniciar o programa
-            backgroundWorker1.RunWorkerAsync();
+           // backgroundWorker1.RunWorkerAsync();
 
         }
 

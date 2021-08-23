@@ -30,6 +30,7 @@ namespace Ping_Pro_Tools
         private void InitializeComponent()
         {
             this.panel2 = new System.Windows.Forms.Panel();
+            this.label1 = new System.Windows.Forms.Label();
             this.Btn4_Config = new System.Windows.Forms.Button();
             this.Btn3_Historico = new System.Windows.Forms.Button();
             this.Btn2_Analise = new System.Windows.Forms.Button();
@@ -60,6 +61,7 @@ namespace Ping_Pro_Tools
             // panel2
             // 
             this.panel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(24)))), ((int)(((byte)(30)))), ((int)(((byte)(54)))));
+            this.panel2.Controls.Add(this.label1);
             this.panel2.Controls.Add(this.Btn4_Config);
             this.panel2.Controls.Add(this.Btn3_Historico);
             this.panel2.Controls.Add(this.Btn2_Analise);
@@ -73,6 +75,17 @@ namespace Ping_Pro_Tools
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(170, 614);
             this.panel2.TabIndex = 1;
+            // 
+            // label1
+            // 
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold);
+            this.label1.ForeColor = System.Drawing.Color.White;
+            this.label1.Location = new System.Drawing.Point(-118, 285);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(93, 30);
+            this.label1.TabIndex = 64;
+            this.label1.Text = "Usuário:";
+            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // Btn4_Config
             // 
@@ -279,7 +292,6 @@ namespace Ping_Pro_Tools
             this.Lbl_Progresso.TabIndex = 5;
             this.Lbl_Progresso.Text = "Progresso:";
             this.Lbl_Progresso.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-           
             // 
             // Lbl_TempoEstimado2
             // 
@@ -352,7 +364,9 @@ namespace Ping_Pro_Tools
             this.Controls.Add(this.Pnl2_Grade);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "Form1_Principal";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Form1";
+            
             this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Form1_Principal_MouseDown);
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
@@ -387,6 +401,7 @@ namespace Ping_Pro_Tools
         private System.ComponentModel.BackgroundWorker backgroundWorker1;
         private System.ComponentModel.BackgroundWorker backgroundWorker2;
         private System.ComponentModel.BackgroundWorker backgroundWorker3;
+        private System.Windows.Forms.Label label1;
     }
 }
 

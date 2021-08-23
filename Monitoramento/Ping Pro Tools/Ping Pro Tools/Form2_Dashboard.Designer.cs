@@ -175,7 +175,7 @@ namespace Ping_Pro_Tools
             // 
             this.Lbl_ID.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold);
             this.Lbl_ID.ForeColor = System.Drawing.Color.White;
-            this.Lbl_ID.Location = new System.Drawing.Point(12, 124);
+            this.Lbl_ID.Location = new System.Drawing.Point(22, 129);
             this.Lbl_ID.Name = "Lbl_ID";
             this.Lbl_ID.Size = new System.Drawing.Size(65, 53);
             this.Lbl_ID.TabIndex = 46;

@@ -22,6 +22,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -105,7 +106,22 @@
     <Compile Include="Classes\Notificações\NotificationLauncher.designer.cs">
       <DependentUpon>NotificationLauncher.cs</DependentUpon>
     </Compile>
+    <Compile Include="Classes\Rounded PictureBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Classes\Taskbar Progress.cs" />
+    <Compile Include="Form_Login_Config.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form_Login_Config.Designer.cs">
+      <DependentUpon>Form_Login_Config.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Form0_Login.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form0_Login.Designer.cs">
+      <DependentUpon>Form0_Login.cs</DependentUpon>
+    </Compile>
     <Compile Include="Form1_Principal.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -151,6 +167,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Classes\Notificações\NotificationLauncher.resx">
       <DependentUpon>NotificationLauncher.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form_Login_Config.resx">
+      <DependentUpon>Form_Login_Config.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form0_Login.resx">
+      <DependentUpon>Form0_Login.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form1_Principal.resx">
       <DependentUpon>Form1_Principal.cs</DependentUpon>
@@ -291,6 +313,11 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="icon.ico" />
+    <None Include="Resources\user.png" />
+    <None Include="Resources\Spin-0.8s-200px %281%29.svg" />
+    <None Include="Resources\Spin-0.8s-200px.gif" />
+    <None Include="Resources\loading.gif" />
+    <None Include="Resources\loading-buffering.gif" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

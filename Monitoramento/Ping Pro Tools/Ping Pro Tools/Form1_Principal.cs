@@ -26,7 +26,7 @@ namespace Ping_Pro_Tools
         string RecebeIP;
         string RecebeTamanhoPacote;
         string RecebeQtdPacote;
-       // string Operador;
+        // string Operador;
         Boolean RecebeFragmentaPacote;
         //
         // Labels do Form2 Analise //
@@ -55,7 +55,7 @@ namespace Ping_Pro_Tools
         // 
         // Variavéis de controle //
         //
-        public int erro =0;
+        public int erro = 0;
         Boolean SAIDODASHBOARD;
         Boolean TextoMudou = Form2_Dashboard.TextoTrocado = true;
         String TempoEmSegundos;
@@ -83,21 +83,25 @@ namespace Ping_Pro_Tools
         public Form1_Principal()
         {
             InitializeComponent();
+           
+
+
             this.Icon = Properties.Resources.icone_globo;
             Region = System.Drawing.Region.FromHrgn(CreateRoundRectRgn(0, 0, Width, Height, 25, 25));
             Pnl_Navegacao.Height = Btn1_Dashboard.Height;
             Pnl_Navegacao.Top = Btn1_Dashboard.Top;
             Pnl_Navegacao.Left = Btn1_Dashboard.Left;
-          
+
             AbrirFormsFilhos(new Form5_Configuracoes()); // Inicializo as configurações para ja rececber os valores referente ao banco dedados
             AbrirFormsFilhos(new Form2_Dashboard()); // Inicializo em seguida o dashboard e exibe
             if (backgroundWorker3.IsBusy == false)
             {
                 backgroundWorker3.RunWorkerAsync(); // Thread 3 busca atualização no campo de texto
             }
-           
+
         }
 
+       
         //
         // Controle do menu lateral esquerdo (Click nos botões) //
         // A cada click há alterações de cores e mudança de posição do painel lateral esquerdo, que indica qual opção está selecionada //
@@ -146,10 +150,10 @@ namespace Ping_Pro_Tools
 
         private void Btn3_Historico_Click(object sender, EventArgs e)
         {
-         
-           Pnl_Navegacao.Height = Btn3_Historico.Height;
-           Pnl_Navegacao.Top = Btn3_Historico.Top;
-          
+
+            Pnl_Navegacao.Height = Btn3_Historico.Height;
+            Pnl_Navegacao.Top = Btn3_Historico.Top;
+
             Btn3_Historico.BackColor = Color.FromArgb(46, 51, 73);
             AbrirFormsFilhos(new Form4_Historico());
         }
@@ -175,7 +179,7 @@ namespace Ping_Pro_Tools
 
         private void Btn7_Parar_Click(object sender, EventArgs e)
         {
-           
+
             EnviaClicado = false;
             backgroundWorker1.CancelAsync();
             backgroundWorker2.CancelAsync();
@@ -184,7 +188,7 @@ namespace Ping_Pro_Tools
             progressBar1.SetState(2);
         }
 
-        private void AbrirFormsFilhos(Form FormsFilhos)
+        public void AbrirFormsFilhos(Form FormsFilhos)
         {
             if (this.Pnl2_Grade.Controls.Count > 0)
                 this.Pnl2_Grade.Controls.RemoveAt(0);
@@ -196,14 +200,14 @@ namespace Ping_Pro_Tools
             fh.Show();
 
         }
-        
-       
-            private void Btn6_Iniciar_Click(object sender, EventArgs e)
+
+
+        private void Btn6_Iniciar_Click(object sender, EventArgs e)
         {
             PerdaDetectada = 0;
             PingAltoDetectado = 0;
             // Chamo a função de monitoramento de perca de pacote, para o envio de notificação
-          
+
             //chamo a notificação personalizada e altero a cor, icone e texto e toco o som de notificação
             Notification.CorPainel = Color.FromArgb(0, 120, 215, 255);
             Notification.Icone = Properties.Resources.Info;
@@ -236,9 +240,9 @@ namespace Ping_Pro_Tools
 
         // Definino por padrão a notificação com o visual do erro, para chamada na catch da funçaõ ping
         //chamo a notificação personalizada e altero a cor, icone e texto e toco o som de notificação
-        
-       
-        
+
+
+
 
 
 
@@ -256,7 +260,7 @@ namespace Ping_Pro_Tools
             //
             //inicia o traballho de fazer o ping em segundo plano, outra thread
             //
-           
+
             CalculoFinalizado = false;
             BackgroundWorker worker = sender as BackgroundWorker;
             string Dados = string.Concat(Enumerable.Repeat("a", int.Parse(RecebeTamanhoPacote)));
@@ -285,11 +289,11 @@ namespace Ping_Pro_Tools
                         {
                             Percent = ((i + 1) / int.Parse(RecebeQtdPacote)) * 100;
                             int Porcento_Inteiro = (int)Percent;
-                          
+
                             System.Threading.Thread.Sleep(1000);
                             PingReply reply = EnviaPing.Send(RecebeIP, 1000, Buffer); // IP, Tempo de Espera, Buffer                                   
                             ListaTempoPing.Insert((int)i, reply.RoundtripTime); //Adiciona na lista posição do contador o tempo do ping                  
-                            
+
                             Envia_Maior = (int)ListaTempoPing.Max(); // acha o maior tempo 
                             Envia_Menor = (int)ListaTempoPing.Where(x => x != 0).DefaultIfEmpty().Min(); //Encontra o menor valor exceto zero;
                             Envia_Media = (int)ListaTempoPing.Average(); //Acha o tempo médio
@@ -300,7 +304,7 @@ namespace Ping_Pro_Tools
                             float Perdidos = (float)Envia_Perdidos;
                             float Npacotes = float.Parse(RecebeQtdPacote);
                             float PorcentoPerda = (Perdidos / i) * 100;
-                           
+
                             if (PorcentoPerda > 0)
                             {
                                 PerdaDetectada++;
@@ -308,8 +312,9 @@ namespace Ping_Pro_Tools
                             if (Envia_Atual > 100)
                             {
                                 PingAltoDetectado++;
-;                            }
-                           
+                                ;
+                            }
+
 
                             if (PorcentoPerda > 100)
                             {
@@ -317,14 +322,14 @@ namespace Ping_Pro_Tools
                             }
                             else
                                 Envia_PerdaPorcento = PorcentoPerda;
-                                worker.ReportProgress(Porcento_Inteiro);
+                            worker.ReportProgress(Porcento_Inteiro);
 
                         }
                         catch
                         {
                             erro = 1;
                             break;
-                            
+
 
                         }
 
@@ -354,16 +359,16 @@ namespace Ping_Pro_Tools
             {
                 Notification.CorPainel = Color.Red;
                 Notification.Icone = Properties.Resources.Error;
-                Notification toastNotificationE = new Notification("Latência alta", "O Ping no cliente " + Form2_Dashboard.EnviaNome +" está muito alto", 172800, FormAnimator.AnimationMethod.Slide, FormAnimator.AnimationDirection.Up);
+                Notification toastNotificationE = new Notification("Latência alta", "O Ping no cliente " + Form2_Dashboard.EnviaNome + " está muito alto", 172800, FormAnimator.AnimationMethod.Slide, FormAnimator.AnimationDirection.Up);
                 toastNotificationE.Show();
                 playaudio(Ping_Pro_Tools.Properties.Resources.zapsplat_error);
             }
 
 
         }
-        
 
-       
+
+
         private void backgroundWorker1_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {   //
             // Recebe a resposta do Worker que ele terminou o trabalho. Trata os tipos de finalização : Sucesso, Erro e Cancelado pelo usuário //
@@ -377,19 +382,19 @@ namespace Ping_Pro_Tools
             Btn7_Parar.Enabled = false;
             CalculoFinalizado = true;
             FlashWindow.Flash(this);
-            
+
             if (e.Cancelled)
             {
 
                 //chamo a notificação personalizada e altero a cor, icone e texto e toco o som de notificação
                 Notification.CorPainel = Color.DarkOrange;
                 Notification.Icone = Properties.Resources.Info;
-                Notification toastNotificationC = new Notification("Parado", "O Monitoramento foi cancelado pelo usuário", 3, FormAnimator.AnimationMethod.Slide, FormAnimator.AnimationDirection.Up);           
+                Notification toastNotificationC = new Notification("Parado", "O Monitoramento foi cancelado pelo usuário", 3, FormAnimator.AnimationMethod.Slide, FormAnimator.AnimationDirection.Up);
                 toastNotificationC.Show();
 
             }
-           
-           else if (erro > 0)
+
+            else if (erro > 0)
             {
                 Notification.CorPainel = Color.Red;
                 Notification.Icone = Properties.Resources.Error;
@@ -408,7 +413,7 @@ namespace Ping_Pro_Tools
                 playaudio(Ping_Pro_Tools.Properties.Resources.zapslat_sucess);
                 toastNotificationS.Show();
             }
-            
+
 
 
         }
@@ -463,12 +468,14 @@ namespace Ping_Pro_Tools
         private void backgroundWorker3_DoWork(object sender, DoWorkEventArgs e)
         {
 
-            BackgroundWorker worker = sender as BackgroundWorker;
+           
             //
             // Monitoro as textbox por alterações e as envio através do Worker 3 para o formulário Dashboard //
             //
             do
-            {   //
+            {
+                System.Threading.Thread.Sleep(1000);
+                //
                 // Até que seja detectado que sai que cliquei em INICIAR, eu envio os dados para o formulário dashboard //
                 //
                 RecebeID = Form2_Dashboard.EnviaID;
@@ -478,7 +485,7 @@ namespace Ping_Pro_Tools
                 RecebeQtdPacote = Form2_Dashboard.EnviaQtdPacote;
                 RecebeFragmentaPacote = Form2_Dashboard.EnviaFragmentaPacote;
                 TextoMudou = Form2_Dashboard.TextoTrocado;
-               
+
                 //
                 // Envio também cada alteração para variáveis temporárias, salvado assim os dados, para que não se perca entre as trocas de formulários pelo usuário//
                 //
@@ -488,10 +495,7 @@ namespace Ping_Pro_Tools
                 TAMANHOTEMP = RecebeTamanhoPacote;
                 FRAGMENTATEMP = RecebeFragmentaPacote;
                 QTDPACOTETEMP = RecebeQtdPacote;
-
                 // Recebo as alterações no campo login do banco de dados 
-
-
 
             } while (EnviaClicado == false);
 
@@ -506,7 +510,7 @@ namespace Ping_Pro_Tools
         public static extern int SendMessage(IntPtr hWnd, int Msg, int wParam, int lParam);
         [System.Runtime.InteropServices.DllImport("user32.dll")]
         public static extern bool ReleaseCapture();
-       
+
 
         private void Form1_Principal_MouseDown(object sender, MouseEventArgs e)
         {
@@ -523,14 +527,16 @@ namespace Ping_Pro_Tools
 
 
 
-       //toca som de notificação desejado
-        public static void playaudio(Stream arquivowav) 
+        //toca som de notificação desejado
+        public static void playaudio(Stream arquivowav)
         {
-            SoundPlayer audio = new SoundPlayer(arquivowav); 
+            SoundPlayer audio = new SoundPlayer(arquivowav);
             audio.Play();
         }
 
-       
+
+        
+
     }
 }
 //

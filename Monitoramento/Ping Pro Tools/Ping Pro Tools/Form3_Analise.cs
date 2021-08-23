@@ -179,7 +179,12 @@ namespace Ping_Pro_Tools
 
         }
 
-        
+        private void Form3_Analise_Load(object sender, EventArgs e)
+        {
+            Txtb_Cliente_Nome.Text = Form2_Dashboard.EnviaNome;
+           
+
+        }
     }
 }
 
