@@ -30,7 +30,6 @@ namespace Ping_Pro_Tools
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form0_Login));
             this.TxtB_Usuario = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
             this.Lbl_Usuario = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
@@ -38,9 +37,10 @@ namespace Ping_Pro_Tools
             this.button1 = new System.Windows.Forms.Button();
             this.Btn_Login = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             this.metroSetControlBox1 = new MetroSet_UI.Controls.MetroSetControlBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.ovalPictureBox1 = new Ping_Pro_Tools.Classes.OvalPictureBox();
+            this.Lbl_User = new System.Windows.Forms.Label();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.ChkB_Salva = new System.Windows.Forms.CheckBox();
+            this.ovalPictureBox1 = new Ping_Pro_Tools.Classes.OvalPictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.ovalPictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -49,7 +49,7 @@ namespace Ping_Pro_Tools
             this.TxtB_Usuario.Location = new System.Drawing.Point(152, 303);
             this.TxtB_Usuario.MaxLength = 30;
             this.TxtB_Usuario.Name = "TxtB_Usuario";
-            this.TxtB_Usuario.Size = new System.Drawing.Size(259, 29);
+            this.TxtB_Usuario.Size = new System.Drawing.Size(259, 33);
             this.TxtB_Usuario.StateCommon.Back.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(74)))), ((int)(((byte)(79)))), ((int)(((byte)(99)))));
             this.TxtB_Usuario.StateCommon.Border.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(24)))), ((int)(((byte)(30)))), ((int)(((byte)(54)))));
             this.TxtB_Usuario.StateCommon.Border.Color2 = System.Drawing.Color.FromArgb(((int)(((byte)(24)))), ((int)(((byte)(30)))), ((int)(((byte)(54)))));
@@ -58,7 +58,9 @@ namespace Ping_Pro_Tools
             | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Right)));
             this.TxtB_Usuario.StateCommon.Border.Rounding = 10;
             this.TxtB_Usuario.StateCommon.Content.Color1 = System.Drawing.SystemColors.ScrollBar;
+            this.TxtB_Usuario.StateCommon.Content.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Bold);
             this.TxtB_Usuario.TabIndex = 54;
+            this.TxtB_Usuario.Text = "AB";
             this.TxtB_Usuario.TextChanged += new System.EventHandler(this.TxtB_Usuario_TextChanged);
             // 
             // Lbl_Usuario
@@ -89,7 +91,7 @@ namespace Ping_Pro_Tools
             this.TxtB_Senha.MaxLength = 30;
             this.TxtB_Senha.Name = "TxtB_Senha";
             this.TxtB_Senha.PasswordChar = '*';
-            this.TxtB_Senha.Size = new System.Drawing.Size(259, 29);
+            this.TxtB_Senha.Size = new System.Drawing.Size(259, 33);
             this.TxtB_Senha.StateCommon.Back.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(74)))), ((int)(((byte)(79)))), ((int)(((byte)(99)))));
             this.TxtB_Senha.StateCommon.Border.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(24)))), ((int)(((byte)(30)))), ((int)(((byte)(54)))));
             this.TxtB_Senha.StateCommon.Border.Color2 = System.Drawing.Color.FromArgb(((int)(((byte)(24)))), ((int)(((byte)(30)))), ((int)(((byte)(54)))));
@@ -98,6 +100,7 @@ namespace Ping_Pro_Tools
             | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Right)));
             this.TxtB_Senha.StateCommon.Border.Rounding = 10;
             this.TxtB_Senha.StateCommon.Content.Color1 = System.Drawing.SystemColors.ScrollBar;
+            this.TxtB_Senha.StateCommon.Content.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.TxtB_Senha.TabIndex = 66;
             this.TxtB_Senha.TextChanged += new System.EventHandler(this.TxtB_Senha_TextChanged);
             // 
@@ -159,27 +162,41 @@ namespace Ping_Pro_Tools
             this.metroSetControlBox1.ThemeAuthor = "Narwin";
             this.metroSetControlBox1.ThemeName = "MetroLite";
             // 
-            // label1
+            // Lbl_User
             // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
-            this.label1.Location = new System.Drawing.Point(147, 246);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(178, 30);
-            this.label1.TabIndex = 73;
-            this.label1.Text = "Bruno Gonçalves";
+            this.Lbl_User.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Lbl_User.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
+            this.Lbl_User.Location = new System.Drawing.Point(79, 246);
+            this.Lbl_User.Name = "Lbl_User";
+            this.Lbl_User.Size = new System.Drawing.Size(339, 30);
+            this.Lbl_User.TabIndex = 73;
+            this.Lbl_User.Text = "Usuario";
+            this.Lbl_User.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // ChkB_Salva
+            // 
+            this.ChkB_Salva.AutoSize = true;
+            this.ChkB_Salva.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ChkB_Salva.ForeColor = System.Drawing.Color.White;
+            this.ChkB_Salva.Location = new System.Drawing.Point(350, 377);
+            this.ChkB_Salva.Name = "ChkB_Salva";
+            this.ChkB_Salva.Size = new System.Drawing.Size(68, 21);
+            this.ChkB_Salva.TabIndex = 74;
+            this.ChkB_Salva.Text = "Salvar ";
+            this.ChkB_Salva.UseVisualStyleBackColor = true;
             // 
             // ovalPictureBox1
             // 
             this.ovalPictureBox1.BackColor = System.Drawing.Color.DarkGray;
-            this.ovalPictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("ovalPictureBox1.Image")));
+            this.ovalPictureBox1.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.ovalPictureBox1.Image = global::Ping_Pro_Tools.Properties.Resources.user;
             this.ovalPictureBox1.Location = new System.Drawing.Point(138, 47);
             this.ovalPictureBox1.Name = "ovalPictureBox1";
             this.ovalPictureBox1.Size = new System.Drawing.Size(213, 196);
             this.ovalPictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.ovalPictureBox1.TabIndex = 0;
             this.ovalPictureBox1.TabStop = false;
+            this.ovalPictureBox1.Click += new System.EventHandler(this.ovalPictureBox1_Click);
             // 
             // Form0_Login
             // 
@@ -187,7 +204,8 @@ namespace Ping_Pro_Tools
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(42)))), ((int)(((byte)(64)))));
             this.ClientSize = new System.Drawing.Size(452, 546);
-            this.Controls.Add(this.label1);
+            this.Controls.Add(this.ChkB_Salva);
+            this.Controls.Add(this.Lbl_User);
             this.Controls.Add(this.metroSetControlBox1);
             this.Controls.Add(this.Btn_Login);
             this.Controls.Add(this.button1);
@@ -200,6 +218,7 @@ namespace Ping_Pro_Tools
             this.Name = "Form0_Login";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Form0_Login";
+            this.Load += new System.EventHandler(this.Form0_Login_Load);
             this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Form0_Login_MouseDown);
             ((System.ComponentModel.ISupportInitialize)(this.ovalPictureBox1)).EndInit();
             this.ResumeLayout(false);
@@ -217,7 +236,8 @@ namespace Ping_Pro_Tools
         private System.Windows.Forms.Button button1;
         private ComponentFactory.Krypton.Toolkit.KryptonButton Btn_Login;
         private MetroSet_UI.Controls.MetroSetControlBox metroSetControlBox1;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label Lbl_User;
         private System.Windows.Forms.ToolTip toolTip1;
+        private System.Windows.Forms.CheckBox ChkB_Salva;
     }
 }

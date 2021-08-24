@@ -17,6 +17,7 @@ namespace Ping_Pro_Tools
         //
         // Inicio da persoanlização da Form. Deixa a form com bordas arredondadas //
         //
+        public static bool salvo;
 
         [DllImport("Gdi32.dll", EntryPoint = "CreateRoundRectRgn")]
 
@@ -63,11 +64,11 @@ namespace Ping_Pro_Tools
         {
             var config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
             var connectionStringsSection = (ConnectionStringsSection)config.GetSection("connectionStrings");
-            connectionStringsSection.ConnectionStrings["MinhaConexao"].ConnectionString = $"Data Source=" + TxtB_Servidor.Text + ";Initial Catalog=" + TxB_Banco.Text+ ";UID=" + Form0_Login.Usuario + ";password=" + Form0_Login.Senha + ";SslMode=none;";
+            connectionStringsSection.ConnectionStrings["MinhaConexao"].ConnectionString = $"Data Source=" + TxtB_Servidor.Text + ";Initial Catalog=" + TxB_Banco.Text + ";port=" + Txb_Porta.Text +";";
             config.Save();
             ConfigurationManager.RefreshSection("connectionStrings");
-            MessageBox.Show("Esse aplicativo será reiniciado");
-            Application.Restart();
+            MessageBox.Show("Configurações salva com sucesso. ","Sucesso",MessageBoxButtons.OK,MessageBoxIcon.Information);
+            this.Close();
         }
     }
 }

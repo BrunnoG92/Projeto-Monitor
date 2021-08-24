@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Configuration;
 using System.Data;
 using System.Drawing;
 using System.Linq;
@@ -15,10 +16,7 @@ namespace Ping_Pro_Tools
     public partial class Form4_Historico : Form
     {
         private string Servidor;
-        private string Porta;
-        private string Usuario;
-        private string Senha;
-        private string BD;
+        
         private bool Sucesso;
         public Form4_Historico()
         {
@@ -28,62 +26,47 @@ namespace Ping_Pro_Tools
 
         private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
         {
-            //recebo os dados de login da pagina de configurações 
-            Servidor = Form5_Configuracoes.Servidor;
-            Porta = Form5_Configuracoes.Porta;
-            Usuario = Form5_Configuracoes.Usuario;
-            Senha = Form5_Configuracoes.Senha;
-            BD = Form5_Configuracoes.BD;
+          
 
             BackgroundWorker worker = sender as BackgroundWorker;
             DataRow row = (kryptonDataGridView1.SelectedRows[0].DataBoundItem as DataRowView).Row;
 
-            MySqlConnection connection;
-            string server;
-            string database;
-            string uid;
-            string password;
-            string porta;
 
-            server = Servidor;
-            database = BD;
-            uid = Usuario;
-            password = Senha;
-            porta = Porta;
-            string connectionString;
-            connectionString = "SERVER=" + server + ";" + "PORT=" + Porta + ";" + "DATABASE=" +
-            database + ";" + "UID=" + uid + ";" + "PASSWORD=" + password + ";";
 
-            connection = new MySqlConnection(connectionString);
+
 
             // APAGA NO BANCO DE DADOS
-            using (MySqlConnection sqlConn = new MySqlConnection(connectionString))
+
             {
                 try
                 {
-
-
-                    sqlConn.Open();
-                    using (MySqlCommand sqlCommand = new MySqlCommand("DELETE FROM Ping WHERE idPing = " + row["idPing"], sqlConn))
+                    string conectasql = ConfigurationManager.ConnectionStrings["MinhaConexao"].ConnectionString;
+                    MySqlConnection mysqlconn = new MySqlConnection(conectasql);
+                    mysqlconn.Open();
+                    if (mysqlconn.State == ConnectionState.Open)
                     {
 
-                        int sucesso = sqlCommand.ExecuteNonQuery();
-                        if (sucesso < 1)
-                        {
-                            Sucesso = false;
 
-                        }
-                        else
+                        using (MySqlCommand sqlCommand = new MySqlCommand("DELETE FROM Ping WHERE idPing = " + row["idPing"], mysqlconn))
                         {
-                            Sucesso = true;
 
+                            int sucesso = sqlCommand.ExecuteNonQuery();
+                            if (sucesso < 1)
+                            {
+                                Sucesso = false;
+
+                            }
+                            else
+                            {
+                                Sucesso = true;
+
+                            }
                         }
                     }
                 }
-                catch
+                catch (Exception Ex)
                 {
-
-
+                    MessageBox.Show(Ex.Message, "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
 

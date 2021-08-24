@@ -32,7 +32,7 @@ namespace Ping_Pro_Tools
             this.Lbl_Servidor = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.TxtB_Servidor = new ComponentFactory.Krypton.Toolkit.KryptonComboBox();
-            this.kryptonTextBox1 = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
+            this.Txb_Porta = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.TxB_Banco = new ComponentFactory.Krypton.Toolkit.KryptonComboBox();
             this.Btn6_Iniciar = new ComponentFactory.Krypton.Toolkit.KryptonButton();
@@ -88,23 +88,23 @@ namespace Ping_Pro_Tools
             this.TxtB_Servidor.TabIndex = 67;
             this.TxtB_Servidor.Text = "127.0.0.1";
             // 
-            // kryptonTextBox1
+            // Txb_Porta
             // 
-            this.kryptonTextBox1.Location = new System.Drawing.Point(201, 103);
-            this.kryptonTextBox1.MaxLength = 30;
-            this.kryptonTextBox1.Name = "kryptonTextBox1";
-            this.kryptonTextBox1.Size = new System.Drawing.Size(259, 29);
-            this.kryptonTextBox1.StateCommon.Back.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(74)))), ((int)(((byte)(79)))), ((int)(((byte)(99)))));
-            this.kryptonTextBox1.StateCommon.Border.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(24)))), ((int)(((byte)(30)))), ((int)(((byte)(54)))));
-            this.kryptonTextBox1.StateCommon.Border.Color2 = System.Drawing.Color.FromArgb(((int)(((byte)(24)))), ((int)(((byte)(30)))), ((int)(((byte)(54)))));
-            this.kryptonTextBox1.StateCommon.Border.DrawBorders = ((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders)((((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Top | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Bottom) 
+            this.Txb_Porta.Location = new System.Drawing.Point(201, 103);
+            this.Txb_Porta.MaxLength = 30;
+            this.Txb_Porta.Name = "Txb_Porta";
+            this.Txb_Porta.Size = new System.Drawing.Size(259, 29);
+            this.Txb_Porta.StateCommon.Back.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(74)))), ((int)(((byte)(79)))), ((int)(((byte)(99)))));
+            this.Txb_Porta.StateCommon.Border.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(24)))), ((int)(((byte)(30)))), ((int)(((byte)(54)))));
+            this.Txb_Porta.StateCommon.Border.Color2 = System.Drawing.Color.FromArgb(((int)(((byte)(24)))), ((int)(((byte)(30)))), ((int)(((byte)(54)))));
+            this.Txb_Porta.StateCommon.Border.DrawBorders = ((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders)((((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Top | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Bottom) 
             | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Left) 
             | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Right)));
-            this.kryptonTextBox1.StateCommon.Border.Rounding = 10;
-            this.kryptonTextBox1.StateCommon.Content.Color1 = System.Drawing.Color.White;
-            this.kryptonTextBox1.StateCommon.Content.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.kryptonTextBox1.TabIndex = 70;
-            this.kryptonTextBox1.Text = "3601";
+            this.Txb_Porta.StateCommon.Border.Rounding = 10;
+            this.Txb_Porta.StateCommon.Content.Color1 = System.Drawing.Color.White;
+            this.Txb_Porta.StateCommon.Content.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Txb_Porta.TabIndex = 70;
+            this.Txb_Porta.Text = "3601";
             // 
             // label1
             // 
@@ -184,7 +184,7 @@ namespace Ping_Pro_Tools
             this.GB_Config.Controls.Add(this.Lbl_Servidor);
             this.GB_Config.Controls.Add(this.label2);
             this.GB_Config.Controls.Add(this.TxtB_Servidor);
-            this.GB_Config.Controls.Add(this.kryptonTextBox1);
+            this.GB_Config.Controls.Add(this.Txb_Porta);
             this.GB_Config.Controls.Add(this.label1);
             this.GB_Config.Controls.Add(this.TxB_Banco);
             this.GB_Config.ForeColor = System.Drawing.Color.White;
@@ -238,7 +238,7 @@ namespace Ping_Pro_Tools
         private System.Windows.Forms.Label Lbl_Servidor;
         private System.Windows.Forms.Label label2;
         private ComponentFactory.Krypton.Toolkit.KryptonComboBox TxtB_Servidor;
-        private ComponentFactory.Krypton.Toolkit.KryptonTextBox kryptonTextBox1;
+        private ComponentFactory.Krypton.Toolkit.KryptonTextBox Txb_Porta;
         private System.Windows.Forms.Label label1;
         private ComponentFactory.Krypton.Toolkit.KryptonComboBox TxB_Banco;
         private ComponentFactory.Krypton.Toolkit.KryptonButton Btn6_Iniciar;

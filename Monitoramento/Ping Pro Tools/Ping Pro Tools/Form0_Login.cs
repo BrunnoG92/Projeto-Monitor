@@ -4,7 +4,9 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Configuration;
 using System.Data;
+using System.Data.SqlClient;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
@@ -18,7 +20,7 @@ namespace Ping_Pro_Tools
     {
         public static string Usuario;
         public static string Senha;
-        
+        string NomePasta = Environment.GetFolderPath(Environment.SpecialFolder.MyPictures);
         //
         // Inicio da persoanlização da Form. Deixa a form com bordas arredondadas //
         //
@@ -43,6 +45,7 @@ namespace Ping_Pro_Tools
             InitializeComponent();
             this.Icon = Properties.Resources.icone_globo;
             Region = System.Drawing.Region.FromHrgn(CreateRoundRectRgn(0, 0, Width, Height, 25, 25));
+            System.IO.Directory.CreateDirectory(NomePasta);
         }
 
 
@@ -72,38 +75,74 @@ namespace Ping_Pro_Tools
 
             Form_Login_Config Configura = new Form_Login_Config();
             Configura.ShowDialog();
+           
         }
+        public static string getBetween(string strSource, string strStart, string strEnd)
+        {
+            if (strSource.Contains(strStart) && strSource.Contains(strEnd))
+            {
+                int Start, End;
+                Start = strSource.IndexOf(strStart, 0) + strStart.Length;
+                End = strSource.IndexOf(strEnd, Start);
+                return strSource.Substring(Start, End - Start);
+            }
 
+            return "";
+        }
         private void Btn_Login_Click(object sender, EventArgs e)
         {   // colocar para buscar usuários e senha ao clicar em logar. senha salva em hash
-            string conectasql = ConfigurationManager.ConnectionStrings["MinhaConexao"].ConnectionString;
+            
+            System.Configuration.Configuration config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+
+            string DBConn = ConfigurationManager.ConnectionStrings["MinhaConexao"].ToString();
+            string Servidor = getBetween(DBConn, "Data Source=", ";");
+            string Porta = getBetween(DBConn, "port=", ";");
+            string BancoDeDados = getBetween(DBConn,"Initial Catalog=", ";");
+
+            // Update the setting.
+             var connectionStringsSection = (ConnectionStringsSection)config.GetSection("connectionStrings");
+             connectionStringsSection.ConnectionStrings["MinhaConexao"].ConnectionString = $"Data Source=" + Servidor + ";port=" + Porta + ";Initial Catalog=" + BancoDeDados + ";UID=" + Usuario + ";password=" +Senha + ";SslMode=none;";
+             config.Save(ConfigurationSaveMode.Full);
+             ConfigurationManager.RefreshSection("connectionStrings");
             try
             {
-
+                string conectasql = ConfigurationManager.ConnectionStrings["MinhaConexao"].ConnectionString;
                 MySqlConnection mysqlconn = new MySqlConnection(conectasql);
                 mysqlconn.Open();
-                string query = $"SELECT * FROM Usuarios WHERE Usuario ={TxtB_Usuario.Text}";
-                
-
                 if (mysqlconn.State == ConnectionState.Open)
                 {   
                     Form1_Principal Iniciar = new Form1_Principal();
                     Iniciar.FormClosed += new FormClosedEventHandler(Iniciar_FormClosed); //Capturo o evento form close
                     this.Hide();
                     Iniciar.Show();
+                   
                 }
-
             }
-            catch
+            catch (Exception Ex)
             {
-                MessageBox.Show("Não foi possivel estabelecer uma conexão com o banco de dados. Verifique sua conexão com a internet ou as configurações de Banco De Dados", "Erro na conexão", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(Ex.Message,"Erro",MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+
            
         }
         void Iniciar_FormClosed(object sender, FormClosedEventArgs e)
         {
             this.Visible = true; // se form Principal estiver fechado, abro o form login
+            if (ChkB_Salva.Checked == false)
+            {
+                TxtB_Usuario.Text = null;
+                TxtB_Senha.Text = null;
+
+                System.Configuration.Configuration config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+                string DBConn = ConfigurationManager.ConnectionStrings["MinhaConexao"].ToString();
+                string Servidor = getBetween(DBConn, "Data Source=", ";");
+                string Porta = getBetween(DBConn, "port=", ";");
+                string BancoDeDados = getBetween(DBConn, "Initial Catalog=", ";");
+                var connectionStringsSection = (ConnectionStringsSection)config.GetSection("connectionStrings");
+                connectionStringsSection.ConnectionStrings["MinhaConexao"].ConnectionString = $"Data Source=" + Servidor + ";port=" + Porta + ";Initial Catalog=" + BancoDeDados + ";UID=" + Usuario + ";password=" + Senha + ";SslMode=none;";
+            }
         }
+       
 
         private void TxtB_Usuario_TextChanged(object sender, EventArgs e)
         {
@@ -115,6 +154,32 @@ namespace Ping_Pro_Tools
         {
             Senha = TxtB_Senha.Text.Trim();
         }
+
+        private void ovalPictureBox1_Click(object sender, EventArgs e)
+        {
+            // abre a caixa de diálogo do arquivo   
+            OpenFileDialog open = new OpenFileDialog();
+            // filtros de imagem  
+            open.Filter = "Arquivos de imagem (*. jpg; * .jpeg; * .gif; * .bmp) | * .jpg; * .jpeg; * .gif; * .bmp";
+            if (open.ShowDialog() == DialogResult.OK)
+            {
+                // exibe a imagem na caixa de imagem  
+                ovalPictureBox1.Image = new  Bitmap(open.FileName);
+               
+            }
+        }
+
+        private void Form0_Login_Load(object sender, EventArgs e)
+        {
+            string N_Arquivo = TxtB_Usuario.Text + ".jpg";
+            string Caminho = NomePasta + @"\" +  N_Arquivo;
+          //  MessageBox.Show(Caminho);
+            ovalPictureBox1.Image.Save(Caminho, ovalPictureBox1.Image.RawFormat);
+        }
+
+
+
+
 
 
 
