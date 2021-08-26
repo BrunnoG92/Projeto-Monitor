@@ -15,12 +15,16 @@ using System.Windows.Forms;
 
 namespace Ping_Pro_Tools
 {
-   
+
     public partial class Form0_Login : Form
     {
         public static string Usuario;
+        string UsuarioSalvo;
         public static string Senha;
-        string NomePasta = Environment.GetFolderPath(Environment.SpecialFolder.MyPictures);
+        Bitmap FotoUsuario;
+        Bitmap FotoSalva;
+     
+        string NomePasta = Environment.GetFolderPath(Environment.SpecialFolder.MyPictures); // pego o caminho da pasta imagens
         //
         // Inicio da persoanlização da Form. Deixa a form com bordas arredondadas //
         //
@@ -43,6 +47,21 @@ namespace Ping_Pro_Tools
         public Form0_Login()
         {
             InitializeComponent();
+
+
+            // pego o nome de usuario salvo
+            string value = System.Configuration.ConfigurationManager.AppSettings["username"];
+            UsuarioSalvo = value;
+            Lbl_User.Text = value;
+            TxtB_Usuario.Text = value;
+
+            // defino a foto do usuario na picturebox se não for null na inicialização
+            if (FotoUsuario != null)
+            {
+                ovalPictureBox1.Image = FotoUsuario;
+            }
+
+
             this.Icon = Properties.Resources.icone_globo;
             Region = System.Drawing.Region.FromHrgn(CreateRoundRectRgn(0, 0, Width, Height, 25, 25));
             System.IO.Directory.CreateDirectory(NomePasta);
@@ -75,7 +94,7 @@ namespace Ping_Pro_Tools
 
             Form_Login_Config Configura = new Form_Login_Config();
             Configura.ShowDialog();
-           
+
         }
         public static string getBetween(string strSource, string strStart, string strEnd)
         {
@@ -90,40 +109,57 @@ namespace Ping_Pro_Tools
             return "";
         }
         private void Btn_Login_Click(object sender, EventArgs e)
-        {   // colocar para buscar usuários e senha ao clicar em logar. senha salva em hash
-            
+        {
+
+            // colocar para buscar usuários e senha ao clicar em logar. senha salva em hash
+
             System.Configuration.Configuration config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
 
             string DBConn = ConfigurationManager.ConnectionStrings["MinhaConexao"].ToString();
             string Servidor = getBetween(DBConn, "Data Source=", ";");
             string Porta = getBetween(DBConn, "port=", ";");
-            string BancoDeDados = getBetween(DBConn,"Initial Catalog=", ";");
+            string BancoDeDados = getBetween(DBConn, "Initial Catalog=", ";");
 
             // Update the setting.
-             var connectionStringsSection = (ConnectionStringsSection)config.GetSection("connectionStrings");
-             connectionStringsSection.ConnectionStrings["MinhaConexao"].ConnectionString = $"Data Source=" + Servidor + ";port=" + Porta + ";Initial Catalog=" + BancoDeDados + ";UID=" + Usuario + ";password=" +Senha + ";SslMode=none;";
-             config.Save(ConfigurationSaveMode.Full);
-             ConfigurationManager.RefreshSection("connectionStrings");
+            var connectionStringsSection = (ConnectionStringsSection)config.GetSection("connectionStrings");
+            connectionStringsSection.ConnectionStrings["MinhaConexao"].ConnectionString = $"Data Source=" + Servidor + ";port=" + Porta + ";Initial Catalog=" + BancoDeDados + ";UID=" + Usuario + ";password=" + Senha + ";SslMode=none;";
+            config.Save(ConfigurationSaveMode.Full);
+            ConfigurationManager.RefreshSection("connectionStrings");
             try
             {
                 string conectasql = ConfigurationManager.ConnectionStrings["MinhaConexao"].ConnectionString;
                 MySqlConnection mysqlconn = new MySqlConnection(conectasql);
                 mysqlconn.Open();
                 if (mysqlconn.State == ConnectionState.Open)
-                {   
+                {
                     Form1_Principal Iniciar = new Form1_Principal();
                     Iniciar.FormClosed += new FormClosedEventHandler(Iniciar_FormClosed); //Capturo o evento form close
                     this.Hide();
                     Iniciar.Show();
-                   
+
+
+
                 }
             }
             catch (Exception Ex)
             {
-                MessageBox.Show(Ex.Message,"Erro",MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(Ex.Message, "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            // salvo o nome do usuário no appconfig se o usuario selecionou 
+            if (ChkB_Salva.Checked == true)
+            {
+                config.AppSettings.Settings["username"].Value = TxtB_Usuario.Text;
+                config.Save(ConfigurationSaveMode.Modified);
+                // salvo a foto do usuario na pasta imagem
+                string N_Arquivo = Usuario + ".jpg";
+                string Caminho = NomePasta + @"\" + N_Arquivo;
+                ovalPictureBox1.Image.Save(Caminho, ovalPictureBox1.Image.RawFormat);
+
             }
 
-           
+
+
+
         }
         void Iniciar_FormClosed(object sender, FormClosedEventArgs e)
         {
@@ -134,20 +170,34 @@ namespace Ping_Pro_Tools
                 TxtB_Senha.Text = null;
 
                 System.Configuration.Configuration config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
-                string DBConn = ConfigurationManager.ConnectionStrings["MinhaConexao"].ToString();
-                string Servidor = getBetween(DBConn, "Data Source=", ";");
-                string Porta = getBetween(DBConn, "port=", ";");
-                string BancoDeDados = getBetween(DBConn, "Initial Catalog=", ";");
-                var connectionStringsSection = (ConnectionStringsSection)config.GetSection("connectionStrings");
-                connectionStringsSection.ConnectionStrings["MinhaConexao"].ConnectionString = $"Data Source=" + Servidor + ";port=" + Porta + ";Initial Catalog=" + BancoDeDados + ";UID=" + Usuario + ";password=" + Senha + ";SslMode=none;";
+                //string DBConn = ConfigurationManager.ConnectionStrings["MinhaConexao"].ToString();
+                // string Servidor = getBetween(DBConn, "Data Source=", ";");
+                //string Porta = getBetween(DBConn, "port=", ";");
+                //string BancoDeDados = getBetween(DBConn, "Initial Catalog=", ";");
+                //var connectionStringsSection = (ConnectionStringsSection)config.GetSection("connectionStrings");
+                //connectionStringsSection.ConnectionStrings["MinhaConexao"].ConnectionString = $"Data Source=" + Servidor + ";port=" + Porta + ";Initial Catalog=" + BancoDeDados + ";UID=" + Usuario + ";password=" + Senha + ";SslMode=none;";
+                Lbl_User.Text = "Usuario";
+                ovalPictureBox1.Image = Properties.Resources.user;
             }
+            else if (ChkB_Salva.Checked == true)
+            {   // carrego a foto do usuario que esta na variavel FotoUsuario, quando a janela principal for fechada
+                UsuarioSalvo = Usuario;
+                Lbl_User.Text = UsuarioSalvo;
+                if (FotoUsuario != null)
+                {
+                    ovalPictureBox1.Image = FotoUsuario;
+                }
+            }
+
+
         }
-       
+
+
 
         private void TxtB_Usuario_TextChanged(object sender, EventArgs e)
-        {
+        {   // pego o nome do usuario
             Usuario = TxtB_Usuario.Text.Trim();
-           
+
         }
 
         private void TxtB_Senha_TextChanged(object sender, EventArgs e)
@@ -160,22 +210,47 @@ namespace Ping_Pro_Tools
             // abre a caixa de diálogo do arquivo   
             OpenFileDialog open = new OpenFileDialog();
             // filtros de imagem  
-            open.Filter = "Arquivos de imagem (*. jpg; * .jpeg; * .gif; * .bmp) | * .jpg; * .jpeg; * .gif; * .bmp";
+            open.Filter = "Arquivos de imagem (*. jpg; *. png; * .jpeg; * .gif; * .bmp) | * .jpg; * .png; * .jpeg; * .gif; * .bmp";
             if (open.ShowDialog() == DialogResult.OK)
             {
                 // exibe a imagem na caixa de imagem  
-                ovalPictureBox1.Image = new  Bitmap(open.FileName);
+                ovalPictureBox1.Image = new Bitmap(open.FileName);
+                
+
+            }
+            //salvo a foto que o usuário escolheu após ela ser trocada na pasta imagems e na variavel foto
+
+            string N_Arquivo = TxtB_Usuario.Text + ".jpg";
+            string Caminho = NomePasta + @"\" + N_Arquivo;
+            if (File.Exists(Caminho) == true)
+            {
+                N_Arquivo = TxtB_Usuario.Text + "1.jpg";
+                Caminho = NomePasta + @"\" + N_Arquivo;
+                ovalPictureBox1.Image.Save(Caminho, ovalPictureBox1.Image.RawFormat);
+                FotoUsuario = (Bitmap)ovalPictureBox1.Image;
                
             }
+            else
+            {
+                ovalPictureBox1.Image.Save(Caminho, ovalPictureBox1.Image.RawFormat);
+                FotoUsuario = (Bitmap)ovalPictureBox1.Image;
+            }
+           
+
+
         }
 
         private void Form0_Login_Load(object sender, EventArgs e)
         {
-            string N_Arquivo = TxtB_Usuario.Text + ".jpg";
-            string Caminho = NomePasta + @"\" +  N_Arquivo;
-          //  MessageBox.Show(Caminho);
-            ovalPictureBox1.Image.Save(Caminho, ovalPictureBox1.Image.RawFormat);
+           
         }
+
+
+
+
+
+
+
 
 
 

@@ -29,18 +29,21 @@ namespace Ping_Pro_Tools
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.Lbl_Servidor = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.TxtB_Servidor = new ComponentFactory.Krypton.Toolkit.KryptonComboBox();
+            this.CmB_Servidor = new ComponentFactory.Krypton.Toolkit.KryptonComboBox();
             this.Txb_Porta = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.TxB_Banco = new ComponentFactory.Krypton.Toolkit.KryptonComboBox();
+            this.CmB_Banco = new ComponentFactory.Krypton.Toolkit.KryptonComboBox();
             this.Btn6_Iniciar = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             this.metroSetControlBox1 = new MetroSet_UI.Controls.MetroSetControlBox();
             this.GB_Config = new System.Windows.Forms.GroupBox();
             this.Btn_Salvar = new ComponentFactory.Krypton.Toolkit.KryptonButton();
-            ((System.ComponentModel.ISupportInitialize)(this.TxtB_Servidor)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.TxB_Banco)).BeginInit();
+            this.Btn_Apaga = new ComponentFactory.Krypton.Toolkit.KryptonButton();
+            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            ((System.ComponentModel.ISupportInitialize)(this.CmB_Servidor)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.CmB_Banco)).BeginInit();
             this.GB_Config.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -66,27 +69,28 @@ namespace Ping_Pro_Tools
             this.label2.Text = "Porta:";
             this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // TxtB_Servidor
+            // CmB_Servidor
             // 
-            this.TxtB_Servidor.DropDownWidth = 115;
-            this.TxtB_Servidor.InputControlStyle = ComponentFactory.Krypton.Toolkit.InputControlStyle.Ribbon;
-            this.TxtB_Servidor.Location = new System.Drawing.Point(201, 63);
-            this.TxtB_Servidor.Name = "TxtB_Servidor";
-            this.TxtB_Servidor.PaletteMode = ComponentFactory.Krypton.Toolkit.PaletteMode.SparkleBlue;
-            this.TxtB_Servidor.Size = new System.Drawing.Size(259, 27);
-            this.TxtB_Servidor.StateCommon.ComboBox.Back.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(74)))), ((int)(((byte)(79)))), ((int)(((byte)(99)))));
-            this.TxtB_Servidor.StateCommon.ComboBox.Border.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(24)))), ((int)(((byte)(30)))), ((int)(((byte)(54)))));
-            this.TxtB_Servidor.StateCommon.ComboBox.Border.Color2 = System.Drawing.Color.FromArgb(((int)(((byte)(24)))), ((int)(((byte)(30)))), ((int)(((byte)(54)))));
-            this.TxtB_Servidor.StateCommon.ComboBox.Border.ColorAngle = -10F;
-            this.TxtB_Servidor.StateCommon.ComboBox.Border.Draw = ComponentFactory.Krypton.Toolkit.InheritBool.True;
-            this.TxtB_Servidor.StateCommon.ComboBox.Border.DrawBorders = ((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders)((((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Top | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Bottom) 
+            this.CmB_Servidor.DropDownWidth = 115;
+            this.CmB_Servidor.InputControlStyle = ComponentFactory.Krypton.Toolkit.InputControlStyle.Ribbon;
+            this.CmB_Servidor.Location = new System.Drawing.Point(201, 63);
+            this.CmB_Servidor.Name = "CmB_Servidor";
+            this.CmB_Servidor.PaletteMode = ComponentFactory.Krypton.Toolkit.PaletteMode.SparkleBlue;
+            this.CmB_Servidor.Size = new System.Drawing.Size(259, 27);
+            this.CmB_Servidor.StateCommon.ComboBox.Back.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(74)))), ((int)(((byte)(79)))), ((int)(((byte)(99)))));
+            this.CmB_Servidor.StateCommon.ComboBox.Border.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(24)))), ((int)(((byte)(30)))), ((int)(((byte)(54)))));
+            this.CmB_Servidor.StateCommon.ComboBox.Border.Color2 = System.Drawing.Color.FromArgb(((int)(((byte)(24)))), ((int)(((byte)(30)))), ((int)(((byte)(54)))));
+            this.CmB_Servidor.StateCommon.ComboBox.Border.ColorAngle = -10F;
+            this.CmB_Servidor.StateCommon.ComboBox.Border.Draw = ComponentFactory.Krypton.Toolkit.InheritBool.True;
+            this.CmB_Servidor.StateCommon.ComboBox.Border.DrawBorders = ((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders)((((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Top | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Bottom) 
             | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Left) 
             | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Right)));
-            this.TxtB_Servidor.StateCommon.ComboBox.Border.Rounding = 10;
-            this.TxtB_Servidor.StateCommon.ComboBox.Content.Color1 = System.Drawing.Color.White;
-            this.TxtB_Servidor.StateCommon.ComboBox.Content.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.TxtB_Servidor.TabIndex = 67;
-            this.TxtB_Servidor.Text = "127.0.0.1";
+            this.CmB_Servidor.StateCommon.ComboBox.Border.ImageStyle = ComponentFactory.Krypton.Toolkit.PaletteImageStyle.Inherit;
+            this.CmB_Servidor.StateCommon.ComboBox.Border.Rounding = 10;
+            this.CmB_Servidor.StateCommon.ComboBox.Content.Color1 = System.Drawing.Color.White;
+            this.CmB_Servidor.StateCommon.ComboBox.Content.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.CmB_Servidor.TabIndex = 67;
+            this.CmB_Servidor.Text = "127.0.0.1";
             // 
             // Txb_Porta
             // 
@@ -100,6 +104,7 @@ namespace Ping_Pro_Tools
             this.Txb_Porta.StateCommon.Border.DrawBorders = ((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders)((((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Top | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Bottom) 
             | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Left) 
             | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Right)));
+            this.Txb_Porta.StateCommon.Border.ImageStyle = ComponentFactory.Krypton.Toolkit.PaletteImageStyle.Inherit;
             this.Txb_Porta.StateCommon.Border.Rounding = 10;
             this.Txb_Porta.StateCommon.Content.Color1 = System.Drawing.Color.White;
             this.Txb_Porta.StateCommon.Content.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -117,27 +122,28 @@ namespace Ping_Pro_Tools
             this.label1.Text = "Banco de Dados:";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // TxB_Banco
+            // CmB_Banco
             // 
-            this.TxB_Banco.DropDownWidth = 115;
-            this.TxB_Banco.InputControlStyle = ComponentFactory.Krypton.Toolkit.InputControlStyle.Ribbon;
-            this.TxB_Banco.Location = new System.Drawing.Point(201, 145);
-            this.TxB_Banco.Name = "TxB_Banco";
-            this.TxB_Banco.PaletteMode = ComponentFactory.Krypton.Toolkit.PaletteMode.SparkleBlue;
-            this.TxB_Banco.Size = new System.Drawing.Size(259, 27);
-            this.TxB_Banco.StateCommon.ComboBox.Back.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(74)))), ((int)(((byte)(79)))), ((int)(((byte)(99)))));
-            this.TxB_Banco.StateCommon.ComboBox.Border.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(24)))), ((int)(((byte)(30)))), ((int)(((byte)(54)))));
-            this.TxB_Banco.StateCommon.ComboBox.Border.Color2 = System.Drawing.Color.FromArgb(((int)(((byte)(24)))), ((int)(((byte)(30)))), ((int)(((byte)(54)))));
-            this.TxB_Banco.StateCommon.ComboBox.Border.ColorAngle = -10F;
-            this.TxB_Banco.StateCommon.ComboBox.Border.Draw = ComponentFactory.Krypton.Toolkit.InheritBool.True;
-            this.TxB_Banco.StateCommon.ComboBox.Border.DrawBorders = ((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders)((((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Top | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Bottom) 
+            this.CmB_Banco.DropDownWidth = 115;
+            this.CmB_Banco.InputControlStyle = ComponentFactory.Krypton.Toolkit.InputControlStyle.Ribbon;
+            this.CmB_Banco.Location = new System.Drawing.Point(201, 145);
+            this.CmB_Banco.Name = "CmB_Banco";
+            this.CmB_Banco.PaletteMode = ComponentFactory.Krypton.Toolkit.PaletteMode.SparkleBlue;
+            this.CmB_Banco.Size = new System.Drawing.Size(259, 27);
+            this.CmB_Banco.StateCommon.ComboBox.Back.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(74)))), ((int)(((byte)(79)))), ((int)(((byte)(99)))));
+            this.CmB_Banco.StateCommon.ComboBox.Border.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(24)))), ((int)(((byte)(30)))), ((int)(((byte)(54)))));
+            this.CmB_Banco.StateCommon.ComboBox.Border.Color2 = System.Drawing.Color.FromArgb(((int)(((byte)(24)))), ((int)(((byte)(30)))), ((int)(((byte)(54)))));
+            this.CmB_Banco.StateCommon.ComboBox.Border.ColorAngle = -10F;
+            this.CmB_Banco.StateCommon.ComboBox.Border.Draw = ComponentFactory.Krypton.Toolkit.InheritBool.True;
+            this.CmB_Banco.StateCommon.ComboBox.Border.DrawBorders = ((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders)((((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Top | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Bottom) 
             | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Left) 
             | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Right)));
-            this.TxB_Banco.StateCommon.ComboBox.Border.Rounding = 10;
-            this.TxB_Banco.StateCommon.ComboBox.Content.Color1 = System.Drawing.Color.White;
-            this.TxB_Banco.StateCommon.ComboBox.Content.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.TxB_Banco.TabIndex = 69;
-            this.TxB_Banco.Text = "Ping";
+            this.CmB_Banco.StateCommon.ComboBox.Border.ImageStyle = ComponentFactory.Krypton.Toolkit.PaletteImageStyle.Inherit;
+            this.CmB_Banco.StateCommon.ComboBox.Border.Rounding = 10;
+            this.CmB_Banco.StateCommon.ComboBox.Content.Color1 = System.Drawing.Color.White;
+            this.CmB_Banco.StateCommon.ComboBox.Content.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.CmB_Banco.TabIndex = 69;
+            this.CmB_Banco.Text = "Ping";
             // 
             // Btn6_Iniciar
             // 
@@ -147,9 +153,12 @@ namespace Ping_Pro_Tools
             this.Btn6_Iniciar.StateCommon.Border.DrawBorders = ((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders)((((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Top | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Bottom) 
             | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Left) 
             | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Right)));
+            this.Btn6_Iniciar.StateCommon.Border.ImageStyle = ComponentFactory.Krypton.Toolkit.PaletteImageStyle.Inherit;
             this.Btn6_Iniciar.StateCommon.Border.Rounding = 10;
             this.Btn6_Iniciar.StateCommon.Content.ShortText.Color1 = System.Drawing.Color.Black;
             this.Btn6_Iniciar.StateCommon.Content.ShortText.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold);
+            this.Btn6_Iniciar.StateCommon.Content.ShortText.ImageStyle = ComponentFactory.Krypton.Toolkit.PaletteImageStyle.Inherit;
+            this.Btn6_Iniciar.StateCommon.Content.ShortText.Trim = ComponentFactory.Krypton.Toolkit.PaletteTextTrim.Inherit;
             this.Btn6_Iniciar.TabIndex = 74;
             this.Btn6_Iniciar.Values.Text = "SALVAR";
             // 
@@ -181,12 +190,13 @@ namespace Ping_Pro_Tools
             // 
             // GB_Config
             // 
+            this.GB_Config.Controls.Add(this.Btn_Apaga);
             this.GB_Config.Controls.Add(this.Lbl_Servidor);
             this.GB_Config.Controls.Add(this.label2);
-            this.GB_Config.Controls.Add(this.TxtB_Servidor);
+            this.GB_Config.Controls.Add(this.CmB_Servidor);
             this.GB_Config.Controls.Add(this.Txb_Porta);
             this.GB_Config.Controls.Add(this.label1);
-            this.GB_Config.Controls.Add(this.TxB_Banco);
+            this.GB_Config.Controls.Add(this.CmB_Banco);
             this.GB_Config.ForeColor = System.Drawing.Color.White;
             this.GB_Config.Location = new System.Drawing.Point(55, 42);
             this.GB_Config.Name = "GB_Config";
@@ -203,12 +213,34 @@ namespace Ping_Pro_Tools
             this.Btn_Salvar.StateCommon.Border.DrawBorders = ((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders)((((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Top | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Bottom) 
             | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Left) 
             | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Right)));
+            this.Btn_Salvar.StateCommon.Border.ImageStyle = ComponentFactory.Krypton.Toolkit.PaletteImageStyle.Inherit;
             this.Btn_Salvar.StateCommon.Border.Rounding = 10;
             this.Btn_Salvar.StateCommon.Content.ShortText.Color1 = System.Drawing.Color.Black;
             this.Btn_Salvar.StateCommon.Content.ShortText.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold);
+            this.Btn_Salvar.StateCommon.Content.ShortText.ImageStyle = ComponentFactory.Krypton.Toolkit.PaletteImageStyle.Inherit;
+            this.Btn_Salvar.StateCommon.Content.ShortText.Trim = ComponentFactory.Krypton.Toolkit.PaletteTextTrim.Inherit;
             this.Btn_Salvar.TabIndex = 77;
             this.Btn_Salvar.Values.Text = "SALVAR";
             this.Btn_Salvar.Click += new System.EventHandler(this.Btn_Salvar_Click);
+            // 
+            // Btn_Apaga
+            // 
+            this.Btn_Apaga.Location = new System.Drawing.Point(402, 178);
+            this.Btn_Apaga.Name = "Btn_Apaga";
+            this.Btn_Apaga.Size = new System.Drawing.Size(58, 26);
+            this.Btn_Apaga.StateCommon.Border.DrawBorders = ((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders)((((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Top | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Bottom) 
+            | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Left) 
+            | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Right)));
+            this.Btn_Apaga.StateCommon.Border.ImageStyle = ComponentFactory.Krypton.Toolkit.PaletteImageStyle.Inherit;
+            this.Btn_Apaga.StateCommon.Border.Rounding = 10;
+            this.Btn_Apaga.StateCommon.Content.ShortText.Color1 = System.Drawing.Color.Black;
+            this.Btn_Apaga.StateCommon.Content.ShortText.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold);
+            this.Btn_Apaga.StateCommon.Content.ShortText.ImageStyle = ComponentFactory.Krypton.Toolkit.PaletteImageStyle.Inherit;
+            this.Btn_Apaga.StateCommon.Content.ShortText.Trim = ComponentFactory.Krypton.Toolkit.PaletteTextTrim.Inherit;
+            this.Btn_Apaga.TabIndex = 78;
+            this.toolTip1.SetToolTip(this.Btn_Apaga, "Apaga a configuração selecionada");
+            this.Btn_Apaga.Values.Text = "Apagar";
+            this.Btn_Apaga.Click += new System.EventHandler(this.Btn_Apaga_Click);
             // 
             // Form_Login_Config
             // 
@@ -224,9 +256,10 @@ namespace Ping_Pro_Tools
             this.Name = "Form_Login_Config";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Forma";
+            this.Load += new System.EventHandler(this.Form_Login_Config_Load);
             this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Form0_Login_MouseDown);
-            ((System.ComponentModel.ISupportInitialize)(this.TxtB_Servidor)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.TxB_Banco)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.CmB_Servidor)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.CmB_Banco)).EndInit();
             this.GB_Config.ResumeLayout(false);
             this.GB_Config.PerformLayout();
             this.ResumeLayout(false);
@@ -237,13 +270,15 @@ namespace Ping_Pro_Tools
 
         private System.Windows.Forms.Label Lbl_Servidor;
         private System.Windows.Forms.Label label2;
-        private ComponentFactory.Krypton.Toolkit.KryptonComboBox TxtB_Servidor;
+        private ComponentFactory.Krypton.Toolkit.KryptonComboBox CmB_Servidor;
         private ComponentFactory.Krypton.Toolkit.KryptonTextBox Txb_Porta;
         private System.Windows.Forms.Label label1;
-        private ComponentFactory.Krypton.Toolkit.KryptonComboBox TxB_Banco;
+        private ComponentFactory.Krypton.Toolkit.KryptonComboBox CmB_Banco;
         private ComponentFactory.Krypton.Toolkit.KryptonButton Btn6_Iniciar;
         private MetroSet_UI.Controls.MetroSetControlBox metroSetControlBox1;
         private System.Windows.Forms.GroupBox GB_Config;
         private ComponentFactory.Krypton.Toolkit.KryptonButton Btn_Salvar;
+        private ComponentFactory.Krypton.Toolkit.KryptonButton Btn_Apaga;
+        private System.Windows.Forms.ToolTip toolTip1;
     }
 }

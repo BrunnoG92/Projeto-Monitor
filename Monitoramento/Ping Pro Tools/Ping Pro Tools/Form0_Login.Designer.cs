@@ -60,7 +60,6 @@ namespace Ping_Pro_Tools
             this.TxtB_Usuario.StateCommon.Content.Color1 = System.Drawing.SystemColors.ScrollBar;
             this.TxtB_Usuario.StateCommon.Content.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Bold);
             this.TxtB_Usuario.TabIndex = 54;
-            this.TxtB_Usuario.Text = "AB";
             this.TxtB_Usuario.TextChanged += new System.EventHandler(this.TxtB_Usuario_TextChanged);
             // 
             // Lbl_Usuario
@@ -183,6 +182,8 @@ namespace Ping_Pro_Tools
             this.ChkB_Salva.Size = new System.Drawing.Size(68, 21);
             this.ChkB_Salva.TabIndex = 74;
             this.ChkB_Salva.Text = "Salvar ";
+            this.toolTip1.SetToolTip(this.ChkB_Salva, "Salva seus dados de login. Observação: Somente o nome de usuário é salvo após o a" +
+        "plicativo ser fechado");
             this.ChkB_Salva.UseVisualStyleBackColor = true;
             // 
             // ovalPictureBox1
