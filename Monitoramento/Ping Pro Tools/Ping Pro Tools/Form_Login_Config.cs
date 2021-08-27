@@ -81,10 +81,8 @@ namespace Ping_Pro_Tools
             string porta3 = System.Configuration.ConfigurationManager.AppSettings["porta3"];
 
             var config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
-            var connectionStringsSection = (ConnectionStringsSection)config.GetSection("connectionStrings");
-            connectionStringsSection.ConnectionStrings["MinhaConexao"].ConnectionString = $"Data Source=" + CmB_Servidor.Text + ";Initial Catalog=" + CmB_Banco.Text + ";port=" + CmB_Porta.Text + ";";
-            config.Save();
-            ConfigurationManager.RefreshSection("connectionStrings");
+          
+          
 
            
             BancoDeDados = CmB_Banco.Text;
@@ -107,7 +105,7 @@ namespace Ping_Pro_Tools
                 CmB_Banco.Items.Add(bd);
                 CmB_Porta.Items.Add(porta);
                 ConfigurationManager.RefreshSection("appSettings");
-                MessageBox.Show("Configurações salva com sucesso. ", "Sucesso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("Configurações salva com sucesso. Não esqueça de aplicar as configurações, para ativa-las. ", "Sucesso", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 this.Close();
             }
 
@@ -126,7 +124,7 @@ namespace Ping_Pro_Tools
                 CmB_Banco.Items.Add(bd2);
                 CmB_Porta.Items.Add(porta2);
                 ConfigurationManager.RefreshSection("appSettings");
-                MessageBox.Show("Configurações salva com sucesso. ", "Sucesso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("Configurações salva com sucesso.Não esqueça de aplicar as configurações, para ativa-las ", "Sucesso", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 this.Close();
             }
 
@@ -150,7 +148,7 @@ namespace Ping_Pro_Tools
                 CmB_Banco.Items.Add(bd3);
                 CmB_Porta.Items.Add(porta3);
                 ConfigurationManager.RefreshSection("appSettings");
-                MessageBox.Show("Configurações salva com sucesso. ", "Sucesso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("Configurações salva com sucesso.Não esqueça de aplicar as configurações, para ativa-las ", "Sucesso", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 this.Close();
 
             }
@@ -196,7 +194,7 @@ namespace Ping_Pro_Tools
         {
             if (CmB_Servidor.SelectedIndex == 0)
             {
-                MessageBox.Show("0 selecionado");
+               // Apago o index 1 do combobox e appconfig
                 var config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
                 config.AppSettings.Settings["servidor"].Value = "";
                 config.AppSettings.Settings["bancodedados"].Value = "";
@@ -210,9 +208,9 @@ namespace Ping_Pro_Tools
                 CmB_Porta.Items.RemoveAt(0);
                 ConfigurationManager.RefreshSection("appSettings");
             }
-            if (CmB_Servidor.SelectedIndex == 1)
+           else if (CmB_Servidor.SelectedIndex == 1)
             {
-                MessageBox.Show("1 selecionado");
+                // Apago o index 2  do combobox e appconfig
                 var config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
                 config.AppSettings.Settings["servidor2"].Value = "";
                 config.AppSettings.Settings["bancodedados2"].Value = "";
@@ -226,9 +224,9 @@ namespace Ping_Pro_Tools
                 CmB_Porta.Items.RemoveAt(1);
                 ConfigurationManager.RefreshSection("appSettings");
             }
-            if (CmB_Servidor.SelectedIndex == 2)
+            else if (CmB_Servidor.SelectedIndex == 2)
             {
-                MessageBox.Show("2 selecionado");
+                // Apago o index 3  do combobox e appconfig
                 var config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
                 config.AppSettings.Settings["servidor3"].Value = "";
                 config.AppSettings.Settings["bancodedados3"].Value = "";
@@ -261,6 +259,17 @@ namespace Ping_Pro_Tools
                 CmB_Banco.SelectedIndex = 2;
                 CmB_Porta.SelectedIndex = 2;
             }
+        }
+
+        private void Btn_Aplicar_Click(object sender, EventArgs e)
+        {
+            var config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+            var connectionStringsSection = (ConnectionStringsSection)config.GetSection("connectionStrings");
+            connectionStringsSection.ConnectionStrings["MinhaConexao"].ConnectionString = $"Data Source=" + CmB_Servidor.Text + ";Initial Catalog=" + CmB_Banco.Text + ";port=" + CmB_Porta.Text + ";";
+            config.Save();
+            ConfigurationManager.RefreshSection("connectionStrings");
+            MessageBox.Show("Configurações aplicadas com sucesso!", "Sucesso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
         }
     }
 }

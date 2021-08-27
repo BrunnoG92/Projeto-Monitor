@@ -38,10 +38,11 @@ namespace Ping_Pro_Tools
             this.Btn6_Iniciar = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             this.metroSetControlBox1 = new MetroSet_UI.Controls.MetroSetControlBox();
             this.GB_Config = new System.Windows.Forms.GroupBox();
+            this.CmB_Porta = new ComponentFactory.Krypton.Toolkit.KryptonComboBox();
             this.Btn_Apaga = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             this.Btn_Salvar = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.CmB_Porta = new ComponentFactory.Krypton.Toolkit.KryptonComboBox();
+            this.Btn_Aplicar = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             ((System.ComponentModel.ISupportInitialize)(this.CmB_Servidor)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.CmB_Banco)).BeginInit();
             this.GB_Config.SuspendLayout();
@@ -203,37 +204,6 @@ namespace Ping_Pro_Tools
             this.GB_Config.TabStop = false;
             this.GB_Config.Text = "Configurações de Banco de Dados";
             // 
-            // Btn_Apaga
-            // 
-            this.Btn_Apaga.Location = new System.Drawing.Point(402, 178);
-            this.Btn_Apaga.Name = "Btn_Apaga";
-            this.Btn_Apaga.Size = new System.Drawing.Size(58, 26);
-            this.Btn_Apaga.StateCommon.Border.DrawBorders = ((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders)((((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Top | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Bottom) 
-            | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Left) 
-            | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Right)));
-            this.Btn_Apaga.StateCommon.Border.Rounding = 10;
-            this.Btn_Apaga.StateCommon.Content.ShortText.Color1 = System.Drawing.Color.Black;
-            this.Btn_Apaga.StateCommon.Content.ShortText.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold);
-            this.Btn_Apaga.TabIndex = 78;
-            this.toolTip1.SetToolTip(this.Btn_Apaga, "Apaga a configuração selecionada");
-            this.Btn_Apaga.Values.Text = "Apagar";
-            this.Btn_Apaga.Click += new System.EventHandler(this.Btn_Apaga_Click);
-            // 
-            // Btn_Salvar
-            // 
-            this.Btn_Salvar.Location = new System.Drawing.Point(246, 293);
-            this.Btn_Salvar.Name = "Btn_Salvar";
-            this.Btn_Salvar.Size = new System.Drawing.Size(114, 31);
-            this.Btn_Salvar.StateCommon.Border.DrawBorders = ((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders)((((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Top | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Bottom) 
-            | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Left) 
-            | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Right)));
-            this.Btn_Salvar.StateCommon.Border.Rounding = 10;
-            this.Btn_Salvar.StateCommon.Content.ShortText.Color1 = System.Drawing.Color.Black;
-            this.Btn_Salvar.StateCommon.Content.ShortText.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold);
-            this.Btn_Salvar.TabIndex = 77;
-            this.Btn_Salvar.Values.Text = "SALVAR";
-            this.Btn_Salvar.Click += new System.EventHandler(this.Btn_Salvar_Click);
-            // 
             // CmB_Porta
             // 
             this.CmB_Porta.DropDownWidth = 115;
@@ -255,12 +225,61 @@ namespace Ping_Pro_Tools
             this.CmB_Porta.StateCommon.ComboBox.Content.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.CmB_Porta.TabIndex = 79;
             // 
+            // Btn_Apaga
+            // 
+            this.Btn_Apaga.Location = new System.Drawing.Point(402, 178);
+            this.Btn_Apaga.Name = "Btn_Apaga";
+            this.Btn_Apaga.Size = new System.Drawing.Size(58, 26);
+            this.Btn_Apaga.StateCommon.Border.DrawBorders = ((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders)((((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Top | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Bottom) 
+            | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Left) 
+            | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Right)));
+            this.Btn_Apaga.StateCommon.Border.Rounding = 10;
+            this.Btn_Apaga.StateCommon.Content.ShortText.Color1 = System.Drawing.Color.Black;
+            this.Btn_Apaga.StateCommon.Content.ShortText.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold);
+            this.Btn_Apaga.TabIndex = 78;
+            this.toolTip1.SetToolTip(this.Btn_Apaga, "Apaga a configuração selecionada");
+            this.Btn_Apaga.Values.Text = "Apagar";
+            this.Btn_Apaga.Click += new System.EventHandler(this.Btn_Apaga_Click);
+            // 
+            // Btn_Salvar
+            // 
+            this.Btn_Salvar.Location = new System.Drawing.Point(334, 293);
+            this.Btn_Salvar.Name = "Btn_Salvar";
+            this.Btn_Salvar.Size = new System.Drawing.Size(114, 31);
+            this.Btn_Salvar.StateCommon.Border.DrawBorders = ((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders)((((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Top | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Bottom) 
+            | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Left) 
+            | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Right)));
+            this.Btn_Salvar.StateCommon.Border.Rounding = 10;
+            this.Btn_Salvar.StateCommon.Content.ShortText.Color1 = System.Drawing.Color.Black;
+            this.Btn_Salvar.StateCommon.Content.ShortText.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold);
+            this.Btn_Salvar.TabIndex = 77;
+            this.toolTip1.SetToolTip(this.Btn_Salvar, "Salva as configurações de banco da dados");
+            this.Btn_Salvar.Values.Text = "SALVAR";
+            this.Btn_Salvar.Click += new System.EventHandler(this.Btn_Salvar_Click);
+            // 
+            // Btn_Aplicar
+            // 
+            this.Btn_Aplicar.Location = new System.Drawing.Point(182, 293);
+            this.Btn_Aplicar.Name = "Btn_Aplicar";
+            this.Btn_Aplicar.Size = new System.Drawing.Size(114, 31);
+            this.Btn_Aplicar.StateCommon.Border.DrawBorders = ((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders)((((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Top | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Bottom) 
+            | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Left) 
+            | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Right)));
+            this.Btn_Aplicar.StateCommon.Border.Rounding = 10;
+            this.Btn_Aplicar.StateCommon.Content.ShortText.Color1 = System.Drawing.Color.Black;
+            this.Btn_Aplicar.StateCommon.Content.ShortText.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold);
+            this.Btn_Aplicar.TabIndex = 78;
+            this.toolTip1.SetToolTip(this.Btn_Aplicar, "Aplica as configurações selecionadas");
+            this.Btn_Aplicar.Values.Text = "APLICAR";
+            this.Btn_Aplicar.Click += new System.EventHandler(this.Btn_Aplicar_Click);
+            // 
             // Form_Login_Config
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(42)))), ((int)(((byte)(64)))));
             this.ClientSize = new System.Drawing.Size(617, 348);
+            this.Controls.Add(this.Btn_Aplicar);
             this.Controls.Add(this.Btn_Salvar);
             this.Controls.Add(this.Btn6_Iniciar);
             this.Controls.Add(this.metroSetControlBox1);
@@ -293,5 +312,6 @@ namespace Ping_Pro_Tools
         private ComponentFactory.Krypton.Toolkit.KryptonButton Btn_Apaga;
         private System.Windows.Forms.ToolTip toolTip1;
         private ComponentFactory.Krypton.Toolkit.KryptonComboBox CmB_Porta;
+        private ComponentFactory.Krypton.Toolkit.KryptonButton Btn_Aplicar;
     }
 }
