@@ -23,7 +23,7 @@ namespace Ping_Pro_Tools
         public static string Senha;
         Bitmap FotoUsuario;
         Bitmap FotoSalva;
-     
+
         string NomePasta = Environment.GetFolderPath(Environment.SpecialFolder.MyPictures); // pego o caminho da pasta imagens
         //
         // Inicio da persoanlização da Form. Deixa a form com bordas arredondadas //
@@ -56,10 +56,7 @@ namespace Ping_Pro_Tools
             TxtB_Usuario.Text = value;
 
             // defino a foto do usuario na picturebox se não for null na inicialização
-            if (FotoUsuario != null)
-            {
-                ovalPictureBox1.Image = FotoUsuario;
-            }
+
 
 
             this.Icon = Properties.Resources.icone_globo;
@@ -207,42 +204,51 @@ namespace Ping_Pro_Tools
 
         private void ovalPictureBox1_Click(object sender, EventArgs e)
         {
+            string N_Arquivo = TxtB_Usuario.Text + ".jpg";
+            string Caminho = NomePasta + @"\" + N_Arquivo;
             // abre a caixa de diálogo do arquivo   
+            File.Delete(Caminho);
             OpenFileDialog open = new OpenFileDialog();
             // filtros de imagem  
             open.Filter = "Arquivos de imagem (*. jpg; *. png; * .jpeg; * .gif; * .bmp) | * .jpg; * .png; * .jpeg; * .gif; * .bmp";
             if (open.ShowDialog() == DialogResult.OK)
             {
                 // exibe a imagem na caixa de imagem  
-                ovalPictureBox1.Image = new Bitmap(open.FileName);
-                
+
+                FotoSalva = new Bitmap(open.FileName);
+                ovalPictureBox1.Image = FotoSalva;
 
             }
             //salvo a foto que o usuário escolheu após ela ser trocada na pasta imagems e na variavel foto
-
-            string N_Arquivo = TxtB_Usuario.Text + ".jpg";
-            string Caminho = NomePasta + @"\" + N_Arquivo;
-            if (File.Exists(Caminho) == true)
-            {
-                N_Arquivo = TxtB_Usuario.Text + "1.jpg";
-                Caminho = NomePasta + @"\" + N_Arquivo;
-                ovalPictureBox1.Image.Save(Caminho, ovalPictureBox1.Image.RawFormat);
-                FotoUsuario = (Bitmap)ovalPictureBox1.Image;
-               
-            }
-            else
-            {
-                ovalPictureBox1.Image.Save(Caminho, ovalPictureBox1.Image.RawFormat);
-                FotoUsuario = (Bitmap)ovalPictureBox1.Image;
-            }
-           
-
+            ovalPictureBox1.Image.Save(Caminho, ovalPictureBox1.Image.RawFormat);
+            FotoUsuario = (Bitmap)ovalPictureBox1.Image;
 
         }
 
         private void Form0_Login_Load(object sender, EventArgs e)
         {
-           
+            // Na inicialização, faço uma cópia da foto atual, se ela existir
+            // Salvo essa cópia na variavel FotoSalva e então carrego para a picturebox
+            // Se a cópia da imagem já existe, apago a cópia
+            string N_Arquivo = TxtB_Usuario.Text + ".jpg";
+            string Caminho = NomePasta + @"\" + N_Arquivo;
+            if (File.Exists(Caminho))
+            {
+                string N_ArquivoCopia = TxtB_Usuario.Text + "1.jpg";
+                string CaminhoCopia = NomePasta + @"\" + N_ArquivoCopia;
+                if (File.Exists(CaminhoCopia))
+                {
+                    File.Delete(CaminhoCopia);
+                }
+                File.Copy(Caminho, CaminhoCopia);
+                FotoSalva = (Bitmap)Image.FromFile(CaminhoCopia);
+                ovalPictureBox1.Image = FotoSalva;
+            }
+            else
+            {
+                ovalPictureBox1.Image = Properties.Resources.user;
+            }
+
         }
 
 

@@ -230,6 +230,7 @@ namespace Ping_Pro_Tools
                 var config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
                 config.AppSettings.Settings["servidor3"].Value = "";
                 config.AppSettings.Settings["bancodedados3"].Value = "";
+                config.AppSettings.Settings["porta3"].Value = "";
                 config.Save(ConfigurationSaveMode.Modified);
                 ConfigurationManager.RefreshSection("servidor3");
                 ConfigurationManager.RefreshSection("bancodedados3");
@@ -271,5 +272,7 @@ namespace Ping_Pro_Tools
             MessageBox.Show("Configurações aplicadas com sucesso!", "Sucesso", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
         }
+
+       
     }
 }
