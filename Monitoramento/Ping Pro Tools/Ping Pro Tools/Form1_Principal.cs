@@ -534,9 +534,11 @@ namespace Ping_Pro_Tools
             audio.Play();
         }
 
-
-        
-
+        private void Form1_Principal_Load(object sender, EventArgs e)
+        {
+            PcB_Usuario.Image = new Bitmap(Form0_Login.FotoSalva);
+            Lbl_Usuario.Text = Form0_Login.Usuario;
+        }
     }
 }
 //

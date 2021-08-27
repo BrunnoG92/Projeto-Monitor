@@ -22,7 +22,7 @@ namespace Ping_Pro_Tools
         string UsuarioSalvo;
         public static string Senha;
         Bitmap FotoUsuario;
-        Bitmap FotoSalva;
+        public static Bitmap FotoSalva;
 
         string NomePasta = Environment.GetFolderPath(Environment.SpecialFolder.MyPictures); // pego o caminho da pasta imagens
         //

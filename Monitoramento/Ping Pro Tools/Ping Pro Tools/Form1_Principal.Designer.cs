@@ -37,7 +37,7 @@ namespace Ping_Pro_Tools
             this.Pnl_Navegacao = new System.Windows.Forms.Panel();
             this.Btn1_Dashboard = new System.Windows.Forms.Button();
             this.Lbl_Usuario = new System.Windows.Forms.Label();
-            this.pictureBox2 = new System.Windows.Forms.PictureBox();
+            this.PcB_Usuario = new System.Windows.Forms.PictureBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.metroSetControlBox1 = new MetroSet_UI.Controls.MetroSetControlBox();
             this.Pnl2_Grade = new System.Windows.Forms.Panel();
@@ -53,7 +53,7 @@ namespace Ping_Pro_Tools
             this.backgroundWorker2 = new System.ComponentModel.BackgroundWorker();
             this.backgroundWorker3 = new System.ComponentModel.BackgroundWorker();
             this.panel2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PcB_Usuario)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.Pnl_BotoesDashboard.SuspendLayout();
             this.SuspendLayout();
@@ -68,7 +68,7 @@ namespace Ping_Pro_Tools
             this.panel2.Controls.Add(this.Pnl_Navegacao);
             this.panel2.Controls.Add(this.Btn1_Dashboard);
             this.panel2.Controls.Add(this.Lbl_Usuario);
-            this.panel2.Controls.Add(this.pictureBox2);
+            this.panel2.Controls.Add(this.PcB_Usuario);
             this.panel2.Controls.Add(this.pictureBox1);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Left;
             this.panel2.Location = new System.Drawing.Point(0, 0);
@@ -179,15 +179,15 @@ namespace Ping_Pro_Tools
             this.Lbl_Usuario.TabIndex = 2;
             this.Lbl_Usuario.Text = "Usuário";
             // 
-            // pictureBox2
+            // PcB_Usuario
             // 
-            this.pictureBox2.Image = global::Ping_Pro_Tools.Properties.Resources.Untitled_11;
-            this.pictureBox2.Location = new System.Drawing.Point(28, 3);
-            this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(100, 63);
-            this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox2.TabIndex = 1;
-            this.pictureBox2.TabStop = false;
+            this.PcB_Usuario.Image = global::Ping_Pro_Tools.Properties.Resources.Untitled_11;
+            this.PcB_Usuario.Location = new System.Drawing.Point(28, 3);
+            this.PcB_Usuario.Name = "PcB_Usuario";
+            this.PcB_Usuario.Size = new System.Drawing.Size(100, 63);
+            this.PcB_Usuario.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.PcB_Usuario.TabIndex = 1;
+            this.PcB_Usuario.TabStop = false;
             // 
             // pictureBox1
             // 
@@ -366,11 +366,11 @@ namespace Ping_Pro_Tools
             this.Name = "Form1_Principal";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Form1";
-            
+            this.Load += new System.EventHandler(this.Form1_Principal_Load);
             this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Form1_Principal_MouseDown);
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PcB_Usuario)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.Pnl_BotoesDashboard.ResumeLayout(false);
             this.ResumeLayout(false);
@@ -382,7 +382,7 @@ namespace Ping_Pro_Tools
         private System.Windows.Forms.Panel Pnl2_Grade;
         private System.Windows.Forms.Panel panel2;
         private MetroSet_UI.Controls.MetroSetControlBox metroSetControlBox1;
-        private System.Windows.Forms.PictureBox pictureBox2;
+        private System.Windows.Forms.PictureBox PcB_Usuario;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Panel Pnl_Navegacao;
         private System.Windows.Forms.Button Btn1_Dashboard;
