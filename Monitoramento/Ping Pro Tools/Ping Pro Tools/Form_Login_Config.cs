@@ -202,7 +202,7 @@ namespace Ping_Pro_Tools
                 config.Save(ConfigurationSaveMode.Modified);
                 ConfigurationManager.RefreshSection("servidor");
                 ConfigurationManager.RefreshSection("bancodedados");
-                MessageBox.Show("Apagado");
+                MessageBox.Show("Apagado com sucesso. ", "Sucesso", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 CmB_Servidor.Items.RemoveAt(0);
                 CmB_Banco.Items.RemoveAt(0);
                 CmB_Porta.Items.RemoveAt(0);
@@ -218,7 +218,7 @@ namespace Ping_Pro_Tools
                 config.Save(ConfigurationSaveMode.Modified);
                 ConfigurationManager.RefreshSection("servidor2");
                 ConfigurationManager.RefreshSection("bancodedados2");
-                MessageBox.Show("Apagado");
+                MessageBox.Show("Apagado com sucesso. ", "Sucesso", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 CmB_Servidor.Items.RemoveAt(1);
                 CmB_Banco.Items.RemoveAt(1);
                 CmB_Porta.Items.RemoveAt(1);
@@ -234,7 +234,7 @@ namespace Ping_Pro_Tools
                 ConfigurationManager.RefreshSection("servidor3");
                 ConfigurationManager.RefreshSection("bancodedados3");
                 config.AppSettings.Settings["porta3"].Value = "";
-                MessageBox.Show("Apagado");
+                MessageBox.Show("Apagado com sucesso. ", "Sucesso", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 CmB_Servidor.Items.RemoveAt(2);
                 CmB_Banco.Items.RemoveAt(2);
                 CmB_Porta.Items.RemoveAt(2);
