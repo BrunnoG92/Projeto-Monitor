@@ -102,6 +102,7 @@ namespace Ping_Pro_Tools
             try
             {
                 mysqlconn.Open();
+                MessageBox.Show(conectasql.ToString());
                 if (mysqlconn.State == ConnectionState.Open)
                 {
                     strSQL = "INSERT INTO Ping (ID_CLIENTE, OPERADOR,  CLIENTE, HOST, QUANTIDADE_PING, TAMANHO_PACOTE, MAIOR_PING, MENOR_PING, MEDIA_PING, QTD_PACOTES_PERDIDOS, PORCENTO_PCTS_PERDIDOS, DATA  ) VALUES (@ID_CLIENTE, @OPERADOR, @CLIENTE, @HOST, @QUANTIDADE_PING, @TAMANHO_PACOTE, @MAIOR_PING, @MENOR_PING, @MEDIA_PING, @QTD_PACOTES_PERDIDOS, @PORCENTO_PCTS_PERDIDOS, @DATA )";
