@@ -64,7 +64,30 @@ namespace Ping_Pro_Tools
                 worker1.ReportProgress(Form1_Principal.Envia_Percent);
             } while (Form1_Principal.CalculoFinalizado != true);
         }
+        Color TrocarCor(int ValorPing)
+        {
+            TxtB_Atual.StateCommon.Border.Width = 2;
+            return Color.FromArgb(24, 30, 54);
 
+            if (ValorPing >= 100)
+            {
+                TxtB_Atual.StateCommon.Border.Width = 2;
+                return Color.Red;
+            }
+            else if (ValorPing >= 50 && ValorPing < 100)
+            {
+                TxtB_Atual.StateCommon.Border.Width = 2;
+                return Color.Yellow;
+            }
+            else if (ValorPing > 0 && ValorPing < 50)
+            {
+               
+                TxtB_Atual.StateCommon.Border.Width = 2;
+                return Color.Chartreuse;
+            }
+          
+
+        }
         private void backgroundWorker1_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
             // Atualiza os resultados //
@@ -78,7 +101,7 @@ namespace Ping_Pro_Tools
             TxtB_Atual.Text = Recebe_atual.ToString();
 
             TxtB_PerdaPorcento.Text = Recebe_PerdaPorcento.ToString("N2") + "%";
-          
+
             if (Recebe_Perdidos == 0 && Recebe_Clicado == true)
             {
                 Lbl_PerdaPorcento.Text = "Perda";
@@ -90,6 +113,7 @@ namespace Ping_Pro_Tools
                 Lbl_PerdaPorcento.Text = "Perda";
                 Lbl_PerdaPorcento.ForeColor = Color.Red;
             }
+            TrocarCor(Recebe_atual);
 
 
 
@@ -102,7 +126,7 @@ namespace Ping_Pro_Tools
             try
             {
                 mysqlconn.Open();
-                MessageBox.Show(conectasql.ToString());
+
                 if (mysqlconn.State == ConnectionState.Open)
                 {
                     strSQL = "INSERT INTO Ping (ID_CLIENTE, OPERADOR,  CLIENTE, HOST, QUANTIDADE_PING, TAMANHO_PACOTE, MAIOR_PING, MENOR_PING, MEDIA_PING, QTD_PACOTES_PERDIDOS, PORCENTO_PCTS_PERDIDOS, DATA  ) VALUES (@ID_CLIENTE, @OPERADOR, @CLIENTE, @HOST, @QUANTIDADE_PING, @TAMANHO_PACOTE, @MAIOR_PING, @MENOR_PING, @MEDIA_PING, @QTD_PACOTES_PERDIDOS, @PORCENTO_PCTS_PERDIDOS, @DATA )";
@@ -119,7 +143,7 @@ namespace Ping_Pro_Tools
                     comando.Parameters.AddWithValue("@QTD_PACOTES_PERDIDOS", Recebe_Perdidos);
                     comando.Parameters.AddWithValue("@PORCENTO_PCTS_PERDIDOS", Recebe_PerdaPorcento);
                     comando.Parameters.AddWithValue("@DATA", DateTime.Now.ToString("dd/MM/yyy"));
-                   
+
                     int salvo = comando.ExecuteNonQuery();
                     if (salvo < 1)
                     {
@@ -147,7 +171,7 @@ namespace Ping_Pro_Tools
             finally
             {
                 mysqlconn.Close();
-               
+
             }
         }
 

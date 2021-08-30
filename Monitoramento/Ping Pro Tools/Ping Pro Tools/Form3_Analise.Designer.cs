@@ -50,8 +50,8 @@ namespace Ping_Pro_Tools
             this.Lbl_PerdaPorcento = new System.Windows.Forms.Label();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.Btn_Salvar = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             this.Lbl_Nome_Cliente = new System.Windows.Forms.Label();
+            this.Btn_Salvar = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             this.Txtb_Cliente_Nome = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
             this.SuspendLayout();
             // 
@@ -342,6 +342,18 @@ namespace Ping_Pro_Tools
             this.backgroundWorker1.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundWorker1_DoWork);
             this.backgroundWorker1.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.backgroundWorker1_ProgressChanged);
             // 
+            // Lbl_Nome_Cliente
+            // 
+            this.Lbl_Nome_Cliente.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold);
+            this.Lbl_Nome_Cliente.ForeColor = System.Drawing.Color.White;
+            this.Lbl_Nome_Cliente.Location = new System.Drawing.Point(134, 18);
+            this.Lbl_Nome_Cliente.Name = "Lbl_Nome_Cliente";
+            this.Lbl_Nome_Cliente.Size = new System.Drawing.Size(129, 53);
+            this.Lbl_Nome_Cliente.TabIndex = 71;
+            this.Lbl_Nome_Cliente.Text = "Cliente:";
+            this.Lbl_Nome_Cliente.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.toolTip1.SetToolTip(this.Lbl_Nome_Cliente, "Quantidade total de Pings que serão feitos");
+            // 
             // Btn_Salvar
             // 
             this.Btn_Salvar.Location = new System.Drawing.Point(322, 394);
@@ -356,18 +368,6 @@ namespace Ping_Pro_Tools
             this.Btn_Salvar.TabIndex = 70;
             this.Btn_Salvar.Values.Text = "SALVAR RESULTADOS";
             this.Btn_Salvar.Click += new System.EventHandler(this.Btn_Salvar_Click);
-            // 
-            // Lbl_Nome_Cliente
-            // 
-            this.Lbl_Nome_Cliente.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold);
-            this.Lbl_Nome_Cliente.ForeColor = System.Drawing.Color.White;
-            this.Lbl_Nome_Cliente.Location = new System.Drawing.Point(134, 18);
-            this.Lbl_Nome_Cliente.Name = "Lbl_Nome_Cliente";
-            this.Lbl_Nome_Cliente.Size = new System.Drawing.Size(129, 53);
-            this.Lbl_Nome_Cliente.TabIndex = 71;
-            this.Lbl_Nome_Cliente.Text = "Cliente:";
-            this.Lbl_Nome_Cliente.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.toolTip1.SetToolTip(this.Lbl_Nome_Cliente, "Quantidade total de Pings que serão feitos");
             // 
             // Txtb_Cliente_Nome
             // 
