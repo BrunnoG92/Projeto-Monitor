@@ -119,7 +119,7 @@ namespace Ping_Pro_Tools
 
             // Update the setting.
             var connectionStringsSection = (ConnectionStringsSection)config.GetSection("connectionStrings");
-            connectionStringsSection.ConnectionStrings["MinhaConexao"].ConnectionString = $"Data Source=" + Servidor + ";port=" + Porta + ";Initial Catalog=" + BancoDeDados + ";UID=" + Usuario + ";password=" + Senha + ";SslMode=none;";
+            connectionStringsSection.ConnectionStrings["MinhaConexao"].ConnectionString = $"Data Source=" + Servidor + ";port=" + Porta + ";Initial Catalog=" + BancoDeDados + ";UID=" + Usuario + ";password=" + Senha + ";SslMode=Required;";
             config.Save(ConfigurationSaveMode.Full);
             ConfigurationManager.RefreshSection("connectionStrings");
             try
